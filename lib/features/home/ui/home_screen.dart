@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/auth/providers/auth_service_provider.dart';
 import 'package:front/src/localization/generated/l10n.dart';
+import 'package:front/src/providers/locale_options_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -14,21 +15,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   String _currentLocaleCode = 'ru';
 
   void _handleLocaleChange(BuildContext context, String code) {
-    Locale newLocale;
-    switch (code) {
-      case 'ru':
-        newLocale = const Locale('ru');
-        break;
-      case 'ua':
-        newLocale = const Locale('uk');
-        break;
-      case 'us':
-        newLocale = const Locale('en');
-        break;
-      default:
-        newLocale = const Locale('en');
-    }
-    S.load(newLocale);
+    final options = ref.read(localeOptionsProvider);
+    final option = options.firstWhere((o) => o.code == code);
+    S.load(option.locale);
     setState(() {
       _currentLocaleCode = code;
     });
@@ -50,6 +39,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final options = ref.watch(localeOptionsProvider);
+
     // final settings = ref.watch(settingsProvider);
     // final notifier = ref.read(settingsProvider.notifier);
     ref.read(authServiceProvider);
@@ -74,11 +66,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     _handleLocaleChange(context, newValue);
                   }
                 },
-                items: const [
-                  DropdownMenuItem(value: 'ru', child: Text('🇷🇺')),
-                  DropdownMenuItem(value: 'ua', child: Text('🇺🇦')),
-                  DropdownMenuItem(value: 'us', child: Text('🇺🇸')),
-                ],
+                items: options.map((o) =>
+                    DropdownMenuItem(
+                      value: o.code,
+                      child: Text(o.emoji),
+                    )
+                ).toList(),
               ),
             ),
           ),

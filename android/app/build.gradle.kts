@@ -15,7 +15,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.temenb.game"
+    namespace = "com.example.front"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

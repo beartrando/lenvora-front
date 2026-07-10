@@ -1,4 +1,4 @@
-package com.example.front
+package org.beartrando.tictactoet
 
 import io.flutter.embedding.android.FlutterActivity
 

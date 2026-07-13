@@ -131,6 +131,22 @@ jobs:
           storeFile=upload-keystore.jks
           EOF
 
+      - name: Checkout proto repository
+        uses: actions/checkout@v4
+        with:
+          repository: beartrando/tic-tac-toe-proto
+          path: infra/proto
+
+      - name: Generate protobuf files
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler
+          dart pub global activate protoc_plugin
+          protoc \
+            --dart_out=grpc:lib/src/grpc/generated \
+            -Iinfra/proto \
+            infra/proto/*.proto
+
       - name: Build appbundle
         run: |
           flutter build appbundle \

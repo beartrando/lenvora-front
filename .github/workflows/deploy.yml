@@ -126,12 +126,22 @@ jobs:
           MOVE_TIMEOUT=${{ secrets.MOVE_TIMEOUT }}
           EOF
 
+      - name: Verify .env
+        run: |
+          echo "Created .env:"
+          cat .env
+
       - name: Install dependencies
         run: flutter pub get
 
       - name: Decode keystore
         run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/upload-keystore.jks
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
+
+      - name: Debug keystore
+        run: |
+          ls -la android
+          ls -la android/app
 
       - name: Create key.properties
         run: |

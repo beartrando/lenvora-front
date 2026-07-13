@@ -142,6 +142,12 @@ jobs:
         run: |
           ls -la android
           ls -la android/app
+          cat android/app/upload-keystore.jks
+
+      - name: Check keystore
+        run: |
+          ls -lh android/app/upload-keystore.jks
+          file android/app/upload-keystore.jks
 
       - name: Create key.properties
         run: |

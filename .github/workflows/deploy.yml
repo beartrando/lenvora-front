@@ -147,8 +147,8 @@ jobs:
           mkdir -p lib/src/grpc/generated/
           protoc \
             --dart_out=grpc:lib/src/grpc/generated \
-            -Iinfra/proto \
-            infra/proto/*.proto
+            --proto_path=infra/proto \
+            $(find infra/proto -name "*.proto")
 
       - name: Build appbundle
         run: |

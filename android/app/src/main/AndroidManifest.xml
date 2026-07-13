@@ -1,5 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="org.beartrando.tictactoe">
+<application
         android:label="front"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

@@ -1,4 +1,4 @@
-package org.beartrando.tictactoet
+package org.beartrando.tictactoe
 
 import io.flutter.embedding.android.FlutterActivity
 

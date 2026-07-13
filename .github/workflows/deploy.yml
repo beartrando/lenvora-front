@@ -136,6 +136,7 @@ jobs:
         with:
           repository: beartrando/tic-tac-toe-proto
           path: infra/proto
+          token: ${{ secrets.GH_PAT }}
 
       - name: Generate protobuf files
         run: |

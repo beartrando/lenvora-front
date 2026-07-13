@@ -115,6 +115,17 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Create .env
+        run: |
+          cat > .env <<EOF
+          ENV=${{ github.ref_name }}
+          GATEWAY_HOST=${{ secrets.GATEWAY_HOST }}
+          GATEWAY_PORT=${{ secrets.GATEWAY_PORT }}
+          STREAMING_HOST=${{ secrets.STREAMING_HOST }}
+          STREAMING_PORT=${{ secrets.STREAMING_PORT }}
+          MOVE_TIMEOUT=${{ secrets.MOVE_TIMEOUT }}
+          EOF
+
       - name: Install dependencies
         run: flutter pub get
 

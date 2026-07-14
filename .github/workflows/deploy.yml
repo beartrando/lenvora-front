@@ -126,10 +126,10 @@ jobs:
           MOVE_TIMEOUT=${{ secrets.MOVE_TIMEOUT }}
           EOF
 
-      - name: Verify .env
-        run: |
-          echo "Created .env:"
-          cat .env
+#      - name: Verify .env
+#        run: |
+#          echo "Created .env:"
+#          cat .env
 
       - name: Install dependencies
         run: flutter pub get
@@ -138,16 +138,16 @@ jobs:
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
 
-      - name: Debug keystore
-        run: |
-          ls -la android
-          ls -la android/app
-          cat android/app/upload-keystore.jks
-
-      - name: Check keystore
-        run: |
-          ls -lh android/app/upload-keystore.jks
-          file android/app/upload-keystore.jks
+#      - name: Debug keystore
+#        run: |
+#          ls -la android
+#          ls -la android/app
+#          cat android/app/upload-keystore.jks
+#
+#      - name: Check keystore
+#        run: |
+#          ls -lh android/app/upload-keystore.jks
+#          file android/app/upload-keystore.jks
 
       - name: Create key.properties
         run: |
@@ -177,6 +177,12 @@ jobs:
             --proto_path=infra/proto \
             $(find infra/proto -name "*.proto")
 
+      - name: Create Google Play credentials
+        run: |
+          cat > google-play.json <<'EOF'
+          ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+          EOF
+
       - name: Build appbundle
         run: |
           flutter build appbundle \
@@ -188,10 +194,10 @@ jobs:
         if: github.ref_name != 'prod'
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+          serviceAccountJson: google-play.json
           packageName: org.beartrando.tictactoe
-          releaseFile: build/app/outputs/bundle/release/app-release.aab
-          track: internal
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          tracks: internal
           whatsNewDirectory: ./release-notes
 
       - name: Upload to Google Play (production)
@@ -200,8 +206,8 @@ jobs:
         with:
           serviceAccountJson: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
           packageName: org.beartrando.tictactoe
-          releaseFile: build/app/outputs/bundle/release/app-release.aab
-          track: production
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          tracks: production
           whatsNewDirectory: ./release-notes
 
 

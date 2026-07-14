@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="org.beartrando.tictactoe">
+    <uses-permission android:name="android.permission.INTERNET"/>
 <application
-        android:label="front"
+        android:label="Tic-tac-toe"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

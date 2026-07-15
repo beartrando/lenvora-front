@@ -37,6 +37,7 @@ dev_dependencies:
   protobuf: ^6.0.0
   flutter_lints: ^6.0.0
   intl_utils: ^2.8.2
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
 
@@ -48,4 +49,11 @@ flutter_intl:
   enabled: true
   arb_dir: lib/core/localization/translations
   output_dir: lib/core/localization/generated
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: assets/icon/icon.png
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: assets/icon/icon.png
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/auth/providers/auth_service_provider.dart';
+import 'package:front/features/setting/providers/setting_provider.dart';
 import 'package:front/src/localization/generated/l10n.dart';
 import 'package:front/src/providers/locale_options_provider.dart';
 
@@ -42,8 +43,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final options = ref.watch(localeOptionsProvider);
 
-    // final settings = ref.watch(settingsProvider);
-    // final notifier = ref.read(settingsProvider.notifier);
+    final settings = ref.watch(settingsProvider);
+    final notifier = ref.read(settingsProvider.notifier);
     ref.read(authServiceProvider);
 
     return Scaffold(

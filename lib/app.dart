@@ -6,37 +6,45 @@ import 'package:front/src/localization/generated/l10n.dart';
 import 'package:front/src/providers/locale_provider.dart';
 import 'package:front/theme.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ProviderScope(
-      child: Consumer(
-        builder: (context, ref, _) {
-          // final secureStorage = ref.watch(secureStorageProvider);
-          // secureStorage.deleteAll();
-          final localeAsync = ref.watch(localeProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localeAsync = ref.watch(localeProvider);
 
-          return localeAsync.when(
-            data: (locale) => MaterialApp(
-              title: 'Front App',
-              theme: appTheme,
-              locale: Locale(locale),
-              localizationsDelegates: [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              initialRoute: '/',
-              routes: appRouter,
-            ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (err, stack) => Center(child: Text('Locale error: $err')),
-          );
-        },
+    return localeAsync.when(
+      data: (locale) => MaterialApp(
+        title: 'Tic Tac Toe',
+        theme: appTheme,
+        locale: Locale(locale),
+        supportedLocales: S.delegate.supportedLocales,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        initialRoute: '/',
+        routes: appRouter,
+      ),
+
+      loading: () => MaterialApp(
+        theme: appTheme,
+        home: const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ),
+
+      error: (err, stack) => MaterialApp(
+        theme: appTheme,
+        home: Scaffold(
+          body: Center(
+            child: Text('Locale error:\n$err'),
+          ),
+        ),
       ),
     );
   }

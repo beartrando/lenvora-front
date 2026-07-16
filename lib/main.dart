@@ -10,12 +10,13 @@ import 'package:logger/logger.dart';
 final logger = Logger();
 
 Future<void> main() async {
-  // Глобальный перехват ошибок Flutter
   FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.dumpErrorToConsole(details); // стандартный вывод
+    FlutterError.dumpErrorToConsole(details);
+
     debugPrint(
       'Flutter error: ${details.exceptionAsString()}\n${details.stack}',
     );
+
     logger.e(
       'Flutter error',
       error: details.exception,
@@ -23,22 +24,30 @@ Future<void> main() async {
     );
   };
 
-  // Глобальный перехват ошибок в асинхронных зонах
   runZonedGuarded(
-    () async {
+        () async {
       WidgetsFlutterBinding.ensureInitialized();
 
       await SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
       ]);
 
-      await dotenv.load(fileName: ".env");
+      await dotenv.load(fileName: '.env');
 
-      runApp(ProviderScope(child: MyApp()));
+      runApp(
+        const ProviderScope(
+          child: MyApp(),
+        ),
+      );
     },
-    (error, stack) {
+        (error, stack) {
       debugPrint('Uncaught async error: $error\n$stack');
-      logger.e('Async error', error: error, stackTrace: stack);
+
+      logger.e(
+        'Async error',
+        error: error,
+        stackTrace: stack,
+      );
     },
   );
 }

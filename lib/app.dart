@@ -28,23 +28,11 @@ class MyApp extends ConsumerWidget {
         initialRoute: '/',
         routes: appRouter,
       ),
-
-      loading: () => MaterialApp(
-        theme: appTheme,
-        home: const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
       ),
-
-      error: (err, stack) => MaterialApp(
-        theme: appTheme,
-        home: Scaffold(
-          body: Center(
-            child: Text('Locale error:\n$err'),
-          ),
-        ),
+      error: (err, stack) => Center(
+        child: Text('Locale error: $err'),
       ),
     );
   }

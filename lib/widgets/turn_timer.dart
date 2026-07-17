@@ -5,12 +5,14 @@ import 'package:front/features/battle/services/battle_service.dart';
 
 class TurnTimer extends StatefulWidget {
   final int seconds;
+  final String battleId;
   final BattleService battleService;
 
   const TurnTimer({
     super.key,
     this.seconds = 2000,
     required this.battleService,
+    required this.battleId,
   });
 
   @override
@@ -30,7 +32,7 @@ class _TurnTimerState extends State<TurnTimer> {
         setState(() => remaining--);
       } else {
         t.cancel();
-        widget.battleService.leave();
+        widget.battleService.leave(battleId: widget.battleId);
       }
     });
   }

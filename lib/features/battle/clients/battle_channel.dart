@@ -16,14 +16,6 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
   final pathname = 'battle';
 
   messageHandler(List<int> message) {
-    // logger.i('Received: $message');
-    // try {
-    //   // final resp = BattleObject.fromBuffer(message);
-    //   // _controller.add(resp);
-    // } catch (e) {
-    //   logger.e('Failed to parse: $e');
-    // }
-
     try {
       final resp = BattleStreamResponse.fromBuffer(message);
       // logger.i(resp);

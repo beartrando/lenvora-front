@@ -4,7 +4,7 @@ import 'package:front/src/grpc/generated/battle.pb.dart';
 
 import '../../battle/providers/battle_channel_provider.dart';
 
-final battleStreamProvider = StreamProvider.family<BattleObject, BattleParams>((
+final battleStreamProvider = StreamProvider.autoDispose.family<BattleObject, BattleParams>((
   ref,
   params,
 ) async* {
@@ -14,7 +14,7 @@ final battleStreamProvider = StreamProvider.family<BattleObject, BattleParams>((
   // logger.i('battleChannel created');
 
   try {
-    // logger.i('before watch');
+    logger.i('before battleChannel.start');
 
     battleChannel.start();
 
@@ -28,5 +28,5 @@ final battleStreamProvider = StreamProvider.family<BattleObject, BattleParams>((
 
   yield* battleChannel.messages;
 
-  ref.onDispose(() => battleChannel.close());
+  ref.onDispose(() {logger.i('battle stream onDispose'); battleChannel.close();});
 });

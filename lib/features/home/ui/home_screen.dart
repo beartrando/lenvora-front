@@ -29,18 +29,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       case 'settings':
         Navigator.pushNamed(context, '/settings');
         break;
-      case 'google':
-        // TODO: авторизация через Google
-        break;
-      case 'facebook':
-        // TODO: авторизация через Facebook
-        break;
+      // case 'google':
+      //   // TODO: авторизация через Google
+      //   break;
+      // case 'facebook':
+      //   // TODO: авторизация через Facebook
+      //   break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     final options = ref.watch(localeOptionsProvider);
 
     final settings = ref.watch(settingsProvider);
@@ -59,7 +58,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: _currentLocaleCode,
-                icon: const Icon(Icons.language, color: Colors.white),
+                // icon: const Icon(Icons.language, color: Colors.white),
                 dropdownColor: Colors.grey[900],
                 style: const TextStyle(color: Colors.white),
                 onChanged: (String? newValue) {
@@ -67,34 +66,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     _handleLocaleChange(context, newValue);
                   }
                 },
-                items: options.map((o) =>
-                    DropdownMenuItem(
-                      value: o.code,
-                      child: Text(o.emoji),
+                items: options
+                    .map(
+                      (o) =>
+                          DropdownMenuItem(value: o.code, child: Text(o.emoji)),
                     )
-                ).toList(),
+                    .toList(),
               ),
             ),
           ),
-          PopupMenuButton<String>(
-            icon: const Icon(Icons.menu),
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'settings',
-                child: Text('⚙️ Настройки'),
-              ),
-              const PopupMenuDivider(),
-              const PopupMenuItem(
-                value: 'google',
-                child: Text('🔐 Войти через Google'),
-              ),
-              const PopupMenuItem(
-                value: 'facebook',
-                child: Text('🔐 Войти через Facebook'),
-              ),
-            ],
-            onSelected: (value) => _handleMenuSelection(context, value),
-          ),
+          // PopupMenuButton<String>(
+          //   icon: const Icon(Icons.menu),
+          //   itemBuilder: (context) => [
+          //     const PopupMenuItem(
+          //       value: 'settings',
+          //       child: Text('⚙️ Настройки'),
+          //     ),
+          //     // const PopupMenuDivider(),
+          //     // const PopupMenuItem(
+          //     //   value: 'google',
+          //     //   child: Text('🔐 Войти через Google'),
+          //     // ),
+          //     // const PopupMenuItem(
+          //     //   value: 'facebook',
+          //     //   child: Text('🔐 Войти через Facebook'),
+          //     // ),
+          //   ],
+          //   onSelected: (value) => _handleMenuSelection(context, value),
+          // ),
         ],
       ),
       body: Center(

@@ -38,13 +38,11 @@ class SettingService {
   }
 
   Future<Setting> load() async {
-    final sound = true;
-    final effects = true;
-    final vibration = true;
+    final prefs = await SharedPreferences.getInstance();
     return Setting(
-      soundEnabled: sound,
-      effectsSoundEnabled: effects,
-      vibrationEnabled: vibration,
+      soundEnabled: prefs.getBool(_soundKey) ?? true,
+      effectsSoundEnabled: prefs.getBool(_effectsKey) ?? true,
+      vibrationEnabled: prefs.getBool(_vibrationKey) ?? true,
     );
   }
 }

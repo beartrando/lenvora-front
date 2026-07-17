@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/battle/widgets/battle_content.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
+import 'package:front/src/grpc/generated/battle.pbserver.dart';
 import 'package:front/src/params/client_params.dart';
 import 'package:front/src/providers/jwt_provider.dart';
 
@@ -19,6 +20,7 @@ class BattleScreen extends ConsumerStatefulWidget {
 
 class _BattleScreenState extends ConsumerState<BattleScreen> {
   late BattleService battleService;
+  late BattleObject? _battle;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +44,14 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
                 );
 
                 return battleAsync.when(
-                  data: (battle) => BattleContent(
-                    battle: battle,
-                    profile: profile,
-                    battleService: battleService,
-                  ),
+                  data: (battle) {
+                    _battle = battle;
+                    return BattleContent(
+                      battle: battle,
+                      profile: profile,
+                      battleService: battleService,
+                    );
+                  },
                   loading: () {
                     debugPrint("Battle stream loading...");
                     return const Center(child: CircularProgressIndicator());
@@ -72,7 +77,11 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
 
   @override
   void dispose() {
-    battleService?.leave();
+    debugPrint("BattleScreen dispose");
+    final battle = _battle;
+    if (battle != null) {
+      battleService.leave(battleId: battle.id);
+    }
     super.dispose();
   }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/battle/services/battle_service.dart';
 import 'package:front/features/profile/widgets/player_name.dart';
 import 'package:front/src/grpc/generated/battle.pb.dart';
 import 'package:front/src/grpc/generated/profile.pb.dart';
+import 'package:front/src/providers/app_config_provider.dart';
 import 'package:front/widgets/turn_timer.dart';
 
-class BattleBoard extends StatelessWidget {
+class BattleBoard extends ConsumerWidget {
   final BattleObject battle;
   final BattleService battleService;
 
@@ -22,7 +24,8 @@ class BattleBoard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final config = ref.watch(appConfigProvider);
     return Column(
       children: [
         Row(
@@ -43,7 +46,7 @@ class BattleBoard extends StatelessWidget {
                 ],
               )
             : (battleService.canMove(battle)
-                  ? TurnTimer(seconds: 2000, battleService: battleService)
+                  ? TurnTimer(seconds: config.moveTimeout, battleService: battleService)
                   : const Text('Not your turn')),
 
         const SizedBox(height: 8),

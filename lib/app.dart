@@ -28,15 +28,17 @@ class MyApp extends ConsumerWidget {
         initialRoute: '/',
         routes: appRouter,
       ),
-      loading: () => const Scaffold(
-        body: Center(
+      loading: () => const Directionality(
+        textDirection: TextDirection.ltr,
+        child: Center(
           child: CircularProgressIndicator(),
         ),
       ),
       error: (err, stack) {
         debugPrint('Locale loading error: $err');
-        return const Scaffold(
-          body: Center(
+        return const Directionality(
+          textDirection: TextDirection.ltr,
+          child: Center(
             child: Text('Failed to load locale. Please try again later.'),
           ),
         );

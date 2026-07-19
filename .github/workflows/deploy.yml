@@ -188,6 +188,8 @@ jobs:
           flutter build appbundle \
             --release \
             --build-name=$VERSION \
+            --dart-define=APP_VERSION=$VERSION \
+            --dart-define=GIT_SHA=$GITHUB_SHA \
             --build-number=$GITHUB_RUN_NUMBER
 
       - name: Upload to Google Play (internal)

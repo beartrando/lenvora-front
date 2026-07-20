@@ -14,7 +14,7 @@ final battleStreamProvider = StreamProvider.autoDispose
       // logger.i('battleChannel created');
 
       try {
-        logger.i('before battleChannel.start');
+        // logger.i('before battleChannel.start');
 
         battleChannel.start();
 
@@ -29,7 +29,7 @@ final battleStreamProvider = StreamProvider.autoDispose
       yield* battleChannel.messages;
 
       ref.onDispose(() {
-        logger.i('battle stream onDispose');
+        // logger.i('battle stream onDispose');
         battleChannel.close();
       });
     });

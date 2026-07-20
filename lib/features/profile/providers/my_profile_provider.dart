@@ -14,7 +14,7 @@ final myProfileProvider = FutureProvider.family<ProfileObject, ClientParams>((
   final profile = await service.getMe();
 
 
-  logger.d(profile);
+  // logger.d(profile);
   if (profile == null) {
     throw Exception("My profile not found");
   }

@@ -33,7 +33,7 @@ abstract class StreamingChannel<T> {
     if (!_controller.isClosed) {
       try {
         _controller.add(data);
-        logger.i("Battle added safely");
+        // logger.i("Battle added safely");
       } catch (e, st) {
         logger.e("safeAdd failed: $e\n$st");
       }

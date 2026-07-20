@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:front/features/auth/providers/auth_client_provider.dart';
 import 'package:front/src/grpc/generated/profile.pb.dart';
 import 'package:front/src/params/client_params.dart';
 
@@ -10,8 +11,10 @@ final myProfileProvider = FutureProvider.family<ProfileObject, ClientParams>((
 ) async {
   final service = await ref.read(profileServiceProvider(params));
 
-  final profile = await service.getMy();
+  final profile = await service.getMe();
 
+
+  logger.d(profile);
   if (profile == null) {
     throw Exception("My profile not found");
   }

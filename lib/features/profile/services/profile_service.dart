@@ -10,11 +10,11 @@ class ProfileService {
 
   ProfileService(this.profileClient);
 
-  Future<ProfileObject?> getMy() async {
-    return await profileClient.getMyProfile();
+  Future<ProfileObject?> getMe() async {
+    return await profileClient.getMe();
   }
 
-  Future<ProfileObject?> getProfile(String profileId) async {
+  Future<ProfileObject?> get(String profileId) async {
     return await profileClient.getProfile(profileId);
   }
 }

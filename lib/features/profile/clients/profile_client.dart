@@ -8,10 +8,10 @@ class ProfileClient extends GatewayClient {
 
   ProfileClient(this.jwt, super.config);
 
-  Future<ProfileObject?> getMyProfile() async {
+  Future<ProfileObject?> getMe() async {
     try {
       final jsonString = await get(
-        '/profile/getMyProfile',
+        '/profile/getMe',
         headers: {'Authorization': 'Bearer ${jwt}'},
       );
 
@@ -28,7 +28,7 @@ class ProfileClient extends GatewayClient {
   Future<ProfileObject?> getProfile(String profileId) async {
     try {
       final jsonString = await get(
-        '/profile/getProfile?profileId=$profileId',
+        '/profile/get?profileId=$profileId',
         headers: {'Authorization': 'Bearer ${jwt}'},
       );
 

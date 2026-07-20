@@ -11,7 +11,7 @@ final profileProvider = FutureProvider.family<ProfileObject, ProfileParams>((
   final service = await ref.read(profileServiceProvider(params.clientParams));
 
   final profileId = params.profileId;
-  final profile = await service.getProfile(profileId);
+  final profile = await service.get(profileId);
 
   if (profile == null) {
     throw Exception("Profile $profileId not found");

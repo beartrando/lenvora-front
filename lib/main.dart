@@ -12,17 +12,10 @@ final logger = Logger();
 Future<void> main() async {
   FlutterError.onError = _handleFlutterError;
 
-  runZonedGuarded(
-    () async {
-      await _initializeApp();
-      runApp(
-        const ProviderScope(
-          child: MyApp(),
-        ),
-      );
-    },
-    _handleAsyncError,
-  );
+  runZonedGuarded(() async {
+    await _initializeApp();
+    runApp(const ProviderScope(child: MyApp()));
+  }, _handleAsyncError);
 }
 
 void _handleFlutterError(FlutterErrorDetails details) {
@@ -39,17 +32,11 @@ void _handleFlutterError(FlutterErrorDetails details) {
 
 void _handleAsyncError(Object error, StackTrace stack) {
   debugPrint('Uncaught async error: $error\\n$stack');
-  logger.e(
-    'Async error',
-    error: error,
-    stackTrace: stack,
-  );
+  logger.e('Async error', error: error, stackTrace: stack);
 }
 
 Future<void> _initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await dotenv.load(fileName: '.env');
 }

@@ -30,9 +30,7 @@ class MyApp extends ConsumerWidget {
       ),
       loading: () => const Directionality(
         textDirection: TextDirection.ltr,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
+        child: Center(child: CircularProgressIndicator()),
       ),
       error: (err, stack) {
         debugPrint('Locale loading error: $err');

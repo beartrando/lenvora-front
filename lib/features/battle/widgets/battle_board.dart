@@ -46,7 +46,11 @@ class BattleBoard extends ConsumerWidget {
                 ],
               )
             : (battleService.canMove(battle)
-                  ? TurnTimer(seconds: config.moveTimeout, battleService: battleService, battleId: battle.id)
+                  ? TurnTimer(
+                      seconds: config.moveTimeout,
+                      battleService: battleService,
+                      battleId: battle.id,
+                    )
                   : const Text('Not your turn')),
 
         const SizedBox(height: 8),

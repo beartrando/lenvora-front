@@ -17,7 +17,7 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
 
   messageHandler(List<int> message) {
     try {
-      final resp = BattleStreamResponse.fromBuffer(message);
+      final resp = BattleResponse.fromBuffer(message);
       // logger.i(resp);
       if (resp.hasBattle()) {
         final battle = resp.battle;
@@ -49,15 +49,15 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
       ..cellIdx = cellIdx
       ..battleId = battleId;
 
-    final req = BattleStreamRequest()..move = moveReq;
+    final req = BattleRequest()..move = moveReq;
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
   void leave(String battleId) {
-    final req = BattleStreamRequest()
-      ..leave = (LeaveBattleRequest()..battleId = battleId);
+    final req = BattleRequest()
+      ..leave = (BattleLeaveRequest()..battleId = battleId);
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');
@@ -65,30 +65,30 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
 
   connectAi(String battleId) {
     // logger.i('Move event');
-    final connectAiRequest = streamingGrpc.AiJoinToBattleRequest()
+    final connectAiRequest = streamingGrpc.BattleJoinAiRequest()
       ..battleId = battleId;
 
-    final req = BattleStreamRequest()..connectAi = connectAiRequest;
+    final req = BattleRequest()..connectAi = connectAiRequest;
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
   start([String? battleId]) {
-    final request = streamingGrpc.StartBattleRequest();
+    final request = streamingGrpc.BattleStartRequest();
 
     if (battleId != null) {
       request.battleId = battleId;
     }
 
-    final req = BattleStreamRequest()..start = request;
+    final req = BattleRequest()..start = request;
     channel.sink.add(req.writeToBuffer());
 
     // logger.i('Sent start battle: $battleId');
   }
 
   Future<void> ping() async {
-    final req = BattleStreamRequest()
+    final req = BattleRequest()
       ..ping = (Ping()
         ..timestamp = toTimestamp(DateTime.now()));
     channel.sink.add(req.writeToBuffer());

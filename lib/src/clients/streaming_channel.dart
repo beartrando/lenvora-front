@@ -90,7 +90,7 @@ abstract class StreamingChannel<T> {
   }
 
   void ping() {
-    // final req = BattleStreamRequest()..ping = Empty();
+    // final req = BattleRequest()..ping = Empty();
     // _channel.sink.add(req.writeToBuffer());
   }
 

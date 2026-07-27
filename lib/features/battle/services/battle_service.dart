@@ -34,7 +34,7 @@ class BattleService {
       return false;
     }
 
-    if (battle.players.length < 2) {
+    if (battle.playerIds.length < 2) {
       return false;
     }
 
@@ -42,9 +42,9 @@ class BattleService {
         .where((c) => c != BattleCellValue.CELL_EMPTY)
         .length;
 
-    final currentTurnIndex = filledCount % battle.players.length;
+    final currentTurnIndex = filledCount % battle.playerIds.length;
 
-    final currentPlayerId = battle.players[currentTurnIndex];
+    final currentPlayerId = battle.playerIds[currentTurnIndex];
 
     return (currentPlayerId == profileId);
   }

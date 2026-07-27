@@ -12,13 +12,13 @@ class AuthClient extends GatewayClient {
     });
     final logger = new Logger();
     logger.d(jsonString);
-    return parseProto(() => AuthObject(), jsonString);
+    return parseProto(() => AuthResponse(), jsonString).auth;
   }
 
   Future<AuthObject> refreshTokens(String refreshToken) async {
     final jsonString = await post('/auth/refreshTokens', {
       'token': refreshToken,
     });
-    return parseProto(() => AuthObject(), jsonString);
+    return parseProto(() => AuthResponse(), jsonString).auth;
   }
 }

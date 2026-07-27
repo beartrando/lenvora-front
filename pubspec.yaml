@@ -48,8 +48,8 @@ flutter:
 
 flutter_intl:
   enabled: true
-  arb_dir: lib/core/localization/translations
-  output_dir: lib/core/localization/generated
+  arb_dir: utils/core/localization/translations
+  output_dir: utils/core/localization/generated
 
 flutter_launcher_icons:
   android: true

@@ -45,7 +45,7 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
 
   void move(String battleId, int cellIdx) {
     // logger.i('Move event');
-    final moveReq = BattleMoveRequest()
+    final moveReq = BattleMove()
       ..cellIdx = cellIdx
       ..battleId = battleId;
 
@@ -57,7 +57,7 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
 
   void leave(String battleId) {
     final req = BattleRequest()
-      ..leave = (BattleLeaveRequest()..battleId = battleId);
+      ..leave = (BattleLeave()..battleId = battleId);
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');
@@ -65,7 +65,7 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
 
   connectAi(String battleId) {
     // logger.i('Move event');
-    final connectAiRequest = streamingGrpc.BattleJoinAiRequest()
+    final connectAiRequest = streamingGrpc.BattleJoinAi()
       ..battleId = battleId;
 
     final req = BattleRequest()..connectAi = connectAiRequest;
@@ -75,7 +75,7 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
   }
 
   start([String? battleId]) {
-    final request = streamingGrpc.BattleStartRequest();
+    final request = streamingGrpc.BattleStart();
 
     if (battleId != null) {
       request.battleId = battleId;

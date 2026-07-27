@@ -18,7 +18,7 @@ class ProfileClient extends GatewayClient {
       final logger = new Logger();
       logger.d(jsonString);
 
-      return parseProto(() => ProfileObject(), jsonString);
+      return parseProto(() => ProfileResponse(), jsonString).profile;
     } catch (e, st) {
       Logger().e("getProfile failed $e $st");
       return null;
@@ -35,7 +35,7 @@ class ProfileClient extends GatewayClient {
       final logger = Logger();
       logger.d(jsonString);
 
-      return parseProto(() => ProfileObject(), jsonString);
+      return parseProto(() => ProfileResponse(), jsonString).profile;
     } catch (e, st) {
       Logger().e("getProfile failed $e $st");
       return null;

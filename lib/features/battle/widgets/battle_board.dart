@@ -31,18 +31,18 @@ class BattleBoard extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            for (int i = 0; i < battle.players.length; i++) ...[
-              PlayerName(profileId: battle.players[i]),
-              if (i < battle.players.length - 1) const Text(' vs '),
+            for (int i = 0; i < battle.playerIds.length; i++) ...[
+              PlayerName(profileId: battle.playerIds[i]),
+              if (i < battle.playerIds.length - 1) const Text(' vs '),
             ],
           ],
         ),
-        battle.winner.isNotEmpty
+        battle.winnerId.isNotEmpty
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('Winner: '),
-                  PlayerName(profileId: battle.winner),
+                  PlayerName(profileId: battle.winnerId),
                 ],
               )
             : (battleService.canMove(battle)

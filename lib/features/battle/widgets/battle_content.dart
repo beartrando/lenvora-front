@@ -27,12 +27,12 @@ class BattleContent extends ConsumerWidget {
           barrierDismissible: false,
           builder: (_) => AlertDialog(
             title: const Text("Матч завершён"),
-            content: battle.winner.isEmpty
+            content: battle.winnerId.isEmpty
                 ? const Text("Ничья")
                 : Row(
                     children: [
                       const Text("Победитель: "),
-                      PlayerName(profileId: battle.winner),
+                      PlayerName(profileId: battle.winnerId),
                     ],
                   ),
             actions: [
@@ -56,7 +56,7 @@ class BattleContent extends ConsumerWidget {
       });
     }
 
-    if (battle.players.length > 1) {
+    if (battle.playerIds.length > 1) {
       try {
         return Scaffold(
           appBar: AppBar(title: const Text('Battle: Tic Tac Toe')),
@@ -83,7 +83,7 @@ class BattleContent extends ConsumerWidget {
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () {
-                  battleService.connectAi(battle.id);
+                  battleService.connectBot(battle.id);
                 },
                 child: const Text('Play with AI'),
               ),

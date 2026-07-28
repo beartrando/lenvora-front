@@ -1,4 +1,4 @@
-import 'package:front/src/grpc/generated/profile.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/profile.pb.dart';
 import 'package:logger/logger.dart';
 
 import '../clients/profile_client.dart';

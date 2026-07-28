@@ -1,4 +1,4 @@
-import 'package:front/src/grpc/generated/auth.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/auth.pb.dart';
 import 'package:front/src/storages/token_storage.dart';
 import 'package:logger/logger.dart';
 

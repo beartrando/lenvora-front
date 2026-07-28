@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front/src/grpc/generated/profile.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/profile.pb.dart';
 
 class ProfileDetailScreen extends StatelessWidget {
   final ProfileObject profile;

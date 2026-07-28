@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/battle/services/battle_service.dart';
 import 'package:front/features/profile/widgets/player_name.dart';
-import 'package:front/src/grpc/generated/battle.pb.dart';
-import 'package:front/src/grpc/generated/profile.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/battle.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/profile.pb.dart';
 import 'package:front/src/providers/app_config_provider.dart';
 import 'package:front/widgets/turn_timer.dart';
 

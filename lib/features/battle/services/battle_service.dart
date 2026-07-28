@@ -1,5 +1,5 @@
 import 'package:front/features/battle/clients/battle_channel.dart';
-import 'package:front/src/grpc/generated/battle.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/battle.pb.dart';
 import 'package:logger/logger.dart';
 
 final logger = Logger();

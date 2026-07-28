@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/auth/providers/auth_client_provider.dart';
-import 'package:front/src/grpc/generated/profile.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/profile.pb.dart';
 import 'package:front/src/params/client_params.dart';
 
 import './profile_service_provider.dart';

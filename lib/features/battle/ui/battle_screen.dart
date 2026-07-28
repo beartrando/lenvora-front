@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/battle/widgets/battle_content.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
-import 'package:front/src/grpc/generated/battle.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/battle.pb.dart';
 import 'package:front/src/params/client_params.dart';
 import 'package:front/src/providers/jwt_provider.dart';
 

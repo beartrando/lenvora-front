@@ -1,5 +1,5 @@
 import 'package:front/src/clients/gateway_client.dart';
-import 'package:front/src/grpc/generated/auth.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/auth.pb.dart';
 import 'package:front/src/helpers/parse_proto.dart';
 import 'package:logger/logger.dart';
 

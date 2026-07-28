@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:fixnum/fixnum.dart';
 import 'package:front/src/clients/streaming_channel.dart';
-import 'package:front/src/grpc/generated/battle.pb.dart' as battleGrpc;
-import 'package:front/src/grpc/generated/common/ping.pb.dart';
-import 'package:front/src/grpc/generated/streaming.pb.dart' as streamingGrpc;
-import 'package:front/src/grpc/generated/streaming.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/battle.pb.dart' as battleGrpc;
+import 'package:front/src/infrastructure/grpc/generated/common/ping.pb.dart';
+import 'package:front/src/infrastructure/grpc/generated/streaming.pb.dart' as streamingGrpc;
+import 'package:front/src/infrastructure/grpc/generated/streaming.pb.dart';
 import 'package:front/src/helpers/protobuf_utils.dart';
 import 'package:logger/logger.dart';
 

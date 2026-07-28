@@ -9,7 +9,7 @@ final gatewayClientProvider = Provider<GatewayClient>((ref) {
   final config = GatewayConfig.fromEnv();
   ;
   logger.i(config);
-  logger.i('Init started with config: $config');
+  logger.i('Init started with app: $config');
 
   final gatewayClient = GatewayClient(config);
 

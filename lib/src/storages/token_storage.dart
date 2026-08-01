@@ -1,4 +1,4 @@
-import 'package:front/src/infrastructure/grpc/generated/auth.pb.dart';
+import 'package:front/src/contracts/proto/auth.pb.dart';
 
 import './secure_storage.dart';
 

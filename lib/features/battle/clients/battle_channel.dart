@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:fixnum/fixnum.dart';
 import 'package:front/src/clients/streaming_channel.dart';
-import 'package:front/src/infrastructure/grpc/generated/battle.pb.dart' as battleGrpc;
-import 'package:front/src/infrastructure/grpc/generated/common/ping.pb.dart';
-import 'package:front/src/infrastructure/grpc/generated/streaming.pb.dart' as streamingGrpc;
-import 'package:front/src/infrastructure/grpc/generated/streaming.pb.dart';
+import 'package:front/src/contracts/proto/battle.pb.dart' as battleProto;
+import 'package:front/src/contracts/proto/common/ping.pb.dart';
+import 'package:front/src/contracts/proto/streaming.pb.dart' as streamingProto;
+import 'package:front/src/contracts/proto/streaming.pb.dart';
 import 'package:front/src/helpers/protobuf_utils.dart';
 import 'package:logger/logger.dart';
 
 final logger = Logger();
 
-class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
+class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
   late String profileId;
   final pathname = 'battle';
 
@@ -65,7 +65,7 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
 
   connectAi(String battleId) {
     // logger.i('Move event');
-    final connectAiRequest = streamingGrpc.BattleJoinAi()
+    final connectAiRequest = streamingProto.BattleJoinAi()
       ..battleId = battleId;
 
     final req = BattleRequest()..connectAi = connectAiRequest;
@@ -75,7 +75,7 @@ class BattleChannel extends StreamingChannel<battleGrpc.BattleObject> {
   }
 
   start([String? battleId]) {
-    final request = streamingGrpc.BattleStart();
+    final request = streamingProto.BattleStart();
 
     if (battleId != null) {
       request.battleId = battleId;

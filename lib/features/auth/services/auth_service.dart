@@ -1,4 +1,4 @@
-import 'package:front/src/infrastructure/grpc/generated/auth.pb.dart';
+import 'package:front/src/contracts/proto/auth.pb.dart';
 import 'package:front/src/storages/token_storage.dart';
 import 'package:logger/logger.dart';
 
@@ -7,11 +7,11 @@ import '../services/device_service.dart';
 
 final logger = Logger();
 
-class AuthService {
+class JwtService {
   final AuthClient authClient;
   final TokenStorage tokenStorage;
 
-  AuthService(this.authClient, this.tokenStorage);
+  JwtService(this.authClient, this.tokenStorage);
 
   Future<void> clearJwt(TokenStorage tokenStorage) async {
     await tokenStorage.deleteAccessToken();

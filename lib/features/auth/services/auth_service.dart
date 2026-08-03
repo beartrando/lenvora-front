@@ -7,11 +7,11 @@ import '../services/device_service.dart';
 
 final logger = Logger();
 
-class JwtService {
+class AuthService {
   final AuthClient authClient;
   final TokenStorage tokenStorage;
 
-  JwtService(this.authClient, this.tokenStorage);
+  AuthService(this.authClient, this.tokenStorage);
 
   Future<void> clearJwt(TokenStorage tokenStorage) async {
     await tokenStorage.deleteAccessToken();

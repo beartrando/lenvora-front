@@ -56,8 +56,7 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
   }
 
   void leave(String battleId) {
-    final req = BattleRequest()
-      ..leave = (BattleLeave()..battleId = battleId);
+    final req = BattleRequest()..leave = (BattleLeave()..battleId = battleId);
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');
@@ -65,8 +64,7 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
 
   connectAi(String battleId) {
     // logger.i('Move event');
-    final connectAiRequest = streamingProto.BattleJoinAi()
-      ..battleId = battleId;
+    final connectAiRequest = streamingProto.BattleJoinAi()..battleId = battleId;
 
     final req = BattleRequest()..connectAi = connectAiRequest;
     // logger.d(req);
@@ -89,8 +87,7 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
 
   Future<void> ping() async {
     final req = BattleRequest()
-      ..ping = (Ping()
-        ..timestamp = toTimestamp(DateTime.now()));
+      ..ping = (Ping()..timestamp = toTimestamp(DateTime.now()));
     channel.sink.add(req.writeToBuffer());
   }
 }

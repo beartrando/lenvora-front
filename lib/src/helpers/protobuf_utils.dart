@@ -1,7 +1,7 @@
 import 'package:fixnum/fixnum.dart';
 import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart';
 import 'package:protobuf/well_known_types/google/protobuf/duration.pb.dart'
-as pb;
+    as pb;
 
 Timestamp toTimestamp(DateTime dateTime) {
   final millis = dateTime.millisecondsSinceEpoch;

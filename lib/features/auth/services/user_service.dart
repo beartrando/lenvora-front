@@ -2,7 +2,7 @@
 // import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // import 'package:../services/device_service.dart';
 //
-// class JwtService {
+// class AuthService {
 //   final GatewayClient _client;
 //   final _storage = const FlutterSecureStorage();
 //

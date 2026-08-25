@@ -17,8 +17,8 @@ class BattleService {
     }
   }
 
-  connectAi(String battleId) {
-    channel.connectAi(battleId);
+  joinBot(String battleId) {
+    channel.joinBot(battleId);
   }
 
   leave({String battleId = ''}) {

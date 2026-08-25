@@ -62,11 +62,11 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
-  connectAi(String battleId) {
+  joinBot(String battleId) {
     // logger.i('Move event');
-    final connectAiRequest = streamingProto.BattleJoinAi()..battleId = battleId;
+    final connectBotRequest = streamingProto.BattleJoinBot()..battleId = battleId;
 
-    final req = BattleRequest()..connectAi = connectAiRequest;
+    final req = BattleRequest()..connectBot = connectBotRequest;
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');

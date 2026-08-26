@@ -17,8 +17,8 @@ class BattleService {
     }
   }
 
-  joinBot(String battleId) {
-    channel.joinBot(battleId);
+  connectBot(String battleId) {
+    channel.connectBot(battleId);
   }
 
   leave({String battleId = ''}) {
@@ -38,7 +38,7 @@ class BattleService {
       return false;
     }
 
-    final filledCount = battle.cells
+    final filledCount = battle.board
         .where((c) => c != BattleCellValue.CELL_EMPTY)
         .length;
 

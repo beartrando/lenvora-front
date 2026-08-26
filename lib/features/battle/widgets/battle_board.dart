@@ -61,8 +61,8 @@ class BattleBoard extends ConsumerWidget {
             ),
             itemCount: 9,
             itemBuilder: (context, index) {
-              debugPrint("Cells raw: ${battle.cells}");
-              final cellValue = safeCellAt(battle.cells, index);
+              debugPrint("Cells raw: ${battle.board}");
+              final cellValue = safeCellAt(battle.board, index);
               return GestureDetector(
                 onTap: () {
                   if (battleService.canMove(battle)) {

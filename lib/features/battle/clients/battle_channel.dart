@@ -62,7 +62,7 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
-  joinBot(String battleId) {
+  connectBot(String battleId) {
     // logger.i('Move event');
     final connectBotRequest = streamingProto.BattleJoinBot()..battleId = battleId;
 

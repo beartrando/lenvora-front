@@ -4,23 +4,23 @@ import 'package:logger/logger.dart';
 
 import '../../features/auth/providers/auth_service_provider.dart';
 
-final jwtProvider = FutureProvider<String>((ref) async {
+final acessTokenProvider = FutureProvider<String>((ref) async {
   final tokenStorage = ref.watch(tokenStorageProvider);
 
-  var jwt = await tokenStorage.readAccessToken();
+  var accessToken = await tokenStorage.readAccessToken();
 
-  if (jwt != null && jwt.isNotEmpty) {
-    return jwt;
+  if (accessToken != null && accessToken.isNotEmpty) {
+    return accessToken;
   }
 
   final authService = await ref.watch(authServiceProvider.future);
 
   var logger = Logger();
 
-  jwt = await authService.getOrCreateJwt();
-  logger.d("JWT получен: $jwt");
+  accessToken = await authService.getOrCreateJwt();
+  logger.d("JWT получен: $accessToken");
 
-  tokenStorage.saveAccessToken(jwt);
+  await tokenStorage.saveAccessToken(accessToken);
 
-  return jwt;
+  return accessToken;
 });

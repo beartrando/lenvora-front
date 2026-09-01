@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
 import 'package:front/src/params/client_params.dart';
-import 'package:front/src/providers/jwt_provider.dart';
+import 'package:front/src/providers/auth_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final jwtAsync = ref.watch(jwtProvider);
+    // final jwtAsync = ref.watch(authProvider);
 
     return jwtAsync.when(
       data: (jwt) {

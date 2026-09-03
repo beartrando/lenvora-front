@@ -171,9 +171,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y protobuf-compiler
           dart pub global activate protoc_plugin
-          mkdir -p lib/src/contracts/proto/
+          mkdir -p lib/contracts/proto/
           protoc \
-            --dart_out=grpc:lib/src/contracts/proto \
+            --dart_out=grpc:lib/contracts/proto \
             --proto_path=infra/proto \
             $(find infra/proto -name "*.proto")
 

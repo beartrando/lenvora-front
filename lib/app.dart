@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/router.dart';
-import 'package:front/src/localization/generated/l10n.dart';
-import 'package:front/src/providers/locale_provider.dart';
+import 'package:front/infrastructure/localization/generated/l10n.dart';
+import 'package:front/infrastructure/localization/locale_provider.dart';
 import 'package:front/theme.dart';
 
 class MyApp extends ConsumerWidget {

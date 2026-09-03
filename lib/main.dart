@@ -21,7 +21,7 @@ Future<void> main() async {
 void _handleFlutterError(FlutterErrorDetails details) {
   FlutterError.dumpErrorToConsole(details);
   debugPrint(
-    'Flutter error: \\${details.exceptionAsString()}\\n\\${details.stack}',
+    'Flutter error: \${details.exceptionAsString()}\n\${details.stack}',
   );
   logger.e(
     'Flutter error',

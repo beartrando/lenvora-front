@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
 import 'package:front/src/params/client_params.dart';
-import 'package:front/src/providers/auth_provider.dart';
+import 'package:front/src/locale/auth_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});

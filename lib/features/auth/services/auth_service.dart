@@ -1,5 +1,5 @@
 import 'package:front/src/contracts/proto/auth.pb.dart';
-import 'package:front/src/storages/token_storage.dart';
+import 'package:front/src/storage/token_storage.dart';
 import 'package:logger/logger.dart';
 
 import '../clients/auth_client.dart';

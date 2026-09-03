@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/auth/providers/auth_client_provider.dart';
+import 'package:front/features/auth/locale/auth_client_provider.dart';
 import 'package:front/src/contracts/proto/profile.pb.dart';
 import 'package:front/src/params/client_params.dart';
 

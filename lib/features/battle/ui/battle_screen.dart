@@ -4,7 +4,7 @@ import 'package:front/features/battle/widgets/battle_content.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
 import 'package:front/src/contracts/proto/battle.pb.dart';
 import 'package:front/src/params/client_params.dart';
-import 'package:front/src/providers/auth_provider.dart';
+import 'package:front/src/locale/auth_provider.dart';
 
 import '../../battle/params/battle_params.dart';
 import '../../battle/providers/battle_service_provider.dart';

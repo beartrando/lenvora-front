@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/auth/providers/auth_service_provider.dart';
 import 'package:front/features/setting/providers/setting_provider.dart';
-import 'package:front/src/localization/generated/l10n.dart';
-import 'package:front/src/providers/locale_options_provider.dart';
+import 'package:front/infrastructure/localization/generated/l10n.dart';
+import 'package:front/infrastructure/localization/locale_options_provider.dart';
+import 'package:front/infrastructure/auth/auth_service_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});

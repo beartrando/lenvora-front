@@ -1,5 +1,5 @@
 import 'package:front/contracts/proto/auth.pb.dart';
-import 'package:front/infrastructure/http/http_client_interface.dart';
+import 'package:front/infrastructure/http/http_client.dart';
 
 class AuthClient {
   final HttpClient http;

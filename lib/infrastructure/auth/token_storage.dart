@@ -1,5 +1,4 @@
 import 'package:front/contracts/proto/auth.pb.dart';
-
 import 'package:front/infrastructure/storage/secure_storage.dart';
 
 class TokenStorage extends SecureStorage {

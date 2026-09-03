@@ -49,4 +49,3 @@ class BattleService {
     return (currentPlayerId == profileId);
   }
 }
-

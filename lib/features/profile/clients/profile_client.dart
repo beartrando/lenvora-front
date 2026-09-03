@@ -1,4 +1,4 @@
-import 'package:front/src/clients/gateway_client.dart';
+import 'package:front/src/api/gateway_client.dart';
 import 'package:front/src/contracts/proto/profile.pb.dart';
 import 'package:front/src/helpers/parse_proto.dart';
 import 'package:logger/logger.dart';

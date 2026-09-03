@@ -1,25 +1,50 @@
-abstract interface class HttpClient {
-  Future<HttpResponse> get(
-      String path, {
-        Map<String, String>? headers,
-        Map<String, dynamic>? query,
-      });
+import 'dart:convert';
 
-  Future<HttpResponse> post(
-      String path, {
-        Map<String, String>? headers,
-        Object? body,
-      });
+import './config/http_config.dart';
+import 'package:http/http.dart' as http;
 
-  Future<HttpResponse> put(
-      String path, {
-        Map<String, String>? headers,
-        Object? body,
-      });
+class HttpClient {
+  final String baseUrl;
+  final int port;
+  final HttpConfig config;
 
-  Future<HttpResponse> delete(
-      String path, {
-        Map<String, String>? headers,
-        Object? body,
-      });
+  GatewayClient(this.config) : baseUrl = config.host, port = config.port;
+
+  Uri buildUri(String path) {
+    return Uri.parse('http://$baseUrl:$port$path');
+  }
+
+  Future<String> post(
+    String path,
+    Map<String, dynamic> body, {
+    Map<String, String>? headers,
+  }) async {
+    final response = await http.post(
+      buildUri(path),
+      headers: {
+        'Content-Type': 'application/json',
+        ...?headers, // добавляем кастомные заголовки
+      },
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception("❌ POST $path failed: ${response.body}");
+    }
+  }
+
+  Future<String> get(String path, {Map<String, String>? headers}) async {
+    final response = await http.get(
+      buildUri(path),
+      headers: {'Content-Type': 'application/json', ...?headers},
+    );
+
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception("❌ GET $path failed: ${response.body}");
+    }
+  }
 }

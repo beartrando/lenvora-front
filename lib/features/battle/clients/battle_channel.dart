@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:fixnum/fixnum.dart';
-import 'package:front/src/clients/streaming_channel.dart';
+import 'package:front/src/api/streaming_channel.dart';
 import 'package:front/src/contracts/proto/battle.pb.dart' as battleProto;
 import 'package:front/src/contracts/proto/common/ping.pb.dart';
 import 'package:front/src/contracts/proto/streaming.pb.dart' as streamingProto;
@@ -64,7 +64,8 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
 
   connectBot(String battleId) {
     // logger.i('Move event');
-    final connectBotRequest = streamingProto.BattleJoinBot()..battleId = battleId;
+    final connectBotRequest = streamingProto.BattleJoinBot()
+      ..battleId = battleId;
 
     final req = BattleRequest()..connectBot = connectBotRequest;
     // logger.d(req);

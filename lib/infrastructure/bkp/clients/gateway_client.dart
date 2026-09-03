@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:front/src/config/gateway_config.dart';
+import 'package:front/src/config/http_config.dart';
 import 'package:http/http.dart' as http;
 
 class GatewayClient {

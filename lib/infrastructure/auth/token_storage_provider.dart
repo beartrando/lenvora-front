@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import './token_storage.dart';
 import 'package:logger/logger.dart';
+
+import './token_storage.dart';
 
 final logger = Logger();
 

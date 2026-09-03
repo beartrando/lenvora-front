@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/profile/params/profile_params.dart';
 import 'package:front/features/profile/providers/profile_provider.dart';
 import 'package:front/features/profile/ui/profile_details_screen.dart';
-import 'package:front/src/params/client_params.dart';
 import 'package:front/src/locale/auth_provider.dart';
+import 'package:front/src/params/client_params.dart';
 
 class PlayerName extends ConsumerWidget {
   final String profileId;

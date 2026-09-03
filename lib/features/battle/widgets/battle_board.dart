@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/battle/services/battle_service.dart';
+import 'package:front/features/battle/widgets/turn_timer.dart';
 import 'package:front/features/profile/widgets/player_name.dart';
 import 'package:front/src/contracts/proto/battle.pb.dart';
 import 'package:front/src/contracts/proto/profile.pb.dart';
 import 'package:front/src/locale/app_config_provider.dart';
-import 'package:front/features/battle/widgets/turn_timer.dart';
 
 class BattleBoard extends ConsumerWidget {
   final BattleObject battle;

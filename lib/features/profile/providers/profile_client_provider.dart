@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/src/config/gateway_config.dart';
+import 'package:front/src/config/http_config.dart';
 import 'package:front/src/params/client_params.dart';
 import 'package:logger/logger.dart';
 

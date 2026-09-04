@@ -6,7 +6,7 @@ import 'package:logger/logger.dart';
 import './auth_service.dart';
 import './token_storage_provider.dart';
 
-final authServiceProvider = FutureProvider<AuthService>((ref) async {
+final authServiceProvider = Provider<AuthService>((ref) {
   final authClient = ref.watch(authClientProvider);
   final tokenStorage = ref.watch(tokenStorageProvider);
   final deviceervice = ref.watch(deviceServiceProvider);

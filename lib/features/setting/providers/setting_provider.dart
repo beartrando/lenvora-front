@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/setting.dart';
-import '../services/setting_service.dart';
-import './setting_notifier.dart';
+import '../notifiers/setting_notifier.dart';
+import './setting_service_provider.dart';
+import './setting_state_provider.dart';
 
+final settingProvider = StateNotifierProvider<SettingNotifier, Setting>((ref) {
+  final setting = ref.watch(settingStateProvider).requireValue;
+  final service = ref.watch(settingServiceProvider);
 
-final settingsProvider = StateNotifierProvider<SettingNotifier, Setting>((ref) {
-  final service = SettingService();
-
-  // await service.load();
-  return SettingNotifier(service);
+  return SettingNotifier(setting, service);
 });

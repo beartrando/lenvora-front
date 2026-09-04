@@ -8,8 +8,8 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settings = ref.watch(settingsProvider);
-    final notifier = ref.read(settingsProvider.notifier);
+    final setting = ref.watch(settingProvider);
+    final notifier = ref.read(settingProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Настройки')),
@@ -17,17 +17,17 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           SwitchListTile(
             title: const Text('Звук'),
-            value: settings.soundEnabled,
+            value: setting.soundEnabled,
             onChanged: notifier.setSoundEnabled,
           ),
           SwitchListTile(
             title: const Text('Эффекты'),
-            value: settings.effectsSoundEnabled,
+            value: setting.effectsSoundEnabled,
             onChanged: notifier.setEffectsSoundEnabled,
           ),
           SwitchListTile(
             title: const Text('Вибрация'),
-            value: settings.vibrationEnabled,
+            value: setting.vibrationEnabled,
             onChanged: notifier.setVibrationEnabled,
           ),
         ],

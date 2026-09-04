@@ -42,8 +42,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final options = ref.watch(localeOptionsProvider);
 
-    final settings = ref.watch(settingsProvider);
-    final notifier = ref.read(settingsProvider.notifier);
+    final setting = ref.watch(settingProvider);
+    final notifier = ref.read(settingProvider.notifier);
     ref.read(authServiceProvider);
 
     return Scaffold(
@@ -75,25 +75,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
           ),
-          // PopupMenuButton<String>(
-          //   icon: const Icon(Icons.menu),
-          //   itemBuilder: (context) => [
-          //     const PopupMenuItem(
-          //       value: 'settings',
-          //       child: Text('⚙️ Настройки'),
-          //     ),
-          //     // const PopupMenuDivider(),
-          //     // const PopupMenuItem(
-          //     //   value: 'google',
-          //     //   child: Text('🔐 Войти через Google'),
-          //     // ),
-          //     // const PopupMenuItem(
-          //     //   value: 'facebook',
-          //     //   child: Text('🔐 Войти через Facebook'),
-          //     // ),
-          //   ],
-          //   onSelected: (value) => _handleMenuSelection(context, value),
-          // ),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.menu),
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'settings',
+                child: Text('⚙️ Настройки'),
+              ),
+              // const PopupMenuDivider(),
+              // const PopupMenuItem(
+              //   value: 'google',
+              //   child: Text('🔐 Войти через Google'),
+              // ),
+              // const PopupMenuItem(
+              //   value: 'facebook',
+              //   child: Text('🔐 Войти через Facebook'),
+              // ),
+            ],
+            onSelected: (value) => _handleMenuSelection(context, value),
+          ),
         ],
       ),
       body: Center(

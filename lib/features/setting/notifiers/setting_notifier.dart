@@ -6,17 +6,6 @@ import '../services/setting_service.dart';
 class SettingNotifier extends StateNotifier<Setting> {
   final SettingService _service;
 
-  SettingNotifier(this._service)
-      : super(
-    const Setting(
-      soundEnabled: true,
-      effectsSoundEnabled: true,
-      vibrationEnabled: true,
-    ),
-  ) {
-    _load();
-  }
-
   Future<void> _load() async {
     final sound = await _service.getSoundEnabled();
     final effects = await _service.getEffectsSoundEnabled();

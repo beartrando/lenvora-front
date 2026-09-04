@@ -1,6 +1,7 @@
 import 'package:front/contracts/proto/auth.pb.dart';
 import 'package:front/infrastructure/api/auth_client.dart';
 import 'package:front/infrastructure/device/device_service.dart';
+import 'package:logger/logger.dart';
 
 import './token_storage.dart';
 

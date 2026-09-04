@@ -8,7 +8,7 @@ class AuthClient {
 
   Future<AuthObject> anonymousSignIn(String deviceId) async {
     final response = await http.post(
-      '/auth/anonymous',
+      '/auth/anonymousSignIn',
       body: {'deviceId': deviceId},
     );
 
@@ -17,7 +17,7 @@ class AuthClient {
 
   Future<AuthObject> refreshTokens(String refreshToken) async {
     final response = await http.post(
-      '/auth/refresh',
+      '/auth/refreshTokens',
       body: {'refreshToken': refreshToken},
     );
 

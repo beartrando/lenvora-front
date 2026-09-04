@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'http_response.dart';
-import 'config/http_config.dart';
+import './config/http_config.dart';
+import './http_response.dart';
 
 class HttpClient {
   final HttpConfig config;
@@ -109,19 +109,9 @@ class HttpClient {
   }
 
   HttpResponse _buildResponse(http.Response response) {
-    Object? body;
-
-    if (response.body.isNotEmpty) {
-      try {
-        body = jsonDecode(response.body);
-      } catch (_) {
-        body = response.body;
-      }
-    }
-
     return HttpResponse(
       statusCode: response.statusCode,
-      body: body,
+      body: response.body,
       headers: response.headers,
     );
   }

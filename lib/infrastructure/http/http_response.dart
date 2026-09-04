@@ -1,6 +1,6 @@
 class HttpResponse {
   final int statusCode;
-  final Object? body;
+  final String? body;
   final Map<String, String> headers;
 
   const HttpResponse({

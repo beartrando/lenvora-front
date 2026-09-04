@@ -12,7 +12,7 @@ class AuthClient {
       body: {'deviceId': deviceId},
     );
 
-    return AuthObject.fromJson(response.body as Map<String, dynamic>);
+    return AuthObject.fromJson(response.body as String);
   }
 
   Future<AuthObject> refreshTokens(String refreshToken) async {
@@ -21,6 +21,6 @@ class AuthClient {
       body: {'refreshToken': refreshToken},
     );
 
-    return AuthObject.fromJson(response.body as Map<String, dynamic>);
+    return AuthObject.fromJson(response.body as String);
   }
 }

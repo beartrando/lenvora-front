@@ -24,7 +24,17 @@ class AuthService {
     await tokenStorage.deleteRefreshToken();
   }
 
-  Future<String> getOrCreateJwt() async {
+  Future<String> getAccessToken() async {
+    final token = await tokenStorage.readAccessToken();
+
+    if (token == null || token.isEmpty) {
+      throw Exception('Access token is missing');
+    }
+
+    return token;
+  }
+
+  Future<String> getOrCreateAccessToken() async {
     final accessToken = await tokenStorage.readAccessToken();
 
     if (accessToken != null && accessToken.isNotEmpty) {

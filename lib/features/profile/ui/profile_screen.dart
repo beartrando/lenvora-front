@@ -9,40 +9,40 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final jwtAsync = ref.watch(authProvider);
+    final authService = ref.read(authServiceProvider);
+    final clientParams = ClientParams(authService.accessToken);
 
-    return jwtAsync.when(
-      data: (jwt) {
-        final clientParams = ClientParams(jwt);
-        final profileAsync = ref.watch(myProfileProvider(clientParams));
+    final profileAsync = ref.watch(
+      myProfileProvider(clientParams),
+    );
 
-        return Scaffold(
-          appBar: AppBar(title: const Text('Profile')),
-          body: profileAsync.when(
-            data: (profile) => Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'ID: ${profile.id}',
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Nickname: ${profile.nickname}',
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                ],
+    return Scaffold(
+      appBar: AppBar(title: const Text('Profile')),
+      body: profileAsync.when(
+        data: (profile) => Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'ID: ${profile.id}',
+                style: const TextStyle(fontSize: 18),
               ),
-            ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (err, stack) => Center(child: Text('Error: $err')),
+              const SizedBox(height: 8),
+              Text(
+                'Nickname: ${profile.nickname}',
+                style: const TextStyle(fontSize: 18),
+              ),
+            ],
           ),
-        );
-      },
-      loading: () => const CircularProgressIndicator(),
-      error: (err, st) => Text("JWT error: $err"),
+        ),
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
+        error: (err, stack) => Center(
+          child: Text('Error: $err'),
+        ),
+      ),
     );
   }
 }

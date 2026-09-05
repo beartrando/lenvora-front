@@ -68,7 +68,10 @@ Future<ProviderContainer> _initRiverpodContainer() async {
   );
 
   final authService = container.read(authServiceProvider);
-  await authService.getOrCreateJwt();
+  await authService.getOrCreateAccessToken();
+
+  // final authService = container.read(authServiceProvider);
+  // await authService.getOrCreateJwt();
 
   return container;
 }

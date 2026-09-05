@@ -17,17 +17,11 @@ class AuthClient {
 
     final json = jsonDecode(response.body as String);
 
-    final logger = Logger();
-    logger.d('---------------');
-    logger.d(json);
-    logger.d('---------------');
+    final authResponse = AuthResponse.fromJson(response.body as String);
 
-    final authResponse = AuthResponse()
-      ..mergeFromProto3Json(jsonDecode(response.body as String));
+    // final authResponse = AuthResponse()
+    //   ..mergeFromProto3Json(jsonDecode(response.body as String));
 
-    logger.d('---------------');
-    logger.d(authResponse);
-    logger.d('---------------');
     if (authResponse.hasAuth()) {
       return authResponse.auth;
     }

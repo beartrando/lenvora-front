@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:front/contracts/proto/auth.pb.dart';
-import 'package:front/infrastructure/http/http_client.dart';
+import 'package:front/infrastructure/http/clients/http_client.dart';
 import 'package:logger/logger.dart';
 
 class AuthClient {
@@ -15,12 +15,8 @@ class AuthClient {
       body: {'deviceId': deviceId},
     );
 
-    final json = jsonDecode(response.body as String);
-
-    final authResponse = AuthResponse.fromJson(response.body as String);
-
-    // final authResponse = AuthResponse()
-    //   ..mergeFromProto3Json(jsonDecode(response.body as String));
+    final authResponse = AuthResponse()
+      ..mergeFromProto3Json(jsonDecode(response.body as String)); // работает
 
     if (authResponse.hasAuth()) {
       return authResponse.auth;
@@ -39,7 +35,8 @@ class AuthClient {
       body: {'refreshToken': refreshToken},
     );
 
-    final authResponse = AuthResponse.fromJson(response.body as String);
+    final authResponse = AuthResponse()
+      ..mergeFromProto3Json(jsonDecode(response.body as String)); // работает
 
     if (authResponse.hasAuth()) {
       return authResponse.auth;

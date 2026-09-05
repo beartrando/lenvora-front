@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import './config/http_config.dart';
-import './http_response.dart';
+import '../config/http_config.dart';
+import '../models/http_response.dart';
 
 class HttpClient {
   final HttpConfig config;

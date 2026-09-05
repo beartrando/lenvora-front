@@ -1,7 +1,7 @@
-class Nickname {
+class ProfileNickname {
   final String value;
 
-  Nickname(String value) : value = value.trim() {
+  ProfileNickname(String value) : value = value.trim() {
     if (this.value.isEmpty) {
       throw ArgumentError('Nickname cannot be empty');
     }
@@ -13,7 +13,7 @@ class Nickname {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is Nickname && value == other.value;
+      identical(this, other) || other is ProfileNickname && value == other.value;
 
   @override
   int get hashCode => value.hashCode;

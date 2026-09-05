@@ -7,9 +7,9 @@ import 'package:front/src/locale/auth_provider.dart';
 import 'package:front/src/params/client_params.dart';
 
 import '../../battle/params/battle_params.dart';
-import '../../battle/providers/battle_service_provider.dart';
+import '../domain/battle_domain_provider.dart';
 import '../../battle/providers/battle_stream_provider.dart';
-import '../../battle/services/battle_service.dart';
+import '../domain/battle_domain.dart';
 
 class BattleScreen extends ConsumerStatefulWidget {
   const BattleScreen({super.key});

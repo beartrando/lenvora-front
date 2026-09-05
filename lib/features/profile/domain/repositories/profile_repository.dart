@@ -1,11 +1,11 @@
-import 'package:front/infrastructure/api/profile_client.dart';
+import 'package:front/features/profile/infrastructure/api/profile_client.dart';
 
 import '../entities/profile.dart';
-import '../value_objects/experience.dart';
-import '../value_objects/level.dart';
-import '../value_objects/nickname.dart';
+import '../value_objects/profile_experience.dart';
+import '../value_objects/profile_level.dart';
+import '../value_objects/profile_nickname.dart';
 import '../value_objects/profile_id.dart';
-import '../value_objects/rating.dart';
+import '../value_objects/profile_rating.dart';
 
 class ProfileRepository {
   final ProfileClient _client;
@@ -17,10 +17,10 @@ class ProfileRepository {
 
     return Profile(
       id: ProfileId(data.id),
-      nickname: Nickname(data.nickname),
-      level: Level(data.level),
-      rating: Rating(data.rating),
-      experience: Experience(data.experience.toInt()),
+      nickname: ProfileNickname(data.nickname),
+      level: ProfileLevel(data.level),
+      rating: ProfileRating(data.rating),
+      experience: ProfileExperience(data.experience.toInt()),
     );
   }
 
@@ -29,10 +29,10 @@ class ProfileRepository {
 
     return Profile(
       id: ProfileId(data.id),
-      nickname: Nickname(data.nickname),
-      level: Level(data.level),
-      rating: Rating(data.rating),
-      experience: Experience(data.experience.toInt()),
+      nickname: ProfileNickname(data.nickname),
+      level: ProfileLevel(data.level),
+      rating: ProfileRating(data.rating),
+      experience: ProfileExperience(data.experience.toInt()),
     );
   }
 }

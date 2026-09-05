@@ -6,7 +6,7 @@ import 'package:front/src/contracts/proto/battle.pb.dart' as battleProto;
 import 'package:front/src/contracts/proto/common/ping.pb.dart';
 import 'package:front/src/contracts/proto/streaming.pb.dart' as streamingProto;
 import 'package:front/src/contracts/proto/streaming.pb.dart';
-import 'package:front/src/helpers/protobuf_utils.dart';
+import 'package:front/src/converters/protobuf_utils.dart';
 import 'package:logger/logger.dart';
 
 final logger = Logger();

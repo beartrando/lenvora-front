@@ -1,15 +1,15 @@
-import '../value_objects/experience.dart';
-import '../value_objects/level.dart';
-import '../value_objects/nickname.dart';
+import '../value_objects/profile_experience.dart';
+import '../value_objects/profile_level.dart';
+import '../value_objects/profile_nickname.dart';
 import '../value_objects/profile_id.dart';
-import '../value_objects/rating.dart';
+import '../value_objects/profile_rating.dart';
 
 class Profile {
   final ProfileId id;
-  Nickname nickname;
-  Level level;
-  Rating rating;
-  Experience experience;
+  ProfileNickname nickname;
+  ProfileLevel level;
+  ProfileRating rating;
+  ProfileExperience experience;
 
   Profile({
     required this.id,
@@ -19,7 +19,7 @@ class Profile {
     required this.experience,
   });
 
-  void changeNickname(Nickname nickname) {
+  void changeNickname(ProfileNickname nickname) {
     this.nickname = nickname;
   }
 }

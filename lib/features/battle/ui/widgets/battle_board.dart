@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/battle/services/battle_service.dart';
+import 'package:front/features/battle/domain/battle_domain.dart';
 import 'package:front/features/battle/widgets/turn_timer.dart';
 import 'package:front/features/profile/widgets/player_name.dart';
 import 'package:front/src/contracts/proto/battle.pb.dart';

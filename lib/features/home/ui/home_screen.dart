@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/setting/providers/setting_provider.dart';
-import 'package:front/infrastructure/auth/auth_service_provider.dart';
 import 'package:front/infrastructure/localization/generated/l10n.dart';
 import 'package:front/infrastructure/localization/locale_options_provider.dart';
 
@@ -41,10 +39,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final options = ref.watch(localeOptionsProvider);
-
-    final setting = ref.watch(settingProvider);
-    final notifier = ref.read(settingProvider.notifier);
-    ref.read(authServiceProvider);
 
     return Scaffold(
       appBar: AppBar(

@@ -18,8 +18,6 @@ DeviceIdProvider createDeviceIdProvider() {
       return IosDeviceIdProvider();
 
     default:
-      throw UnsupportedError(
-        'Unsupported platform: $defaultTargetPlatform',
-      );
+      throw UnsupportedError('Unsupported platform: $defaultTargetPlatform');
   }
 }

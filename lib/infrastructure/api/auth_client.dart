@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:front/contracts/proto/auth.pb.dart';
 import 'package:front/infrastructure/http/http_client.dart';
+import 'package:logger/logger.dart';
 
 class AuthClient {
   final HttpClient http;
@@ -12,7 +15,28 @@ class AuthClient {
       body: {'deviceId': deviceId},
     );
 
-    return AuthObject.fromJson(response.body as String);
+    final json = jsonDecode(response.body as String);
+
+    final logger = Logger();
+    logger.d('---------------');
+    logger.d(json);
+    logger.d('---------------');
+
+    final authResponse = AuthResponse()
+      ..mergeFromProto3Json(jsonDecode(response.body as String));
+
+    logger.d('---------------');
+    logger.d(authResponse);
+    logger.d('---------------');
+    if (authResponse.hasAuth()) {
+      return authResponse.auth;
+    }
+
+    if (authResponse.hasError()) {
+      throw Exception(authResponse.error);
+    }
+
+    throw Exception('Empty auth response');
   }
 
   Future<AuthObject> refreshTokens(String refreshToken) async {
@@ -21,6 +45,16 @@ class AuthClient {
       body: {'refreshToken': refreshToken},
     );
 
-    return AuthObject.fromJson(response.body as String);
+    final authResponse = AuthResponse.fromJson(response.body as String);
+
+    if (authResponse.hasAuth()) {
+      return authResponse.auth;
+    }
+
+    if (authResponse.hasError()) {
+      throw Exception(authResponse.error);
+    }
+
+    throw Exception('Empty auth response');
   }
 }

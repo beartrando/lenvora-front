@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/setting_provider.dart';
+import '../application/setting_provider.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -17,17 +17,17 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           SwitchListTile(
             title: const Text('Звук'),
-            value: setting.soundEnabled,
+            value: setting.soundEnabled.value,
             onChanged: notifier.setSoundEnabled,
           ),
           SwitchListTile(
             title: const Text('Эффекты'),
-            value: setting.effectsSoundEnabled,
+            value: setting.effectsSoundEnabled.value,
             onChanged: notifier.setEffectsSoundEnabled,
           ),
           SwitchListTile(
             title: const Text('Вибрация'),
-            value: setting.vibrationEnabled,
+            value: setting.vibrationEnabled.value,
             onChanged: notifier.setVibrationEnabled,
           ),
         ],

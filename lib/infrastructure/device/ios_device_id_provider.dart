@@ -5,9 +5,8 @@ import 'device_id_provider.dart';
 class IosDeviceIdProvider implements DeviceIdProvider {
   final DeviceInfoPlugin _deviceInfo;
 
-  IosDeviceIdProvider({
-    DeviceInfoPlugin? deviceInfo,
-  }) : _deviceInfo = deviceInfo ?? DeviceInfoPlugin();
+  IosDeviceIdProvider({DeviceInfoPlugin? deviceInfo})
+    : _deviceInfo = deviceInfo ?? DeviceInfoPlugin();
 
   @override
   Future<String> getDeviceId() async {

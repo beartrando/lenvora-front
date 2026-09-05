@@ -10,10 +10,7 @@ class HttpClient {
 
   HttpClient(this.config);
 
-  Uri buildUri(
-      String path, {
-        Map<String, dynamic>? query,
-      }) {
+  Uri buildUri(String path, {Map<String, dynamic>? query}) {
     final uri = Uri.parse(
       '${config.schema}://${config.host}:${config.port}$path',
     );
@@ -24,38 +21,32 @@ class HttpClient {
 
     return uri.replace(
       queryParameters: query.map(
-            (key, value) => MapEntry(key, value.toString()),
+        (key, value) => MapEntry(key, value.toString()),
       ),
     );
   }
 
   Future<HttpResponse> get(
-      String path, {
-        Map<String, String>? headers,
-        Map<String, dynamic>? query,
-      }) async {
+    String path, {
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+  }) async {
     final response = await http.get(
       buildUri(path, query: query),
-      headers: {
-        'Content-Type': 'application/json',
-        ...?headers,
-      },
+      headers: {'Content-Type': 'application/json', ...?headers},
     );
 
     return _buildResponse(response);
   }
 
   Future<HttpResponse> post(
-      String path, {
-        Map<String, String>? headers,
-        Object? body,
-      }) async {
+    String path, {
+    Map<String, String>? headers,
+    Object? body,
+  }) async {
     final response = await http.post(
       buildUri(path),
-      headers: {
-        'Content-Type': 'application/json',
-        ...?headers,
-      },
+      headers: {'Content-Type': 'application/json', ...?headers},
       body: _encodeBody(body),
     );
 
@@ -63,16 +54,13 @@ class HttpClient {
   }
 
   Future<HttpResponse> put(
-      String path, {
-        Map<String, String>? headers,
-        Object? body,
-      }) async {
+    String path, {
+    Map<String, String>? headers,
+    Object? body,
+  }) async {
     final response = await http.put(
       buildUri(path),
-      headers: {
-        'Content-Type': 'application/json',
-        ...?headers,
-      },
+      headers: {'Content-Type': 'application/json', ...?headers},
       body: _encodeBody(body),
     );
 
@@ -80,16 +68,13 @@ class HttpClient {
   }
 
   Future<HttpResponse> delete(
-      String path, {
-        Map<String, String>? headers,
-        Object? body,
-      }) async {
+    String path, {
+    Map<String, String>? headers,
+    Object? body,
+  }) async {
     final response = await http.delete(
       buildUri(path),
-      headers: {
-        'Content-Type': 'application/json',
-        ...?headers,
-      },
+      headers: {'Content-Type': 'application/json', ...?headers},
       body: _encodeBody(body),
     );
 

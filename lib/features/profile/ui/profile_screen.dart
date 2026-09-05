@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/profile/providers/my_profile_provider.dart';
-import 'package:front/src/locale/auth_provider.dart';
-import 'package:front/src/params/client_params.dart';
+
+import '../providers/my_profile_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authService = ref.read(authServiceProvider);
-    final clientParams = ClientParams(authService.accessToken);
-
-    final profileAsync = ref.watch(
-      myProfileProvider(clientParams),
-    );
+    final profileAsync = ref.watch(myProfileProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
@@ -24,24 +18,17 @@ class ProfileScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'ID: ${profile.id}',
-                style: const TextStyle(fontSize: 18),
-              ),
+              Text('ID: ${profile.id.value}', style: const TextStyle(fontSize: 18)),
               const SizedBox(height: 8),
               Text(
-                'Nickname: ${profile.nickname}',
+                'Nickname: ${profile.nickname.value}',
                 style: const TextStyle(fontSize: 18),
               ),
             ],
           ),
         ),
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
-        error: (err, stack) => Center(
-          child: Text('Error: $err'),
-        ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (err, stack) => Center(child: Text('Error: $err')),
       ),
     );
   }

@@ -1,21 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/profile/params/profile_params.dart';
-import 'package:front/src/contracts/proto/profile.pb.dart';
 
-import './profile_service_provider.dart';
+import '../domain/entities/profile.dart';
+import '../domain/repositories/profile_repository_provider.dart';
 
-final profileProvider = FutureProvider.family<ProfileObject, ProfileParams>((
+final profileProvider = FutureProvider.family<Profile, ProfileId>((
   ref,
-  params,
+  string profileId,
 ) async {
-  final service = await ref.read(profileServiceProvider(params.clientParams));
+  final repository = ref.watch(profileRepositoryProvider);
 
-  final profileId = params.profileId;
-  final profile = await service.get(profileId);
-
-  if (profile == null) {
-    throw Exception("Profile $profileId not found");
-  }
-
-  return profile;
+  return repository.get(profileId);
 });

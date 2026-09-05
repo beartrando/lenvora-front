@@ -9,16 +9,16 @@ class ProfileDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(profile.nickname)),
+      appBar: AppBar(title: Text(profile.nickname.value)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("ID: ${profile.id}"),
-            Text("Уровень: ${profile.level}"),
-            Text("Рейтинг: ${profile.rating}"),
-            Text("Опыт: ${profile.experience}"),
+            Text("ID: ${profile.id.value}"),
+            Text("Уровень: ${profile.level.value}"),
+            Text("Рейтинг: ${profile.rating.value}"),
+            Text("Опыт: ${profile.experience.value}"),
           ],
         ),
       ),

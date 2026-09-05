@@ -1,11 +1,11 @@
 import 'package:front/contracts/proto/auth.pb.dart';
-import 'package:front/infrastructure/api/auth_client.dart';
+import 'package:front/infrastructure/api/public_auth_client.dart';
 import 'package:front/infrastructure/device/device_service.dart';
 
 import './token_storage.dart';
 
 class AuthService {
-  final AuthClient authClient;
+  final PublicAuthClient authClient;
   final TokenStorage tokenStorage;
   final DeviceService deviceService;
 
@@ -41,19 +41,23 @@ class AuthService {
       return accessToken;
     }
 
-    final refreshToken = await tokenStorage.readRefreshToken();
-
-    if (refreshToken != null && refreshToken.isNotEmpty) {
-      final AuthObject response = await authClient.refreshTokens(refreshToken);
-
-      await tokenStorage.saveAuthObject(response);
-
-      return response.accessToken;
-    }
-
     final deviceId = await deviceService.getDeviceId();
 
     final AuthObject response = await authClient.anonymousSignIn(deviceId);
+
+    await tokenStorage.saveAuthObject(response);
+
+    return response.accessToken;
+  }
+
+  Future<String> refreshTokens() async {
+    final refreshToken = await tokenStorage.readRefreshToken();
+
+    if (refreshToken == null || refreshToken.isEmpty) {
+      throw Exception('Access token is missing');
+    }
+
+    final AuthObject response = await authClient.refreshTokens(refreshToken);
 
     await tokenStorage.saveAuthObject(response);
 

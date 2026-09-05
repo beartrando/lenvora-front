@@ -1,16 +1,17 @@
 import 'dart:convert';
 
 import 'package:front/contracts/proto/auth.pb.dart';
+import 'package:front/infrastructure/http/clients/authorized_http_client.dart';
 import 'package:front/infrastructure/http/clients/http_client.dart';
 import 'package:logger/logger.dart';
 
-class AuthClient {
-  final HttpClient http;
+class PublicAuthClient {
+  final HttpClient httpClient;
 
-  AuthClient(this.http);
+  PublicAuthClient(this.httpClient);
 
   Future<AuthObject> anonymousSignIn(String deviceId) async {
-    final response = await http.post(
+    final response = await httpClient.post(
       '/auth/anonymousSignIn',
       body: {'deviceId': deviceId},
     );
@@ -30,7 +31,7 @@ class AuthClient {
   }
 
   Future<AuthObject> refreshTokens(String refreshToken) async {
-    final response = await http.post(
+    final response = await httpClient.post(
       '/auth/refreshTokens',
       body: {'refreshToken': refreshToken},
     );

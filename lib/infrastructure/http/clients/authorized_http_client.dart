@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:front/infrastructure/auth/auth_service.dart';
+import 'package:front/infrastructure/http/models/http_response.dart';
 
 import './http_client.dart';
 
@@ -57,11 +56,20 @@ class AuthorizedHttpClient {
 
     var response = await request(token);
 
-    if (response.statusCode == 401) {
-      token = await _authService.refreshAccessToken();
-      response = await request(token);
+    if (response.statusCode != 401) {
+      return response;
     }
 
-    return response;
+    await _authService.clearAccessToken();
+    token = await _authService.refreshTokens();
+    response = await request(token);
+
+    if (response.statusCode != 401) {
+      return response;
+    }
+
+    await _authService.clearRefreshToken();
+    token = await _authService.getOrCreateAccessToken();
+    return await request(token);
   }
 }

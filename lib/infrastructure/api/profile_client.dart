@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:front/contracts/proto/profile.pb.dart';
-import 'package:front/infrastructure/http/http_client.dart';
+import 'package:front/infrastructure/http/clients/authorized_http_client.dart';
 import 'package:logger/logger.dart';
 
 class ProfileClient {
-  final HttpClient http;
+  final AuthorizedHttpClient authorizedHttpClient;
 
-  ProfileClient(this.http);
+  ProfileClient(this.authorizedHttpClient);
 
-  Future<ProfileObject?> getMe(string jwt) async {
+  Future<ProfileObject?> getMe() async {
     try {
       final jsonString = await get(
         '/profile/getMe',

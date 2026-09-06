@@ -1,16 +1,20 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class StreamingConfig {
+import './websocket_config.dart';
+
+class StreamingConfig implements WebSocketConfig {
+  @override
   final String host;
+
+  @override
   final int port;
 
-  // final Environment env;
+  const StreamingConfig({required this.host, required this.port});
 
   factory StreamingConfig.fromEnv() {
-    final host = dotenv.env['STREAMING_HOST'] ?? 'localhost';
-    final port = int.tryParse(dotenv.env['STREAMING_PORT'] ?? '') ?? 8080;
-    return StreamingConfig(host: host, port: port);
+    return StreamingConfig(
+      host: dotenv.env['STREAMING_HOST'] ?? 'localhost',
+      port: int.tryParse(dotenv.env['STREAMING_PORT'] ?? '') ?? 8080,
+    );
   }
-
-  const StreamingConfig({required this.host, required this.port});
 }

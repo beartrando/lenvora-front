@@ -1,6 +1,5 @@
-import './value_objects/device_id.dart';
-
 import '../storage/secure_storage.dart';
+import './value_objects/device_id.dart';
 import 'device_id_provider.dart';
 
 class DeviceService {

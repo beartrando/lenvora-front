@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:fixnum/fixnum.dart';
-import 'package:front/contracts/proto/battle.pb.dart' as battleProto;
 import 'package:front/contracts/proto/common/ping.pb.dart';
 import 'package:front/contracts/proto/streaming.pb.dart' as streamingProto;
 import 'package:front/contracts/proto/streaming.pb.dart';
+import 'package:front/features/battle/domain/entities/battle.dart';
+import 'package:front/features/battle/infrastructure/converters/streaming/battle_response_converter.dart';
 import 'package:front/features/profile/domain/value_objects/profile_id.dart';
+import 'package:front/infrastructure/converters/timestamp_converter.dart';
 import 'package:front/infrastructure/websocket/websocket_connection.dart';
 import 'package:logger/logger.dart';
 
@@ -13,25 +14,20 @@ import '../domain/value_objects/battle_id.dart';
 
 final logger = Logger();
 
-class BattleChannel extends WebsocketConnection<battleProto.BattleResponse> {
+class BattleChannel extends WebsocketConnection<Battle> {
   late ProfileId profileId;
   final pathname = 'battle';
 
   messageHandler(List<int> message) {
     try {
-      final resp = BattleResponse.fromBuffer(message);
-      // logger.i(resp);
-      if (resp.hasBattle()) {
-        final battle = resp.battle;
-        // logger.i('before battle added to controller');
-        safeAdd(battle);
-        // logger.i('battle added to controller');
+      final battle = BattleResponseConverter.fromProto(
+        streamingProto.BattleResponse.fromBuffer(message),
+      );
+      // logger.i('before battle added to controller');
+      safeAdd(battle);
+      // logger.i('battle added to controller');
 
-        // logger.i('battle added to controller');
-      } else {
-        logger.e(resp);
-        logger.e('Battle handling went wrong: $resp');
-      }
+      // logger.i('battle added to controller');
     } catch (e) {
       logger.e('Failed to parse: $e');
     }
@@ -49,7 +45,7 @@ class BattleChannel extends WebsocketConnection<battleProto.BattleResponse> {
     // logger.i('Move event');
     final moveReq = BattleMove()
       ..cellIdx = cellIdx
-      ..battleId = battleId;
+      ..battleId = battleId.value;
 
     final req = BattleRequest()..move = moveReq;
     // logger.d(req);
@@ -58,7 +54,8 @@ class BattleChannel extends WebsocketConnection<battleProto.BattleResponse> {
   }
 
   void leave(BattleId battleId) {
-    final req = BattleRequest()..leave = (BattleLeave()..battleId = battleId);
+    final req = BattleRequest()
+      ..leave = (BattleLeave()..battleId = battleId.value);
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');
@@ -67,7 +64,7 @@ class BattleChannel extends WebsocketConnection<battleProto.BattleResponse> {
   connectBot(BattleId battleId) {
     // logger.i('Move event');
     final connectBotRequest = streamingProto.BattleJoinBot()
-      ..battleId = battleId;
+      ..battleId = battleId.value;
 
     final req = BattleRequest()..connectBot = connectBotRequest;
     // logger.d(req);
@@ -79,7 +76,7 @@ class BattleChannel extends WebsocketConnection<battleProto.BattleResponse> {
     final request = streamingProto.BattleStart();
 
     if (battleId != null) {
-      request.battleId = battleId;
+      request.battleId = battleId.value;
     }
 
     final req = BattleRequest()..start = request;
@@ -90,7 +87,7 @@ class BattleChannel extends WebsocketConnection<battleProto.BattleResponse> {
 
   Future<void> ping() async {
     final req = BattleRequest()
-      ..ping = (Ping()..timestamp = toTimestamp(DateTime.now()));
+      ..ping = (Ping()..timestamp = TimestampConverter().to(DateTime.now()));
     channel.sink.add(req.writeToBuffer());
   }
 }

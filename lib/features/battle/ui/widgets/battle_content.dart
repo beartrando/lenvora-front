@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:front/features/battle/domain/enums/battle_status.enum.dart';
 import 'package:front/features/profile/ui/widgets/player_name.dart';
 
 import '../../domain/entities/battle.dart';
@@ -20,19 +21,19 @@ class BattleContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (battle.status == BattleStatus.FINISHED) {
+    if (battle.status == BattleStatusEnum.finished) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showDialog(
           context: context,
           barrierDismissible: false,
           builder: (_) => AlertDialog(
             title: const Text("Матч завершён"),
-            content: battle.winnerId.isEmpty
+            content: battle.winnerId == null
                 ? const Text("Ничья")
                 : Row(
                     children: [
                       const Text("Победитель: "),
-                      PlayerName(profileId: battle.winnerId),
+                      PlayerName(profileId: battle.winnerId!),
                     ],
                   ),
             actions: [

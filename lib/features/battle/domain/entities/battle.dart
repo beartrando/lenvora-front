@@ -1,3 +1,5 @@
+import 'package:front/features/profile/domain/value_objects/profile_id.dart';
+
 import '../enums/battle_status.enum.dart';
 import '../value_objects/battle_board.dart';
 import '../value_objects/battle_id.dart';
@@ -8,7 +10,7 @@ class Battle {
   final BattleBoard board;
   final BattlePlayerIds playerIds;
   BattleStatusEnum status;
-  BattleId? winnerId;
+  ProfileId? winnerId;
   final DateTime? lastMoveAt;
   final DateTime createdAt;
   final DateTime updatedAt;

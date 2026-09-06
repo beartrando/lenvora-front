@@ -7,11 +7,11 @@ class CanMove {
   const CanMove();
 
   bool calculate(Battle battle, ProfileId profileId) {
-    if (battle.status.value != BattleStatusEnum.active) {
+    if (battle.status != BattleStatusEnum.active) {
       return false;
     }
 
-    if (battle.playerIds.value.length < 2) {
+    if (battle.playerIds.length < 2) {
       return false;
     }
 

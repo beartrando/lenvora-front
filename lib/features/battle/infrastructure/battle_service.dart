@@ -16,18 +16,18 @@ class BattleService {
       return;
     }
 
-    channel.move(battle.id.value, cellIndex);
+    channel.move(battle.id, cellIndex);
   }
 
   void connectBot(BattleId battleId) {
-    channel.connectBot(battleId.value);
+    channel.connectBot(battleId);
   }
 
   void leave(BattleId battleId) {
-    channel.leave(battleId.value);
+    channel.leave(battleId);
   }
 
   void start(BattleId battleId) {
-    channel.start(battleId.value);
+    channel.start(battleId);
   }
 }

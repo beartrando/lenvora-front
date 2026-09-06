@@ -8,7 +8,7 @@ import './profile_converter.dart';
 class ProfileResponseConverter {
   static Profile fromString(String? profileResponse) {
     if (profileResponse == null || profileResponse.isEmpty) {
-      throw Exception('Empty auth response');
+      throw Exception('Empty profile response');
     }
 
     final protoProfileResponse = profileProto.ProfileResponse()

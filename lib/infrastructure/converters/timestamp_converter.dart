@@ -2,6 +2,8 @@ import 'package:fixnum/fixnum.dart';
 import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart';
 
 class TimestampConverter {
+  const TimestampConverter();
+
   Timestamp to(DateTime dateTime) {
     final millis = dateTime.millisecondsSinceEpoch;
 

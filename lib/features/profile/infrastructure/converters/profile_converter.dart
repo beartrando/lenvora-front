@@ -2,9 +2,9 @@ import 'package:front/contracts/proto/profile.pb.dart';
 
 import '../../domain/entities/profile.dart';
 import '../../domain/value_objects/profile_experience.dart';
+import '../../domain/value_objects/profile_id.dart';
 import '../../domain/value_objects/profile_level.dart';
 import '../../domain/value_objects/profile_nickname.dart';
-import '../../domain/value_objects/profile_id.dart';
 import '../../domain/value_objects/profile_rating.dart';
 
 class ProfileConverter {

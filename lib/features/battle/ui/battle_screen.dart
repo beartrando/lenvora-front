@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/battle/infrastructure/battle_service.dart';
+import 'package:front/features/battle/infrastructure/battle_stream_provider.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
 
 import '../../battle/providers/battle_stream_provider.dart';
@@ -63,7 +64,7 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
     debugPrint("BattleScreen dispose");
     final battle = _battle;
     if (battle != null) {
-      battleService.leave(battleId: battle.id);
+      battleService.leave(battle.id);
     }
     super.dispose();
   }

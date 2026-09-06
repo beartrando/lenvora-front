@@ -13,6 +13,8 @@ class BattlePlayerIds {
   @override
   int get hashCode => Object.hashAll(value);
 
+  int get length => value.length;
+
   bool _equals(List<ProfileId> other) {
     if (value.length != other.length) {
       return false;

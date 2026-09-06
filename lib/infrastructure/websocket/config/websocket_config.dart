@@ -1,4 +1,5 @@
 abstract class WebsocketConfig {
-  final String host;
-  final int port;
+  String get host;
+
+  int get port;
 }

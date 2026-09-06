@@ -19,5 +19,5 @@ final battleChannelProvider = FutureProvider<BattleChannel>((ref) async {
 
   final jwt = await authService.ensureAccessToken();
 
-  return BattleChannel(config, profile.id.value, jwt);
+  return BattleChannel(config, profile.id, jwt);
 });

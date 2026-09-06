@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/battle/domain/entities/battle.dart';
 import 'package:front/features/battle/domain/enums/battle_cell_value.enum.dart';
+import 'package:front/features/battle/domain/rules/can_move.dart';
 import 'package:front/features/battle/domain/value_objects/battle_board.dart';
 import 'package:front/features/profile/domain/entities/profile.dart';
 import 'package:front/features/profile/ui/widgets/player_name.dart';
+import 'package:front/infrastructure/app/app_config_provider.dart';
 
 import '../../infrastructure/battle_service.dart';
 import './turn_timer.dart';
@@ -34,26 +36,26 @@ class BattleBoardWidege extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (int i = 0; i < battle.playerIds.length; i++) ...[
-              PlayerName(profileId: battle.playerIds[i]),
+              PlayerName(profileId: battle.playerIds.value[i]),
               if (i < battle.playerIds.length - 1) const Text(' vs '),
             ],
           ],
         ),
-        battle.winnerId.isNotEmpty
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Winner: '),
-                  PlayerName(profileId: battle.winnerId),
-                ],
-              )
-            : (battleService.canMove(battle)
+        battle.winnerId == null
+            ? (CanMove().calculate(battle, profile.id)
                   ? TurnTimer(
                       seconds: config.moveTimeout,
                       battleService: battleService,
                       battleId: battle.id,
                     )
-                  : const Text('Not your turn')),
+                  : const Text('Not your turn'))
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Winner: '),
+                  PlayerName(profileId: battle.winnerId!),
+                ],
+              ),
 
         const SizedBox(height: 8),
         Expanded(
@@ -67,7 +69,7 @@ class BattleBoardWidege extends ConsumerWidget {
               final cellValue = safeCellAt(battle.board, index);
               return GestureDetector(
                 onTap: () {
-                  if (battleService.canMove(battle)) {
+                  if (CanMove().calculate(battle, profile.id)) {
                     battleService.makeMove(battle, index);
                   }
                 },

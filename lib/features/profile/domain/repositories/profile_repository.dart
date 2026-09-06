@@ -1,11 +1,7 @@
 import 'package:front/features/profile/infrastructure/api/profile_client.dart';
 
 import '../entities/profile.dart';
-import '../value_objects/profile_experience.dart';
 import '../value_objects/profile_id.dart';
-import '../value_objects/profile_level.dart';
-import '../value_objects/profile_nickname.dart';
-import '../value_objects/profile_rating.dart';
 
 class ProfileRepository {
   final ProfileClient _client;

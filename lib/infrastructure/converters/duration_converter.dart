@@ -3,6 +3,8 @@ import 'package:protobuf/well_known_types/google/protobuf/duration.pb.dart'
     as pb;
 
 class DurationConverter {
+  const DurationConverter();
+
   pb.Duration to(Duration duration) {
     return pb.Duration()
       ..seconds = Int64(duration.inSeconds)

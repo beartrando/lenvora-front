@@ -5,8 +5,7 @@ class DeviceId {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is DeviceId && other.value == value;
+      identical(this, other) || other is DeviceId && other.value == value;
 
   @override
   int get hashCode => value.hashCode;

@@ -11,7 +11,6 @@ class AuthResponseConverter {
       throw Exception('Empty auth response');
     }
 
-
     final protoAuthResponse = authProto.AuthResponse()
       ..mergeFromProto3Json(jsonDecode(authResponse as String)); // работает
 

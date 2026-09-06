@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:front/features/battle/domain/value_objects/battle_id.dart';
+
 import '../../infrastructure/battle_service.dart';
 
 class TurnTimer extends StatefulWidget {
   final int seconds;
-  final String battleId;
+  final BattleId battleId;
   final BattleService battleService;
 
   const TurnTimer({
@@ -32,7 +34,7 @@ class _TurnTimerState extends State<TurnTimer> {
         setState(() => remaining--);
       } else {
         t.cancel();
-        widget.battleService.leave(battleId: widget.battleId);
+        widget.battleService.leave(widget.battleId);
       }
     });
   }

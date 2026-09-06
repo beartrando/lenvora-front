@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:front/infrastructure/auth/value_objects/access_token.dart';
 import 'package:front/infrastructure/websocket/config/websocket_config.dart';
 import 'package:logger/logger.dart';
 import 'package:web_socket_channel/status.dart' as status;
@@ -9,7 +10,7 @@ final logger = Logger();
 
 abstract class WebsocketConnection<T> {
   final WebsocketConfig config;
-  final String jwt;
+  final AccessToken accessToken;
   late WebSocketChannel _channel;
   late StreamSubscription _subscription;
   Timer? _heartbeat;
@@ -23,8 +24,8 @@ abstract class WebsocketConnection<T> {
   messageHandler(List<int> message) {
     logger.i('Received: $message');
     try {
-      final resp = T.fromBuffer(message);
-      safeAdd(resp.data);
+      // final resp = T.fromBuffer(message);
+      // safeAdd(resp.data);
     } catch (e) {
       logger.e('Failed to parse: $e');
     }
@@ -42,7 +43,9 @@ abstract class WebsocketConnection<T> {
   }
 
   getWsUri() {
-    return Uri.parse('ws://${config.host}:${config.port}/$pathname?token=$accessToken');
+    return Uri.parse(
+      'ws://${config.host}:${config.port}/$pathname?token=${accessToken.value}',
+    );
   }
 
   connect() {

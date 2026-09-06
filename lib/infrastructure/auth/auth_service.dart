@@ -1,4 +1,4 @@
-import 'package:front/infrastructure/auth/clients/auth_client.dart';
+import 'package:front/infrastructure/auth/api/auth_client.dart';
 import 'package:front/infrastructure/device/device_service.dart';
 
 import './token_storage.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/infrastructure/auth/clients/auth_client_provider.dart';
+import 'package:front/infrastructure/auth/api/auth_client_provider.dart';
 import 'package:front/infrastructure/device/device_service_provider.dart';
 import 'package:logger/logger.dart';
 

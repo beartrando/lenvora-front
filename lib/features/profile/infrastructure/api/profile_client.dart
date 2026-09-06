@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:front/features/profile/domain/entities/profile.dart';
 import 'package:front/features/profile/domain/value_objects/profile_id.dart';
+import 'package:front/features/profile/infrastructure/converters/profile_response_converter.dart';
 import 'package:front/infrastructure/http/clients/authorized_http_client.dart';
 
 class ProfileClient {
@@ -12,18 +13,7 @@ class ProfileClient {
   Future<Profile> getMe() async {
     final response = await authorizedHttpClient.get('/profile/getMe');
 
-    final profileResponse = ProfileResponse()
-      ..mergeFromProto3Json(jsonDecode(response.body as String));
-
-    if (profileResponse.hasProfile()) {
-      return profileResponse.profile;
-    }
-
-    if (profileResponse.hasError()) {
-      throw Exception(profileResponse.error);
-    }
-
-    throw Exception('Empty profile response');
+    return ProfileResponseConverter.fromString(response.body);
   }
 
   Future<Profile> getProfile(ProfileId profileId) async {
@@ -32,17 +22,6 @@ class ProfileClient {
       query: {'profileId': profileId.value},
     );
 
-    final profileResponse = ProfileResponse()
-      ..mergeFromProto3Json(jsonDecode(response.body as String));
-
-    if (profileResponse.hasProfile()) {
-      return profileResponse.profile;
-    }
-
-    if (profileResponse.hasError()) {
-      throw Exception(profileResponse.error);
-    }
-
-    throw Exception('Empty profile response');
+    return ProfileResponseConverter.fromString(response.body);
   }
 }

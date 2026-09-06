@@ -1,11 +1,18 @@
+import 'dart:convert';
+
 import 'package:front/contracts/proto/auth.pb.dart' as authProto;
 import 'package:front/infrastructure/auth/value_objects/auth_object.dart';
 
 import './auth_object_converter.dart';
 
 class AuthResponseConverter {
-  static AuthObject fromString(String authResponse) {
-    final protoAuthResponse = AuthResponse()
+  static AuthObject fromString(String? authResponse) {
+    if (authResponse == null || authResponse.isEmpty) {
+      throw Exception('Empty auth response');
+    }
+
+
+    final protoAuthResponse = authProto.AuthResponse()
       ..mergeFromProto3Json(jsonDecode(authResponse as String)); // работает
 
     return AuthResponseConverter.fromProto(protoAuthResponse);

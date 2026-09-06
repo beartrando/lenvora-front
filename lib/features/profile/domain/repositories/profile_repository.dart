@@ -13,26 +13,10 @@ class ProfileRepository {
   ProfileRepository(this._client);
 
   Future<Profile> getMe() async {
-    final data = await _client.getMe();
-
-    return Profile(
-      id: ProfileId(data.id),
-      nickname: ProfileNickname(data.nickname),
-      level: ProfileLevel(data.level),
-      rating: ProfileRating(data.rating),
-      experience: ProfileExperience(data.experience.toInt()),
-    );
+    return await _client.getMe();
   }
 
   Future<Profile> get(ProfileId id) async {
-    final data = await _client.getProfile(id);
-
-    return Profile(
-      id: ProfileId(data.id),
-      nickname: ProfileNickname(data.nickname),
-      level: ProfileLevel(data.level),
-      rating: ProfileRating(data.rating),
-      experience: ProfileExperience(data.experience.toInt()),
-    );
+    return await _client.getProfile(id);
   }
 }

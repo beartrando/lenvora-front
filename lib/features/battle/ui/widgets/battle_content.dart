@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/profile/widgets/player_name.dart';
-import 'package:front/src/contracts/proto/battle.pb.dart';
+import 'package:front/features/profile/ui/widgets/player_name.dart';
 
-import 'battle_board.dart';
+import '../../domain/entities/battle.dart';
+import './battle_board.dart';
 
 class BattleContent extends ConsumerWidget {
-  final BattleObject battle;
+  final Battle battle;
   final dynamic profile;
   final BattleService battleService;
 

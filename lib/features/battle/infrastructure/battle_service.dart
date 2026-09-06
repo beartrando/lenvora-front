@@ -1,3 +1,6 @@
+import 'package:front/features/battle/domain/entities/battle.dart';
+import 'package:front/features/battle/domain/value_objects/battle_id.dart';
+
 class BattleService {
   final ProfileId profileId;
   final BattleChannel channel;

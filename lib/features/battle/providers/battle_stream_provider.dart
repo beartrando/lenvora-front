@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/contracts/proto/battle.pb.dart';
 import 'package:front/features/battle/params/battle_params.dart';
 
-import '../../battle/providers/battle_channel_provider.dart';
+import '../infrastructure/battle_channel_provider.dart';
 
 final battleStreamProvider = StreamProvider.autoDispose
     .family<BattleObject, BattleParams>((ref, params) async* {

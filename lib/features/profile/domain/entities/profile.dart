@@ -19,7 +19,7 @@ class Profile {
     required this.experience,
   });
 
-  void changeNickname(ProfileNickname nickname) {
+  void setNickname(ProfileNickname nickname) {
     this.nickname = nickname;
   }
 }

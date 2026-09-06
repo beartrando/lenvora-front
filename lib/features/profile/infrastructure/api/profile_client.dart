@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:front/contracts/proto/profile.pb.dart';
+import 'package:front/features/profile/domain/entities/profile.dart';
 import 'package:front/features/profile/domain/value_objects/profile_id.dart';
 import 'package:front/infrastructure/http/clients/authorized_http_client.dart';
 
@@ -9,7 +10,7 @@ class ProfileClient {
 
   ProfileClient(this.authorizedHttpClient);
 
-  Future<ProfileObject> getMe() async {
+  Future<Profile> getMe() async {
     final response = await authorizedHttpClient.get('/profile/getMe');
 
     final profileResponse = ProfileResponse()
@@ -26,7 +27,7 @@ class ProfileClient {
     throw Exception('Empty profile response');
   }
 
-  Future<ProfileObject> getProfile(ProfileId profileId) async {
+  Future<Profile> getProfile(ProfileId profileId) async {
     final response = await authorizedHttpClient.get(
       '/profile/get',
       query: {'profileId': profileId.value},

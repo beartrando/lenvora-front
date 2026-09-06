@@ -1,13 +1,13 @@
+import '../enums/battle_status.enum.dart';
 import '../value_objects/battle_board.dart';
 import '../value_objects/battle_id.dart';
 import '../value_objects/battle_player_ids.dart';
-import '../value_objects/battle_status.enum.dart';
 
 class Battle {
   final BattleId id;
   final BattleBoard board;
   final BattlePlayerIds playerIds;
-  BattleStatus status;
+  BattleStatusEnum status;
   BattleId? winnerId;
   final DateTime? lastMoveAt;
   final DateTime createdAt;

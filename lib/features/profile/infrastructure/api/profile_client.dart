@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:front/contracts/proto/profile.pb.dart';
 import 'package:front/features/profile/domain/entities/profile.dart';
 import 'package:front/features/profile/domain/value_objects/profile_id.dart';
 import 'package:front/infrastructure/http/clients/authorized_http_client.dart';

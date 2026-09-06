@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/profile/ui/widgets/player_name.dart';
 
 import '../../domain/entities/battle.dart';
-import './battle_board.dart';
+import '../../infrastructure/battle_service.dart';
+import './battle_board_widget.dart';
 
 class BattleContent extends ConsumerWidget {
   final Battle battle;
@@ -59,7 +60,7 @@ class BattleContent extends ConsumerWidget {
       try {
         return Scaffold(
           appBar: AppBar(title: const Text('Battle: Tic Tac Toe')),
-          body: BattleBoard(
+          body: BattleBoardWidege(
             battle: battle,
             profile: profile,
             battleService: battleService,

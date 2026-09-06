@@ -3,14 +3,18 @@ import '../enums/battle_cell_value.enum.dart';
 class BattleBoard {
   static const int size = 9;
 
-  final List<BattleCellValue> cells;
+  final List<BattleCellValueEnum> cells;
 
-  BattleBoard(List<BattleCellValue> cells)
+  BattleBoard(List<BattleCellValueEnum> cells)
     : assert(cells.length == size),
       cells = List.unmodifiable(cells);
 
-  BattleCellValue operator [](int index) => cells[index];
+  BattleCellValueEnum operator [](int index) => cells[index];
 
   int get filledCount =>
-      cells.where((cell) => cell != BattleCellValue.empty).length;
+      cells.where((cell) => cell != BattleCellValueEnum.empty).length;
+
+  bool validateIndex(int index) {
+    return index >= 0 && index < size;
+  }
 }

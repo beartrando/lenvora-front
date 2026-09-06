@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:front/src/contracts/proto/profile.pb.dart';
+import '../domain/entities/profile.dart';
 
 class ProfileDetailScreen extends StatelessWidget {
-  final ProfileObject profile;
+  final Profile profile;
 
   const ProfileDetailScreen({required this.profile, super.key});
 

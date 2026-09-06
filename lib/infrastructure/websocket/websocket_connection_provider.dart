@@ -3,7 +3,7 @@
 // import 'package:logger/logger.dart';
 //
 // import '../services/auth_service.dart';
-// import './public_auth_client_provider.dart';
+// import './auth_client_provider.dart';
 //
 // final authServiceProvider = FutureProvider<AuthService>((ref) async {
 //   final authClient = ref.watch(authClientProvider);

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/contracts/proto/battle.pb.dart';
+import 'package:front/features/battle/infrastructure/battle_service.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
 
 import '../../battle/providers/battle_stream_provider.dart';
+import '../domain/entities/battle.dart';
 import './widgets/battle_content.dart';
 
 class BattleScreen extends ConsumerStatefulWidget {
@@ -15,7 +16,7 @@ class BattleScreen extends ConsumerStatefulWidget {
 
 class _BattleScreenState extends ConsumerState<BattleScreen> {
   late BattleService battleService;
-  late BattleObject? _battle;
+  late Battle? _battle;
 
   @override
   Widget build(BuildContext context) {

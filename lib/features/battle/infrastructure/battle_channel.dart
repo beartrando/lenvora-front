@@ -1,18 +1,20 @@
 import 'dart:async';
 
 import 'package:fixnum/fixnum.dart';
-import 'package:front/src/api/streaming_channel.dart';
-import 'package:front/src/contracts/proto/battle.pb.dart' as battleProto;
-import 'package:front/src/contracts/proto/common/ping.pb.dart';
-import 'package:front/src/contracts/proto/streaming.pb.dart' as streamingProto;
-import 'package:front/src/contracts/proto/streaming.pb.dart';
-import 'package:front/src/converters/protobuf_utils.dart';
+import 'package:front/contracts/proto/battle.pb.dart' as battleProto;
+import 'package:front/contracts/proto/common/ping.pb.dart';
+import 'package:front/contracts/proto/streaming.pb.dart' as streamingProto;
+import 'package:front/contracts/proto/streaming.pb.dart';
+import 'package:front/features/profile/domain/value_objects/profile_id.dart';
+import 'package:front/infrastructure/websocket/websocket_connection.dart';
 import 'package:logger/logger.dart';
+
+import '../domain/value_objects/battle_id.dart';
 
 final logger = Logger();
 
-class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
-  late String profileId;
+class BattleChannel extends WebsocketConnection<battleProto.BattleResponse> {
+  late ProfileId profileId;
   final pathname = 'battle';
 
   messageHandler(List<int> message) {
@@ -37,13 +39,13 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
 
   getWsUri() {
     return Uri.parse(
-      'ws://${config.host}:${config.port}/$pathname?token=$jwt&profileId=${this.profileId}',
+      'ws://${config.host}:${config.port}/$pathname?token=${accessToken.value}&profileId=${this.profileId.value}',
     );
   }
 
-  BattleChannel(super.config, this.profileId, super.jwt);
+  BattleChannel(super.config, this.profileId, super.accessToken);
 
-  void move(String battleId, int cellIdx) {
+  void move(BattleId battleId, int cellIdx) {
     // logger.i('Move event');
     final moveReq = BattleMove()
       ..cellIdx = cellIdx
@@ -55,14 +57,14 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
-  void leave(String battleId) {
+  void leave(BattleId battleId) {
     final req = BattleRequest()..leave = (BattleLeave()..battleId = battleId);
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
-  connectBot(String battleId) {
+  connectBot(BattleId battleId) {
     // logger.i('Move event');
     final connectBotRequest = streamingProto.BattleJoinBot()
       ..battleId = battleId;
@@ -73,7 +75,7 @@ class BattleChannel extends StreamingChannel<battleProto.BattleObject> {
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
-  start([String? battleId]) {
+  start([BattleId? battleId]) {
     final request = streamingProto.BattleStart();
 
     if (battleId != null) {

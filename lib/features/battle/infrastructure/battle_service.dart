@@ -1,5 +1,9 @@
-import 'package:front/features/battle/domain/entities/battle.dart';
-import 'package:front/features/battle/domain/value_objects/battle_id.dart';
+import 'package:front/features/profile/domain/value_objects/profile_id.dart';
+
+import '../domain/entities/battle.dart';
+import '../domain/rules/can_move.dart';
+import '../domain/value_objects/battle_id.dart';
+import './battle_channel.dart';
 
 class BattleService {
   final ProfileId profileId;
@@ -8,7 +12,7 @@ class BattleService {
   BattleService(this.profileId, this.channel);
 
   void makeMove(Battle battle, int cellIndex) {
-    if (!battle.canMove(profileId)) {
+    if (!CanMove().calculate(battle, profileId)) {
       return;
     }
 

@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/battle/widgets/turn_timer.dart';
-import 'package:front/features/profile/widgets/player_name.dart';
-import 'package:front/src/contracts/proto/battle.pb.dart';
-import 'package:front/src/contracts/proto/profile.pb.dart';
-import 'package:front/src/locale/app_config_provider.dart';
+import 'package:front/features/battle/domain/entities/battle.dart';
+import 'package:front/features/battle/domain/enums/battle_cell_value.enum.dart';
+import 'package:front/features/battle/domain/value_objects/battle_board.dart';
+import 'package:front/features/profile/domain/entities/profile.dart';
+import 'package:front/features/profile/ui/widgets/player_name.dart';
 
-class BattleBoard extends ConsumerWidget {
-  final BattleObject battle;
+import '../../infrastructure/battle_service.dart';
+import './turn_timer.dart';
+
+class BattleBoardWidege extends ConsumerWidget {
+  final Battle battle;
   final BattleService battleService;
 
   // final ProfileService profileService;
-  final ProfileObject profile;
+  final Profile profile;
 
   // final WidgetRef ref;
 
-  const BattleBoard({
+  const BattleBoardWidege({
     required this.profile,
     required this.battle,
     required this.battleService,
@@ -94,32 +97,32 @@ class BattleBoard extends ConsumerWidget {
     );
   }
 
-  BattleCellValue safeCellAt(List<BattleCellValue> cells, int index) {
-    if (index >= 0 && index < cells.length) {
-      return cells[index];
+  BattleCellValueEnum safeCellAt(BattleBoard board, int index) {
+    if (board.validateIndex(index)) {
+      return board[index];
     }
-    return BattleCellValue.CELL_EMPTY;
+    return BattleCellValueEnum.empty;
   }
 
-  String _renderCell(BattleCellValue value) {
+  String _renderCell(BattleCellValueEnum value) {
     switch (value) {
-      case BattleCellValue.CELL_X:
+      case BattleCellValueEnum.x:
         return 'X';
-      case BattleCellValue.CELL_O:
+      case BattleCellValueEnum.o:
         return 'O';
-      case BattleCellValue.CELL_EMPTY:
+      case BattleCellValueEnum.empty:
       default:
         return '';
     }
   }
 
-  Color _cellColor(BattleCellValue value) {
+  Color _cellColor(BattleCellValueEnum value) {
     switch (value) {
-      case BattleCellValue.CELL_X:
+      case BattleCellValueEnum.x:
         return Colors.red; // X красный
-      case BattleCellValue.CELL_O:
+      case BattleCellValueEnum.o:
         return Colors.blue; // O синий
-      case BattleCellValue.CELL_EMPTY:
+      case BattleCellValueEnum.empty:
       default:
         return Colors.white; // пустая клетка белая
     }

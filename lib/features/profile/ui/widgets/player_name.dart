@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/profile/params/profile_params.dart';
-import 'package:front/features/profile/providers/profile_provider.dart';
-import 'package:front/features/profile/ui/profile_details_screen.dart';
-import 'package:front/src/locale/auth_provider.dart';
-import 'package:front/src/params/client_params.dart';
+
+import '../../providers/profile_provider.dart';
+import '../profile_details_screen.dart';
 
 class PlayerName extends ConsumerWidget {
   final String profileId;
@@ -13,40 +11,31 @@ class PlayerName extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final jwtAsync = ref.watch(tokenProvider);
+    final profileAsync = ref.watch(profileProvider);
 
-    return jwtAsync.when(
-      data: (jwt) {
-        final profileParams = ProfileParams(ClientParams(jwt), profileId);
-        final profileAsync = ref.watch(profileProvider(profileParams));
-
-        return profileAsync.when(
-          data: (profile) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ProfileDetailScreen(profile: profile),
-                  ),
-                );
-              },
-              child: Text(
-                profile.nickname,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.blue, // выделим кликабельность
-                  decoration: TextDecoration.underline,
-                ),
+    return profileAsync.when(
+      data: (profile) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ProfileDetailScreen(profile: profile),
               ),
             );
           },
-          loading: () => const Text("Загрузка..."),
-          error: (err, _) => Text("Ошибка: $err"),
+          child: Text(
+            profile.nickname,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.blue, // выделим кликабельность
+              decoration: TextDecoration.underline,
+            ),
+          ),
         );
       },
-      loading: () => const Text("Auth..."),
-      error: (err, _) => Text("Auth error: $err"),
+      loading: () => const Text("Загрузка..."),
+      error: (err, _) => Text("Ошибка: $err"),
     );
   }
 }

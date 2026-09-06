@@ -42,7 +42,7 @@ abstract class WebsocketConnection<T> {
   }
 
   getWsUri() {
-    return Uri.parse('ws://${config.host}:${config.port}/$pathname?token=$jwt');
+    return Uri.parse('ws://${config.host}:${config.port}/$pathname?token=$accessToken');
   }
 
   connect() {
@@ -66,7 +66,7 @@ abstract class WebsocketConnection<T> {
     );
   }
 
-  WebsocketConnection(this.config, this.jwt) {
+  WebsocketConnection(this.config, this.accessToken) {
     connect();
 
     // _controller.stream.listen(

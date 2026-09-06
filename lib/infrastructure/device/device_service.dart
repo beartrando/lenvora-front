@@ -1,3 +1,5 @@
+import './value_objects/device_id.dart';
+
 import '../storage/secure_storage.dart';
 import 'device_id_provider.dart';
 
@@ -13,17 +15,17 @@ class DeviceService {
   }) : _deviceIdProvider = deviceIdProvider,
        _storage = storage;
 
-  Future<String> getDeviceId() async {
+  Future<DeviceId> getDeviceId() async {
     final stored = await _storage.read(_deviceIdKey);
 
     if (stored != null && stored.isNotEmpty) {
-      return stored;
+      return DeviceId(stored);
     }
 
     final deviceId = await _deviceIdProvider.getDeviceId();
 
     await _storage.save(_deviceIdKey, deviceId);
 
-    return deviceId;
+    return DeviceId(deviceId);
   }
 }

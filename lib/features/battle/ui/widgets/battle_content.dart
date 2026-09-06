@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/profile/widgets/player_name.dart';
 import 'package:front/src/contracts/proto/battle.pb.dart';
 
-import '../domain/battle_domain.dart';
 import 'battle_board.dart';
 
 class BattleContent extends ConsumerWidget {

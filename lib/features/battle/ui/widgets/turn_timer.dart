@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:front/features/battle/domain/battle_domain.dart';
 
 class TurnTimer extends StatefulWidget {
   final int seconds;

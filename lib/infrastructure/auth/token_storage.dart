@@ -5,8 +5,9 @@ import './value_objects/auth_object.dart';
 import './value_objects/refresh_token.dart';
 
 class TokenStorage extends SecureStorage {
-  final accessTokenKey = 'accessToken';
-  final refreshTokenKey = 'refreshToken';
+  static const accessTokenKey = 'accessToken';
+  static const refreshTokenKey = 'refreshToken';
+
   AccessToken? _accessToken;
   RefreshToken? _refreshToken;
 
@@ -19,37 +20,52 @@ class TokenStorage extends SecureStorage {
 
   Future<void> saveAccessToken(AccessToken accessToken) async {
     _accessToken = accessToken;
-    await save(this.accessTokenKey, accessToken.value);
+    await save(accessTokenKey, accessToken.value);
   }
 
   Future<AccessToken?> readAccessToken() async {
-    if (_accessToken != null && _accessToken.value != '') {
+    if (_accessToken != null) {
       return _accessToken;
     }
-    final _accessToken = await read(this.accessTokenKey);
-    return AccessToken(_accessToken);
+
+    final value = await read(accessTokenKey);
+
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+
+    _accessToken = AccessToken(value);
+    return _accessToken;
   }
 
   Future<void> deleteAccessToken() async {
     _accessToken = null;
-    return await delete(this.accessTokenKey);
+    await delete(accessTokenKey);
   }
 
   Future<void> saveRefreshToken(RefreshToken refreshToken) async {
     _refreshToken = refreshToken;
-    await save(this.refreshTokenKey, refreshToken.value);
+    await save(refreshTokenKey, refreshToken.value);
   }
 
   Future<RefreshToken?> readRefreshToken() async {
-    if (_refreshToken != null && _refreshToken != '') {
+    if (_refreshToken != null) {
       return _refreshToken;
     }
-    final refreshToken = await read(this.refreshTokenKey);
-    return RefreshToken(refreshToken);
+
+    final value = await read(refreshTokenKey);
+
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+
+    _refreshToken = RefreshToken(value);
+    return _refreshToken;
   }
 
   Future<void> deleteRefreshToken() async {
-    return await delete(this.refreshTokenKey);
+    _refreshToken = null;
+    await delete(refreshTokenKey);
   }
 
   Future<void> clearAll() async {

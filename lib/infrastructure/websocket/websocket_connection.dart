@@ -23,8 +23,8 @@ abstract class WebsocketConnection<T> {
   messageHandler(List<int> message) {
     logger.i('Received: $message');
     try {
-      // final resp = T.fromBuffer(message);
-      // safeAdd(resp.data);
+      final resp = T.fromBuffer(message);
+      safeAdd(resp.data);
     } catch (e) {
       logger.e('Failed to parse: $e');
     }

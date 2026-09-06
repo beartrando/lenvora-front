@@ -1,27 +1,16 @@
-import BattleCellValueEnum from "../enums/battle-cell-value.enum";
+import '../enums/battle_cell_value.enum.dart';
 
-export class BattleBoard {
-    constructor(
-        readonly cells: readonly BattleCellValueEnum[],
-    ) {
-        if (cells.length !== 9) {
-            throw new Error("BattleBoard must contain 9 cells");
-        }
+class BattleBoard {
+  static const int size = 9;
 
-        if (
-            cells.some(
-                cell => !Object.values(BattleCellValueEnum).includes(cell),
-            )
-        ) {
-            throw new Error("Invalid cell value");
-        }
-    }
+  final List<BattleCellValue> cells;
 
-    static empty(): BattleBoard {
-        return new BattleBoard(
-            Array(9).fill(BattleCellValueEnum.EMPTY),
-        );
-    }
+  BattleBoard(List<BattleCellValue> cells)
+    : assert(cells.length == size),
+      cells = List.unmodifiable(cells);
+
+  BattleCellValue operator [](int index) => cells[index];
+
+  int get filledCount =>
+      cells.where((cell) => cell != BattleCellValue.empty).length;
 }
-
-export default BattleBoard;

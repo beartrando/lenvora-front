@@ -1,18 +1,24 @@
-import BattleStatusEnum from "../enums/battle-status.enum";
+import '../enums/battle_status.enum.dart';
 
-export class BattleStatus {
-    constructor(
-        readonly value: BattleStatusEnum,
-    ) {
-    }
+class BattleStatus {
+  final BattleStatusEnum value;
 
-    static create(status: BattleStatusEnum) {
-        return new BattleStatus(status);
-    }
+  const BattleStatus(this.value);
 
-    equals(other: BattleStatus): boolean {
-        return this.value === other.value;
-    }
+  const BattleStatus.unknown() : value = BattleStatusEnum.unknown;
+
+  const BattleStatus.created() : value = BattleStatusEnum.created;
+
+  const BattleStatus.ready() : value = BattleStatusEnum.ready;
+
+  const BattleStatus.active() : value = BattleStatusEnum.active;
+
+  const BattleStatus.finished() : value = BattleStatusEnum.finished;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is BattleStatus && other.value == value;
+
+  @override
+  int get hashCode => value.hashCode;
 }
-
-export default BattleStatus;

@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:front/contracts/proto/auth.pb.dart';
-import 'package:front/infrastructure/http/clients/authorized_http_client.dart';
 import 'package:front/infrastructure/http/clients/http_client.dart';
-import 'package:logger/logger.dart';
 
 class PublicAuthClient {
   final HttpClient httpClient;

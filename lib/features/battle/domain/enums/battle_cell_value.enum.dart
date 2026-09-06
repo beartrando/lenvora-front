@@ -1,5 +1,1 @@
-enum BattleCellValue {
-    empty,
-    x,
-    o,
-}
+enum BattleCellValue { empty, x, o }

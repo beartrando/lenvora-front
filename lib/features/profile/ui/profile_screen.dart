@@ -18,7 +18,10 @@ class ProfileScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('ID: ${profile.id.value}', style: const TextStyle(fontSize: 18)),
+              Text(
+                'ID: ${profile.id.value}',
+                style: const TextStyle(fontSize: 18),
+              ),
               const SizedBox(height: 8),
               Text(
                 'Nickname: ${profile.nickname.value}',

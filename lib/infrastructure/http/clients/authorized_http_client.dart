@@ -56,20 +56,11 @@ class AuthorizedHttpClient {
 
     var response = await request(token.value);
 
-    if (response.statusCode != 401) {
-      return response;
+    if (response.statusCode == 401) {
+      await _authService.clearRefreshToken();
+      token = await _authService.ensureAccessToken();
+      response = await request(token.value);
     }
-
-    await _authService.clearAccessToken();
-    token = await _authService.refreshTokens();
-    response = await request(token.value);
-
-    if (response.statusCode != 401) {
-      return response;
-    }
-
-    await _authService.clearRefreshToken();
-    token = await _authService.getOrCreateAccessToken();
-    return await request(token.value);
+    return response;
   }
 }

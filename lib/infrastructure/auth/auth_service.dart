@@ -50,34 +50,34 @@ class AuthService {
     return response.accessToken;
   }
 
-  Future<AccessToken> ensureAccessToken() async {
-    var token = await this.getAccessToken();
+  Future<AccessToken> verifyAccessToken(AccessToken accesToken) async {
+    final response = await authClient.verifyAccessToken(accesToken);
 
-    return token;
-    // final AuthObject response = await authClient.verifyAccessToken(token);
-    //
-    // if (response.statusCode != 401) {
-    //   return token;
-    // }
-    //
-    // var token = await this.refreshTokens();
-    //
-    //
-    // if (response.statusCode != 401) {
-    //   return token;
-    // }
-    //
-    // await _authService.clearAccessToken();
-    // token = await _authService.refreshTokens();
-    // response = await request(token);
-    //
-    // if (response.statusCode != 401) {
-    //   return response;
-    // }
-    //
-    // await _authService.clearRefreshToken();
-    // token = await _authService.getOrCreateAccessToken();
-    // return await request(token);
+    await tokenStorage.saveAuthObject(response);
+
+    return response.accessToken;
+  }
+
+  Future<AccessToken> ensureAccessToken() async {
+    var accessToken = await tokenStorage.readAccessToken();
+
+    if (accessToken != null) {
+      var response = await authClient.verifyAccessToken(accessToken);
+      if (response.statusCode != 401) {
+        return token;
+      }
+    }
+
+    var refreshToken = await tokenStorage.readRefreshToken();
+    if (refreshToken != null) {
+      response = await this.refreshTokens();
+
+      if (response.auth != null) {
+        return await tokenStorage.readAccessToken();
+      }
+    }
+
+    return await this.getOrCreateAccessToken();
   }
 
   Future<AccessToken> refreshTokens() async {

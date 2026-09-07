@@ -27,4 +27,13 @@ class AuthClient {
 
     return AuthResponseConverter.fromString(response.body);
   }
+
+  Future<bool> verifyAccessToken(RefreshToken refreshToken) async {
+    final response = await httpClient.post(
+      '/auth/refreshTokens',
+      body: {'refreshToken': refreshToken.value},
+    );
+
+    return AuthResponseConverter.fromString(response.body);
+  }
 }

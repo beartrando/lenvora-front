@@ -2,8 +2,6 @@
 // import 'package:front/src/locale/token_storage_provider.dart';
 // import 'package:logger/logger.dart';
 //
-// import '../services/auth_service.dart';
-// import './auth_client_provider.dart';
 //
 // final authServiceProvider = FutureProvider<AuthService>((ref) async {
 //   final authClient = ref.watch(authClientProvider);

@@ -542,7 +542,7 @@ packages:
     source: hosted
     version: "6.0.0"
   protoc_plugin:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: protoc_plugin
       sha256: d1ea363e9118f954d9d482c2f7281c5ff5149b059e68672d1faa564d49091f05

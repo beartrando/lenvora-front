@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:front/infrastructure/storage/secure_storage.dart';
 import 'package:logger/logger.dart';
-
-import './secure_storage.dart';
 
 final logger = Logger();
 

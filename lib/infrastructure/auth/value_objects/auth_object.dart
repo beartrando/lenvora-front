@@ -1,5 +1,6 @@
-import './access_token.dart';
-import './refresh_token.dart';
+
+import 'package:front/infrastructure/auth/value_objects/access_token.dart';
+import 'package:front/infrastructure/auth/value_objects/refresh_token.dart';
 
 class AuthObject {
   final AccessToken accessToken;

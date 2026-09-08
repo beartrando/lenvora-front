@@ -1,8 +1,10 @@
 import 'package:front/infrastructure/auth/api/auth_client.dart';
+import 'package:front/infrastructure/auth/token_storage.dart';
+import 'package:front/infrastructure/auth/value_objects/access_token.dart';
 import 'package:front/infrastructure/device/device_service.dart';
+import 'package:logger/logger.dart';
 
-import './token_storage.dart';
-import './value_objects/access_token.dart';
+final logger = Logger();
 
 class AuthService {
   final AuthClient authClient;
@@ -50,30 +52,36 @@ class AuthService {
     return response.accessToken;
   }
 
-  Future<AccessToken> verifyAccessToken(AccessToken accesToken) async {
-    final response = await authClient.verifyAccessToken(accesToken);
-
-    await tokenStorage.saveAuthObject(response);
-
-    return response.accessToken;
+  Future<bool> verifyAccessToken(AccessToken accesToken) async {
+    return await authClient.verifyAccessToken(accesToken);
   }
 
   Future<AccessToken> ensureAccessToken() async {
     var accessToken = await tokenStorage.readAccessToken();
 
     if (accessToken != null) {
-      var response = await authClient.verifyAccessToken(accessToken);
-      if (response.statusCode != 401) {
-        return token;
+      try {
+        final response = await authClient.verifyAccessToken(accessToken);
+        if (response) {
+          return accessToken;
+        }
+      } catch (e) {
+        this.clearAccessToken();
+        logger.i(e);
       }
     }
 
     var refreshToken = await tokenStorage.readRefreshToken();
     if (refreshToken != null) {
-      response = await this.refreshTokens();
+      try {
+        accessToken = await this.refreshTokens();
 
-      if (response.auth != null) {
-        return await tokenStorage.readAccessToken();
+        if (accessToken != null) {
+          return accessToken;
+        }
+      } catch (e) {
+        this.clearRefreshToken();
+        logger.i(e);
       }
     }
 

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/battle/domain/entities/battle.dart';
-import 'package:front/features/battle/domain/enums/battle_cell_value.enum.dart';
-import 'package:front/features/battle/domain/rules/can_move.dart';
-import 'package:front/features/battle/domain/value_objects/battle_board.dart';
-import 'package:front/features/profile/domain/entities/profile.dart';
+import 'package:front/domain/battle/enums/battle_cell_value.enum.dart';
+import 'package:front/domain/battle/rules/can_move.dart';
+import 'package:front/domain/battle/value_objects/battle_board.dart';
+import 'package:front/domain/profile/entities/profile.dart';
+import 'package:front/features/battle/infrastructure/websocket/battle_service.dart';
+import 'package:front/domain/battle/entities/battle.dart';
+import 'package:front/features/battle/ui/widgets/turn_timer.dart';
 import 'package:front/features/profile/ui/widgets/player_name.dart';
 import 'package:front/infrastructure/app/app_config_provider.dart';
 
-import '../../infrastructure/battle_service.dart';
-import './turn_timer.dart';
-
-class BattleBoardWidege extends ConsumerWidget {
+class BattleBoardWideget extends ConsumerWidget {
   final Battle battle;
   final BattleService battleService;
 
@@ -20,7 +19,7 @@ class BattleBoardWidege extends ConsumerWidget {
 
   // final WidgetRef ref;
 
-  const BattleBoardWidege({
+  const BattleBoardWideget({
     required this.profile,
     required this.battle,
     required this.battleService,

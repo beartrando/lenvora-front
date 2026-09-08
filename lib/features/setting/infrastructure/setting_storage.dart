@@ -1,11 +1,10 @@
 import 'dart:convert';
 
+import 'package:front/domain/setting/value_objects/effects_sound_enabled.dart';
+import 'package:front/domain/setting/value_objects/setting.dart';
+import 'package:front/domain/setting/value_objects/sound_enabled.dart';
+import 'package:front/domain/setting/value_objects/vibration_enabled.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../domain/value_objects/effects_sound_enabled.dart';
-import '../domain/value_objects/setting.dart';
-import '../domain/value_objects/sound_enabled.dart';
-import '../domain/value_objects/vibration_enabled.dart';
 
 class SettingStorage {
   static const _key = 'setting';

@@ -1,9 +1,10 @@
+import 'package:front/infrastructure/auth/value_objects/access_token.dart';
+import 'package:front/infrastructure/auth/value_objects/auth_object.dart';
+import 'package:front/infrastructure/auth/value_objects/refresh_token.dart';
 import 'package:front/infrastructure/device/value_objects/device_id.dart';
 import 'package:front/infrastructure/http/clients/http_client.dart';
-
-import '../converters/auth_response_converter.dart';
-import '../value_objects/auth_object.dart';
-import '../value_objects/refresh_token.dart';
+import 'package:front/infrastructure/proto/converters/auth/auth_response_converter.dart';
+import 'package:front/infrastructure/proto/converters/success_response_converter.dart';
 
 class AuthClient {
   final HttpClient httpClient;
@@ -28,12 +29,12 @@ class AuthClient {
     return AuthResponseConverter.fromString(response.body);
   }
 
-  Future<bool> verifyAccessToken(RefreshToken refreshToken) async {
+  Future<bool> verifyAccessToken(AccessToken accessToken) async {
     final response = await httpClient.post(
-      '/auth/refreshTokens',
-      body: {'refreshToken': refreshToken.value},
+      '/auth/verify',
+      headers: {'Authorization': 'Bearer ${accessToken.value}'},
     );
 
-    return AuthResponseConverter.fromString(response.body);
+    return SuccessResponseConverter.fromString(response.body);
   }
 }

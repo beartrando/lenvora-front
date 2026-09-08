@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../domain/value_objects/profile_id.dart';
-import '../../providers/profile_provider.dart';
-import '../profile_details_screen.dart';
+import 'package:front/domain/profile/value_objects/profile_id.dart';
+import 'package:front/features/profile/providers/profile_provider.dart';
+import 'package:front/features/profile/ui/profile_details_screen.dart';
 
 class PlayerName extends ConsumerWidget {
   final ProfileId profileId;

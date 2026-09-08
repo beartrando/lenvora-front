@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:front/features/battle/infrastructure/battle_service.dart';
-import 'package:front/features/battle/infrastructure/battle_stream_provider.dart';
+import 'package:front/domain/battle/entities/battle.dart';
+import 'package:front/features/battle/infrastructure/websocket/battle_service.dart';
+import 'package:front/features/battle/infrastructure/websocket/battle_stream_provider.dart';
+import 'package:front/features/battle/providers/battle_stream_provider.dart';
+import 'package:front/features/battle/ui/widgets/battle_content.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
-
-import '../../battle/providers/battle_stream_provider.dart';
-import '../domain/entities/battle.dart';
-import './widgets/battle_content.dart';
 
 class BattleScreen extends ConsumerStatefulWidget {
   const BattleScreen({super.key});

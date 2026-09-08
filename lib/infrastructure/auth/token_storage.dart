@@ -1,8 +1,7 @@
+import 'package:front/infrastructure/auth/value_objects/access_token.dart';
+import 'package:front/infrastructure/auth/value_objects/auth_object.dart';
+import 'package:front/infrastructure/auth/value_objects/refresh_token.dart';
 import 'package:front/infrastructure/storage/secure_storage.dart';
-
-import './value_objects/access_token.dart';
-import './value_objects/auth_object.dart';
-import './value_objects/refresh_token.dart';
 
 class TokenStorage extends SecureStorage {
   static const accessTokenKey = 'accessToken';

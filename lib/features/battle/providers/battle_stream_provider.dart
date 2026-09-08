@@ -1,8 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../domain/entities/battle.dart';
-import '../infrastructure/battle_channel_provider.dart';
-import '../infrastructure/converters/battle/battle_response_converter.dart';
+import 'package:front/domain/battle/entities/battle.dart';
+import 'package:front/features/battle/infrastructure/websocket/battle_channel_provider.dart';
 
 final battleStreamProvider = StreamProvider.autoDispose<Battle>((ref) async* {
   // logger.i('battleStreamProvider');

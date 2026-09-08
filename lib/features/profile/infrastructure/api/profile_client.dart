@@ -1,7 +1,7 @@
-import 'package:front/features/profile/domain/entities/profile.dart';
-import 'package:front/features/profile/domain/value_objects/profile_id.dart';
-import 'package:front/features/profile/infrastructure/converters/profile_response_converter.dart';
+import 'package:front/domain/profile/entities/profile.dart';
+import 'package:front/domain/profile/value_objects/profile_id.dart';
 import 'package:front/infrastructure/http/clients/authorized_http_client.dart';
+import 'package:front/infrastructure/proto/converters/profile/profile_response_converter.dart';
 
 class ProfileClient {
   final AuthorizedHttpClient authorizedHttpClient;

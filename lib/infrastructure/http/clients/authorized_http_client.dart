@@ -1,7 +1,6 @@
 import 'package:front/infrastructure/auth/auth_service.dart';
+import 'package:front/infrastructure/http/clients/http_client.dart';
 import 'package:front/infrastructure/http/models/http_response.dart';
-
-import './http_client.dart';
 
 class AuthorizedHttpClient {
   final HttpClient _http;

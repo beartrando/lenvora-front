@@ -1,8 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../domain/entities/profile.dart';
-import '../domain/repositories/profile_repository_provider.dart';
-import '../domain/value_objects/profile_id.dart';
+import 'package:front/domain/profile/entities/profile.dart';
+import 'package:front/domain/profile/repositories/profile_repository_provider.dart';
+import 'package:front/domain/profile/value_objects/profile_id.dart';
 
 final profileProvider = FutureProvider.family<Profile, ProfileId>((
   ref,

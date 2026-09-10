@@ -1,1 +1,1 @@
-enum BattleStatusEnum { unknown, created, ready, active, finished }
+enum BattleStatusEnum { unknown, created, ready, active, started, finished, cancelled }

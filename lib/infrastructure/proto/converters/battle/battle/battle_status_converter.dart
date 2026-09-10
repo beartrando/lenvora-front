@@ -13,6 +13,10 @@ class BattleStatusConverter {
         return BattleStatusEnum.ready;
       case proto.BattleStatus.ACTIVE:
         return BattleStatusEnum.active;
+      case proto.BattleStatus.STARTED:
+        return BattleStatusEnum.started;
+      case proto.BattleStatus.FINISHED:
+        return BattleStatusEnum.finished;
       case proto.BattleStatus.FINISHED:
         return BattleStatusEnum.finished;
       default:

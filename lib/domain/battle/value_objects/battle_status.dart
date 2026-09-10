@@ -14,7 +14,11 @@ class BattleStatus {
 
   const BattleStatus.active() : value = BattleStatusEnum.active;
 
+  const BattleStatus.started() : value = BattleStatusEnum.started;
+
   const BattleStatus.finished() : value = BattleStatusEnum.finished;
+
+  const BattleStatus.cancelled() : value = BattleStatusEnum.cancelled;
 
   @override
   bool operator ==(Object other) =>

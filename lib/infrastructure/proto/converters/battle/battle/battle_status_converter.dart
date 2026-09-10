@@ -11,8 +11,6 @@ class BattleStatusConverter {
         return BattleStatusEnum.created;
       case proto.BattleStatus.READY:
         return BattleStatusEnum.ready;
-      case proto.BattleStatus.ACTIVE:
-        return BattleStatusEnum.active;
       case proto.BattleStatus.STARTED:
         return BattleStatusEnum.started;
       case proto.BattleStatus.FINISHED:

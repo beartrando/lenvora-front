@@ -12,8 +12,6 @@ class BattleStatus {
 
   const BattleStatus.ready() : value = BattleStatusEnum.ready;
 
-  const BattleStatus.active() : value = BattleStatusEnum.active;
-
   const BattleStatus.started() : value = BattleStatusEnum.started;
 
   const BattleStatus.finished() : value = BattleStatusEnum.finished;

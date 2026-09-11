@@ -2,7 +2,6 @@ import 'package:front/domain/battle/entities/battle.dart';
 import 'package:front/domain/battle/enums/battle_status.enum.dart';
 import 'package:front/domain/profile/value_objects/profile_id.dart';
 
-
 class CanMove {
   const CanMove();
 

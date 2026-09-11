@@ -4,7 +4,6 @@ import 'package:front/contracts/proto/streaming.pb.dart' as streamingProto;
 import 'package:front/domain/battle/entities/battle.dart';
 import 'package:front/infrastructure/proto/converters/battle/battle_converter.dart';
 
-
 class BattleResponseConverter {
   static Battle fromString(String? battleResponse) {
     if (battleResponse == null || battleResponse.isEmpty) {

@@ -1,4 +1,3 @@
-
 import 'package:front/domain/battle/enums/battle_status.enum.dart';
 
 class BattleStatus {

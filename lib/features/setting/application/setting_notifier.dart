@@ -5,7 +5,6 @@ import 'package:front/domain/setting/value_objects/setting.dart';
 import 'package:front/domain/setting/value_objects/sound_enabled.dart';
 import 'package:front/domain/setting/value_objects/vibration_enabled.dart';
 
-
 class SettingNotifier extends StateNotifier<Setting> {
   final SettingDomain _settingDomain;
 

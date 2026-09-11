@@ -1,7 +1,6 @@
 import 'package:front/contracts/proto/battle.pb.dart' as proto;
 import 'package:front/domain/battle/enums/battle_status.enum.dart';
 
-
 class BattleStatusConverter {
   static BattleStatusEnum fromProto(proto.BattleStatus value) {
     switch (value) {

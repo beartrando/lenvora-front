@@ -1,7 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:front/infrastructure/websocket/config/websocket_config.dart';
 
-
 class StreamingConfig implements WebsocketConfig {
   @override
   final String host;

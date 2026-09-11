@@ -2,7 +2,6 @@ import 'package:front/domain/profile/entities/profile.dart';
 import 'package:front/domain/profile/value_objects/profile_id.dart';
 import 'package:front/features/profile/infrastructure/api/profile_client.dart';
 
-
 class ProfileRepository {
   final ProfileClient _client;
 

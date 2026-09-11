@@ -2,7 +2,6 @@ import 'package:front/infrastructure/device/providers/device_id_provider.dart';
 import 'package:front/infrastructure/device/value_objects/device_id.dart';
 import 'package:front/infrastructure/storage/secure_storage.dart';
 
-
 class DeviceService {
   static const _deviceIdKey = 'device.id';
 

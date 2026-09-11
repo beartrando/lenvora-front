@@ -1,4 +1,3 @@
-
 import 'package:front/domain/profile/value_objects/profile_experience.dart';
 import 'package:front/domain/profile/value_objects/profile_id.dart';
 import 'package:front/domain/profile/value_objects/profile_level.dart';

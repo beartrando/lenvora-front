@@ -4,7 +4,6 @@ import 'package:front/contracts/proto/profile.pb.dart' as profileProto;
 import 'package:front/domain/profile/entities/profile.dart';
 import 'package:front/infrastructure/proto/converters/profile/profile_converter.dart';
 
-
 class ProfileResponseConverter {
   static Profile fromString(String? profileResponse) {
     if (profileResponse == null || profileResponse.isEmpty) {

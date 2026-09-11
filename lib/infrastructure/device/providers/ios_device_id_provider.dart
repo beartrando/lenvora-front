@@ -1,7 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:front/infrastructure/device/providers/device_id_provider.dart';
 
-
 class IosDeviceIdProvider implements DeviceIdProvider {
   final DeviceInfoPlugin _deviceInfo;
 

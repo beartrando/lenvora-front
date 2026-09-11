@@ -1,4 +1,3 @@
-
 import 'package:front/domain/setting/value_objects/effects_sound_enabled.dart';
 import 'package:front/domain/setting/value_objects/sound_enabled.dart';
 import 'package:front/domain/setting/value_objects/vibration_enabled.dart';

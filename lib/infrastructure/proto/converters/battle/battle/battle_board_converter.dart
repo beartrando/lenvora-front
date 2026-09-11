@@ -2,7 +2,6 @@ import 'package:front/contracts/proto/battle.pb.dart' as proto;
 import 'package:front/domain/battle/enums/battle_cell_value.enum.dart';
 import 'package:front/domain/battle/value_objects/battle_board.dart';
 
-
 class BattleBoardConverter {
   static BattleBoard fromProto(List<proto.BattleCellValue> cells) {
     return BattleBoard(cells.map(_cellValueFromProto).toList());

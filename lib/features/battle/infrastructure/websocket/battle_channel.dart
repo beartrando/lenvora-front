@@ -11,7 +11,6 @@ import 'package:front/infrastructure/proto/converters/timestamp_converter.dart';
 import 'package:front/infrastructure/websocket/websocket_connection.dart';
 import 'package:logger/logger.dart';
 
-
 final logger = Logger();
 
 class BattleChannel extends WebsocketConnection<Battle> {
@@ -70,6 +69,20 @@ class BattleChannel extends WebsocketConnection<Battle> {
     // logger.d(req);
     channel.sink.add(req.writeToBuffer());
     // logger.i('Sent profile: $profileId at $cellIdx');
+  }
+
+  create([BattleId? battleId]) {
+    final request = streamingProto.BattleCreate();
+
+    if (battleId != null) {
+      request.battleId = battleId.value;
+    }
+
+    final req = BattleRequest()..create = request;
+
+    channel.sink.add(req.writeToBuffer());
+
+    // logger.i('Sent start battle: $battleId');
   }
 
   start([BattleId? battleId]) {

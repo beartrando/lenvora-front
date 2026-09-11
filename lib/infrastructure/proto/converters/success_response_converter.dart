@@ -11,7 +11,7 @@ class SuccessResponseConverter {
       throw Exception('Empty success response');
     }
 
-    logger.i(jsonDecode(successResponse as String));
+    // logger.i(jsonDecode(successResponse as String));
     final protoSuccessResponse = responseProto.SuccessResponse()
       ..mergeFromProto3Json(jsonDecode(successResponse as String)); // работает
 

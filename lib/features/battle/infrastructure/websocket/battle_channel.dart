@@ -61,7 +61,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
   }
 
   connectBot(BattleId battleId) {
-    // logger.i('Move event');
+    // logger.i(battleId.value);
     final connectBotRequest = streamingProto.BattleJoinBot()
       ..battleId = battleId.value;
 

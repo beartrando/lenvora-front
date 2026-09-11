@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/domain/battle/entities/battle.dart';
 import 'package:front/domain/battle/enums/battle_cell_value.enum.dart';
+import 'package:front/domain/battle/rules/batle_finished.dart';
+import 'package:front/domain/battle/rules/batle_started.dart';
 import 'package:front/domain/battle/rules/can_move.dart';
 import 'package:front/domain/battle/value_objects/battle_board.dart';
 import 'package:front/domain/profile/entities/profile.dart';
@@ -40,21 +42,32 @@ class BattleBoardWideget extends ConsumerWidget {
             ],
           ],
         ),
-        battle.winnerId == null
-            ? (CanMove().calculate(battle, profile.id)
-                  ? TurnTimer(
-                      seconds: config.moveTimeout,
-                      battleService: battleService,
-                      battleId: battle.id,
+        (BattleFinished().calculate(battle)
+            ? (battle.winnerId != null
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Winner: '),
+                        PlayerName(profileId: battle.winnerId!),
+                      ],
                     )
-                  : const Text('Not your turn'))
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Winner: '),
-                  PlayerName(profileId: battle.winnerId!),
-                ],
-              ),
+                  : const Text('Battle canceled'))
+            : (BattleStarted().calculate(battle)
+                  ? (CanMove().calculate(battle, profile.id)
+                        ? TurnTimer(
+                            key: const ValueKey('your-turn'),
+                            text: const Text('Your turn'),
+                            seconds: config.moveTimeout,
+                            battleService: battleService,
+                            battleId: battle.id,
+                          )
+                        : TurnTimer(
+                            key: const ValueKey('not-your-turn'),
+                            text: const Text('Not your turn'),
+                            seconds: config.moveTimeout,
+                            battleService: battleService,
+                          ))
+                  : const SizedBox.shrink())),
 
         const SizedBox(height: 8),
         Expanded(

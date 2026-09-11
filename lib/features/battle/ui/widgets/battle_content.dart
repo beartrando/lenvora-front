@@ -42,7 +42,7 @@ class BattleContent extends ConsumerWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  this.battleService.channel.start();
+                  this.battleService.channel.init();
                   Navigator.of(context).pop();
                 },
                 child: const Text("Играть ещё"),

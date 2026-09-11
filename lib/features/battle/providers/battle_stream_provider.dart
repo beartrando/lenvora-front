@@ -11,10 +11,6 @@ final battleStreamProvider = StreamProvider.autoDispose<Battle>((ref) async* {
   try {
     // logger.i('before battleChannel.start');
 
-    ref.onDispose(() {
-      battleChannel.close();
-    });
-
     battleChannel.init();
 
     // logger.i('after watch');

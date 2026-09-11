@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/domain/battle/entities/battle.dart';
 import 'package:front/domain/battle/enums/battle_status.enum.dart';
+import 'package:front/features/battle/infrastructure/websocket/battle_channel_provider.dart';
 import 'package:front/features/battle/infrastructure/websocket/battle_service.dart';
 import 'package:front/features/battle/infrastructure/websocket/battle_stream_provider.dart';
 import 'package:front/features/battle/providers/battle_stream_provider.dart';
@@ -29,6 +30,29 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
         return battleServiceAsync.when(
           data: (service) {
             battleService = service;
+
+
+            final battleChannel = ref.watch(battleChannelProvider).valueOrNull;
+
+            if (battleChannel != null) {
+              battleChannel.onConnectionLost ??= () {
+                if (!mounted) {
+                  return;
+                }
+
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/',
+                      (route) => false,
+                );
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Соединение с сервером потеряно'),
+                  ),
+                );
+              };
+            }
+
             final battleAsync = ref.watch(battleStreamProvider);
 
             return battleAsync.when(

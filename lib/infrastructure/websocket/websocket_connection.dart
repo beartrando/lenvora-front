@@ -14,9 +14,11 @@ abstract class WebsocketConnection<T> {
   late WebSocketChannel _channel;
   late StreamSubscription _subscription;
   Timer? _heartbeat;
+  void Function()? onConnectionLost;
+  bool _closing = false;
 
   final pathname = '';
-  final heartbeatTimer = 30;
+  final heartbeatTimer = 10;
   final _controller = StreamController<T>.broadcast();
 
   WebSocketChannel get channel => _channel;
@@ -60,6 +62,9 @@ abstract class WebsocketConnection<T> {
       },
       onDone: () {
         logger.w('WebSocket closed');
+        if (!_closing) {
+          onConnectionLost?.call();
+        }
       },
     );
 
@@ -99,6 +104,8 @@ abstract class WebsocketConnection<T> {
   }
 
   Future<void> close() async {
+    _closing = true;
+
     // logger.i('WebSocket is going to close');
     _heartbeat?.cancel();
     await _subscription.cancel();

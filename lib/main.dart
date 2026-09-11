@@ -9,6 +9,7 @@ import 'package:front/domain/setting/setting_domain.dart';
 import 'package:front/domain/setting/setting_domain_provider.dart';
 import 'package:front/features/setting/infrastructure/setting_storage.dart';
 import 'package:front/features/setting/infrastructure/setting_storage_provider.dart';
+import 'package:front/features/update/infrastructure/app_update_service.dart';
 import 'package:front/infrastructure/auth/auth_service_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,6 +27,8 @@ Future<void> main() async {
     runApp(
       UncontrolledProviderScope(container: container, child: const MyApp()),
     );
+
+    await AppUpdateService(logger).checkAndUpdate();
   }, _handleAsyncError);
 }
 

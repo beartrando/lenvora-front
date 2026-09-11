@@ -8,7 +8,7 @@ import 'battle_channel.dart';
 
 final logger = Logger();
 
-final battleChannelProvider = FutureProvider<BattleChannel>((ref) async {
+final battleChannelProvider = FutureProvider.autoDispose<BattleChannel>((ref) async {
   // logger.i('battleChannelProvider');
 
   // final existing = ref.state as BattleChannel?;

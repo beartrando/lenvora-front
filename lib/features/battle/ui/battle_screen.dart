@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/domain/battle/entities/battle.dart';
+import 'package:front/domain/battle/enums/battle_status.enum.dart';
 import 'package:front/features/battle/infrastructure/websocket/battle_service.dart';
 import 'package:front/features/battle/infrastructure/websocket/battle_stream_provider.dart';
 import 'package:front/features/battle/providers/battle_stream_provider.dart';
@@ -33,6 +34,9 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
             return battleAsync.when(
               data: (battle) {
                 _battle = battle;
+                if (battle.status == BattleStatusEnum.ready) {
+                  battleService.start(battle.id);
+                }
                 return BattleContent(
                   battle: battle,
                   profile: profile,

@@ -71,14 +71,14 @@ class BattleChannel extends WebsocketConnection<Battle> {
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
-  create([BattleId? battleId]) {
-    final request = streamingProto.BattleCreate();
+  init([BattleId? battleId]) {
+    final request = streamingProto.BattleInit();
 
     if (battleId != null) {
       request.battleId = battleId.value;
     }
 
-    final req = BattleRequest()..create = request;
+    final req = BattleRequest()..init = request;
 
     channel.sink.add(req.writeToBuffer());
 

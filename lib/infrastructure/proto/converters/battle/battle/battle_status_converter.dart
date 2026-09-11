@@ -10,12 +10,14 @@ class BattleStatusConverter {
         return BattleStatusEnum.created;
       case proto.BattleStatus.READY:
         return BattleStatusEnum.ready;
+      case proto.BattleStatus.MATCHED:
+        return BattleStatusEnum.matched;
       case proto.BattleStatus.STARTED:
         return BattleStatusEnum.started;
       case proto.BattleStatus.FINISHED:
         return BattleStatusEnum.finished;
-      case proto.BattleStatus.FINISHED:
-        return BattleStatusEnum.finished;
+      case proto.BattleStatus.CANCELLED:
+        return BattleStatusEnum.cancelled;
       default:
         throw Exception('Unknown BattleStatus: $value');
     }

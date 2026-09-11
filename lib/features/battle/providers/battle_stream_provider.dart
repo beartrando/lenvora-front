@@ -15,7 +15,7 @@ final battleStreamProvider = StreamProvider.autoDispose<Battle>((ref) async* {
       battleChannel.close();
     });
 
-    battleChannel.create();
+    battleChannel.init();
 
     // logger.i('after watch');
   } catch (e, st) {

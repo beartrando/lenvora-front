@@ -20,7 +20,8 @@ class BattleContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (battle.status == BattleStatusEnum.finished) {
+    if (battle.status == BattleStatusEnum.finished ||
+        battle.status == BattleStatusEnum.cancelled) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showDialog(
           context: context,
@@ -28,11 +29,14 @@ class BattleContent extends ConsumerWidget {
           builder: (_) => AlertDialog(
             title: const Text("Матч завершён"),
             content: battle.winnerId == null
-                ? const Text("Ничья")
+                ? (battle.status == BattleStatusEnum.cancelled
+                      ? const Text("Отменено")
+                      : const Text("Ничья"))
                 : Row(
                     children: [
-                      const Text("Победитель: "),
-                      PlayerName(profileId: battle.winnerId!),
+                      (this.profile.id == battle.winnerId)
+                          ? const Text("Вы победили!")
+                          : const Text("Вы проиграли!"),
                     ],
                   ),
             actions: [

@@ -10,8 +10,8 @@ class BattleService {
 
   BattleService(this.profileId, this.channel);
 
-  void create(BattleId battleId) {
-    channel.create(battleId);
+  void init(BattleId battleId) {
+    channel.init(battleId);
   }
 
   void start(BattleId battleId) {

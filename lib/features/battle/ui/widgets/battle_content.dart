@@ -4,7 +4,6 @@ import 'package:front/domain/battle/entities/battle.dart';
 import 'package:front/domain/battle/enums/battle_status.enum.dart';
 import 'package:front/features/battle/infrastructure/websocket/battle_service.dart';
 import 'package:front/features/battle/ui/widgets/battle_board_widget.dart';
-import 'package:front/features/profile/ui/widgets/player_name.dart';
 
 class BattleContent extends ConsumerWidget {
   final Battle battle;

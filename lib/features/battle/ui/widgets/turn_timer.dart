@@ -52,11 +52,7 @@ class _TurnTimerState extends State<TurnTimer> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: [
-        widget.text,
-        const SizedBox(width: 4),
-        Text("($remaining s)"),
-      ],
+      children: [widget.text, const SizedBox(width: 4), Text("($remaining s)")],
     );
   }
 }

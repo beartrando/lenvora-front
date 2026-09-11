@@ -17,16 +17,11 @@ class AppUpdateService {
     try {
       final info = await InAppUpdate.checkForUpdate();
 
-      if (info.updateAvailability ==
-          UpdateAvailability.updateAvailable) {
+      if (info.updateAvailability == UpdateAvailability.updateAvailable) {
         await InAppUpdate.performImmediateUpdate();
       }
     } catch (error, stackTrace) {
-      logger.e(
-        'App update check failed',
-        error: error,
-        stackTrace: stackTrace,
-      );
+      logger.e('App update check failed', error: error, stackTrace: stackTrace);
     }
   }
 }

@@ -31,7 +31,6 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
           data: (service) {
             battleService = service;
 
-
             final battleChannel = ref.watch(battleChannelProvider).valueOrNull;
 
             if (battleChannel != null) {
@@ -40,10 +39,9 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
                   return;
                 }
 
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/',
-                      (route) => false,
-                );
+                Navigator.of(
+                  context,
+                ).pushNamedAndRemoveUntil('/', (route) => false);
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(

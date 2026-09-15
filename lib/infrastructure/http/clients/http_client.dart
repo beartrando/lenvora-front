@@ -10,8 +10,11 @@ class HttpClient {
   HttpClient(this.config);
 
   Uri buildUri(String path, {Map<String, dynamic>? query}) {
+    final port = config.port != null ? ':${config.port}' : '';
+    final normalizedPath = path.startsWith('/') ? path : '/$path';
+
     final uri = Uri.parse(
-      '${config.schema}://${config.host}:${config.port}$path',
+      '${config.schema}://${config.host}$port$normalizedPath',
     );
 
     if (query == null) {

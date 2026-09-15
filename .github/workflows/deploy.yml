@@ -170,7 +170,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y protobuf-compiler
-          dart pub global activate protoc_plugin
+          dart pub global activate protoc_plugin 25.0.0
           mkdir -p lib/contracts/proto/
           protoc \
             --dart_out=grpc:lib/contracts/proto \

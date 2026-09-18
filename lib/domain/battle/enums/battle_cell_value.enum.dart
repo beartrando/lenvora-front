@@ -1,1 +1,8 @@
-enum BattleCellValueEnum { empty, x, o }
+enum BattleCellValueEnum {
+  empty,
+  x,
+  o;
+
+  @override
+  String toString() => name;
+}

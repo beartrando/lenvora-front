@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/domain/battle/entities/battle.dart';
@@ -8,6 +10,9 @@ import 'package:front/features/battle/infrastructure/websocket/battle_stream_pro
 import 'package:front/features/battle/providers/battle_stream_provider.dart';
 import 'package:front/features/battle/ui/widgets/battle_content.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
+import 'package:logger/logger.dart';
+
+final logger = Logger();
 
 class BattleScreen extends ConsumerStatefulWidget {
   const BattleScreen({super.key});
@@ -55,6 +60,7 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
 
             return battleAsync.when(
               data: (battle) {
+                debugPrint(battle.toString());
                 _battle = battle;
                 if (battle.status == BattleStatusEnum.ready) {
                   battleService.start(battle.id);

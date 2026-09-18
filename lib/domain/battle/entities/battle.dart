@@ -24,4 +24,18 @@ class Battle {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  @override
+  String toString() {
+    return 'Battle('
+        'id: $id, '
+        'board: $board, '
+        'playerIds: $playerIds, '
+        'status: $status, '
+        'winnerId: $winnerId, '
+        'lastMoveAt: $lastMoveAt, '
+        'createdAt: $createdAt, '
+        'updatedAt: $updatedAt'
+        ')';
+  }
 }

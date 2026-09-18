@@ -28,4 +28,7 @@ class BattlePlayerIds {
 
     return true;
   }
+
+  @override
+  String toString() => value.join(', ');
 }

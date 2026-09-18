@@ -17,4 +17,9 @@ class BattleBoard {
   bool validateIndex(int index) {
     return index >= 0 && index < size;
   }
+
+  @override
+  String toString() {
+    return cells.join(', ');
+  }
 }

@@ -53,6 +53,12 @@ class BattleContent extends ConsumerWidget {
                 },
                 child: const Text("Выйти в меню"),
               ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Закрыть"),
+              ),
             ],
           ),
         );

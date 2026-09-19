@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:front/infrastructure/app/app_version.dart';
 import 'package:front/infrastructure/localization/generated/l10n.dart';
 import 'package:front/infrastructure/localization/locale_options_provider.dart';
 import 'package:front/infrastructure/localization/locale_provider.dart';
@@ -107,6 +108,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: appVersion.isEmpty
+          ? null
+          : SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  'v$appVersion',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+            ),
     );
   }
 }

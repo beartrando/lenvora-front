@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:front/contracts/proto/common/response.pb.dart' as response_proto;
+import 'package:front/contracts/proto/common/response.pb.dart'
+    as response_proto;
 import 'package:logger/logger.dart';
 
 final logger = Logger();

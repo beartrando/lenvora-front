@@ -11,7 +11,7 @@ class ProfileResponseConverter {
     }
 
     final protoProfileResponse = profile_proto.ProfileResponse()
-      ..mergeFromProto3Json(jsonDecode(profileResponse as String));
+      ..mergeFromProto3Json(jsonDecode(profileResponse));
 
     return ProfileResponseConverter.fromProto(protoProfileResponse);
   }

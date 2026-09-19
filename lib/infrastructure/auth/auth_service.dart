@@ -66,7 +66,7 @@ class AuthService {
           return accessToken;
         }
       } catch (e) {
-        this.clearAccessToken();
+        clearAccessToken();
         logger.i(e);
       }
     }
@@ -74,18 +74,14 @@ class AuthService {
     var refreshToken = await tokenStorage.readRefreshToken();
     if (refreshToken != null) {
       try {
-        accessToken = await this.refreshTokens();
-
-        if (accessToken != null) {
-          return accessToken;
-        }
+        return await refreshTokens();
       } catch (e) {
-        this.clearRefreshToken();
+        clearRefreshToken();
         logger.i(e);
       }
     }
 
-    return await this.getOrCreateAccessToken();
+    return await getOrCreateAccessToken();
   }
 
   Future<AccessToken> refreshTokens() async {

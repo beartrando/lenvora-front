@@ -16,7 +16,7 @@ class TurnTimer extends StatefulWidget {
     required this.text,
     this.seconds = 2000,
     required this.battleService,
-    this.battleId = null,
+    this.battleId,
   });
 
   @override

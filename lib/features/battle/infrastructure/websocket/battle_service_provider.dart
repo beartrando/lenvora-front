@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
 
 import 'battle_channel_provider.dart';

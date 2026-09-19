@@ -12,6 +12,7 @@ include: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
     - lib/contracts/proto/**
+    - lib/infrastructure/localization/generated/**
 
 linter:
   # The lint rules applied to this project can be customized in the

@@ -12,7 +12,7 @@ class SessionResponseConverter {
     }
 
     final protosessionResponse = auth_proto.SessionResponse()
-      ..mergeFromProto3Json(jsonDecode(sessionResponse as String)); // работает
+      ..mergeFromProto3Json(jsonDecode(sessionResponse));
 
     return SessionResponseConverter.fromProto(protosessionResponse);
   }
@@ -23,8 +23,6 @@ class SessionResponseConverter {
     }
 
     if (response.hasError()) {
-      final error = response.error;
-
       throw response.error;
     }
 

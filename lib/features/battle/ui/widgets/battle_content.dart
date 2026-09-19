@@ -28,13 +28,9 @@ class _BattleContentState extends State<BattleContent> {
 
   Timer? _aiConnectionTimer;
   int _secondsUntilAi = _aiConnectionDelay.inSeconds;
+  bool _isBotConnectionRequested = false;
 
   bool get _hasRival => widget.battle.hasRival();
-
-  bool _isFinished(battle) {
-    return (battle.status == BattleStatusEnum.finished) ||
-        (battle.status == BattleStatusEnum.cancelled);
-  }
 
   bool get _isAiConnectionScheduled => _aiConnectionTimer != null;
 
@@ -48,7 +44,7 @@ class _BattleContentState extends State<BattleContent> {
   Widget build(BuildContext context) {
     final battle = widget.battle;
 
-    if (_isFinished(battle)) {
+    if (battle.isFinished()) {
       _showMatchFinishedDialog(context, battle);
     }
 
@@ -59,6 +55,7 @@ class _BattleContentState extends State<BattleContent> {
           : _WaitingForRival(
               secondsUntilAi: _secondsUntilAi,
               aiConnectionScheduled: _isAiConnectionScheduled,
+              isBotConnectionRequested: _isBotConnectionRequested,
               onConnectBot: _connectBot,
               onCancelAiConnection: _cancelAiConnectionTimer,
             ),
@@ -113,14 +110,14 @@ class _BattleContentState extends State<BattleContent> {
   }
 
   bool _shouldRestartAiTimer(BattleContent oldWidget) {
-    final wasFinished = _isFinished(oldWidget.battle);
+    final wasFinished = oldWidget.battle.isFinished();
     final isNewBattle = oldWidget.battle.id != widget.battle.id;
     return (wasFinished || isNewBattle) && !_isAiConnectionScheduled;
   }
 
   @override
   void dispose() {
-    _aiConnectionTimer?.cancel();
+    _clearAiConnectionTimer();
     super.dispose();
   }
 
@@ -131,7 +128,7 @@ class _BattleContentState extends State<BattleContent> {
 
     _aiConnectionTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!mounted || _hasRival) {
-        timer.cancel();
+        _clearAiConnectionTimer();
         return;
       }
 
@@ -148,18 +145,26 @@ class _BattleContentState extends State<BattleContent> {
   void _restartAiConnectionTimer() {
     setState(() {
       _secondsUntilAi = _aiConnectionDelay.inSeconds;
+      _isBotConnectionRequested = false;
     });
     _startAiConnectionTimer();
   }
 
   void _cancelAiConnectionTimer() {
+    _clearAiConnectionTimer();
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void _clearAiConnectionTimer() {
     _aiConnectionTimer?.cancel();
     _aiConnectionTimer = null;
-    setState(() => {});
   }
 
   void _connectBot() {
-    _cancelAiConnectionTimer();
+    _clearAiConnectionTimer();
+    setState(() => _isBotConnectionRequested = true);
     widget.battleService.connectBot(widget.battle.id);
   }
 
@@ -196,12 +201,14 @@ class _BattleContentState extends State<BattleContent> {
 class _WaitingForRival extends StatelessWidget {
   final int secondsUntilAi;
   final bool aiConnectionScheduled;
+  final bool isBotConnectionRequested;
   final VoidCallback onConnectBot;
   final VoidCallback onCancelAiConnection;
 
   const _WaitingForRival({
     required this.secondsUntilAi,
     required this.aiConnectionScheduled,
+    required this.isBotConnectionRequested,
     required this.onConnectBot,
     required this.onCancelAiConnection,
   });
@@ -222,18 +229,22 @@ class _WaitingForRival extends StatelessWidget {
             Text(strings.aiWillConnectIn(secondsUntilAi)),
           ],
           const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: onConnectBot,
-            child: Text(
-              aiConnectionScheduled ? strings.connectAiNow : strings.playWithAi,
+          if (!isBotConnectionRequested) ...[
+            ElevatedButton(
+              onPressed: onConnectBot,
+              child: Text(
+                aiConnectionScheduled
+                    ? strings.connectAiNow
+                    : strings.playWithAi,
+              ),
             ),
-          ),
-          if (aiConnectionScheduled) ...[
-            const SizedBox(height: 12),
-            OutlinedButton(
-              onPressed: onCancelAiConnection,
-              child: Text(strings.cancelAiConnection),
-            ),
+            if (aiConnectionScheduled) ...[
+              const SizedBox(height: 12),
+              OutlinedButton(
+                onPressed: onCancelAiConnection,
+                child: Text(strings.cancelAiConnection),
+              ),
+            ],
           ],
         ],
       ),

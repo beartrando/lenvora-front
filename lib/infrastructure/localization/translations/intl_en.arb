@@ -39,6 +39,7 @@
   "versus": "vs",
   "winner": "Winner:",
   "battleCancelled": "Battle cancelled",
+  "battleReadyWait": "Battle ready, wait a sec.",
   "yourTurn": "Your turn",
   "notYourTurn": "Not your turn",
   "secondsRemaining": "({seconds} s)",

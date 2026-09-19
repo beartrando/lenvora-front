@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("Крестики-нолики"),
     "backToMenu": MessageLookupByLibrary.simpleMessage("Выйти в меню"),
     "battleCancelled": MessageLookupByLibrary.simpleMessage("Матч отменён"),
+    "battleReadyWait": MessageLookupByLibrary.simpleMessage(
+      "Матч готов, подождите секунду.",
+    ),
     "battleTitle": MessageLookupByLibrary.simpleMessage(
       "Матч: Крестики-нолики",
     ),

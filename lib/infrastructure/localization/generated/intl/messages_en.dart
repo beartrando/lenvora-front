@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("Tic Tac Toe"),
     "backToMenu": MessageLookupByLibrary.simpleMessage("Back to menu"),
     "battleCancelled": MessageLookupByLibrary.simpleMessage("Battle cancelled"),
+    "battleReadyWait": MessageLookupByLibrary.simpleMessage(
+      "Battle ready, wait a sec.",
+    ),
     "battleTitle": MessageLookupByLibrary.simpleMessage("Battle: Tic Tac Toe"),
     "cancelAiConnection": MessageLookupByLibrary.simpleMessage(
       "Cancel AI connection",

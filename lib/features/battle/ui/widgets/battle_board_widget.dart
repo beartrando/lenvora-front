@@ -69,7 +69,7 @@ class BattleBoardWideget extends ConsumerWidget {
                             seconds: config.moveTimeout,
                             battleService: battleService,
                           ))
-                  : const SizedBox.shrink())),
+                  : Text(S.of(context).battleReadyWait))),
 
         const SizedBox(height: 8),
         Expanded(

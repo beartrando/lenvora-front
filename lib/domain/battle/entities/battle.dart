@@ -42,4 +42,9 @@ class Battle {
   bool hasRival() {
     return this.playerIds.length > 1;
   }
+
+  bool isFinished() {
+    return (this.status == BattleStatusEnum.finished) ||
+        (this.status == BattleStatusEnum.cancelled);
+  }
 }

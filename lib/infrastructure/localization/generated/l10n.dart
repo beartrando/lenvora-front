@@ -279,6 +279,16 @@ class S {
     );
   }
 
+  /// `Battle ready, wait a sec.`
+  String get battleReadyWait {
+    return Intl.message(
+      'Battle ready, wait a sec.',
+      name: 'battleReadyWait',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Your turn`
   String get yourTurn {
     return Intl.message('Your turn', name: 'yourTurn', desc: '', args: []);

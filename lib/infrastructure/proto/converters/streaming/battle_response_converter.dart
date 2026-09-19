@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:front/contracts/proto/streaming.pb.dart' as streamingProto;
+import 'package:front/contracts/proto/streaming.pb.dart' as streaming_proto;
 import 'package:front/domain/battle/entities/battle.dart';
 import 'package:front/infrastructure/proto/converters/battle/battle_converter.dart';
 
@@ -10,13 +10,13 @@ class BattleResponseConverter {
       throw Exception('Empty battle response');
     }
 
-    final protoBattleResponse = streamingProto.BattleResponse()
+    final protoBattleResponse = streaming_proto.BattleResponse()
       ..mergeFromProto3Json(jsonDecode(battleResponse as String)); // работает
 
     return BattleResponseConverter.fromProto(protoBattleResponse);
   }
 
-  static Battle fromProto(streamingProto.BattleResponse response) {
+  static Battle fromProto(streaming_proto.BattleResponse response) {
     if (response.hasBattle()) {
       return BattleConverter.fromProto(response.battle);
     }

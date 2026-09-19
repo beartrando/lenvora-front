@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:front/contracts/proto/profile.pb.dart' as profileProto;
+import 'package:front/contracts/proto/profile.pb.dart' as profile_proto;
 import 'package:front/domain/profile/entities/profile.dart';
 import 'package:front/infrastructure/proto/converters/profile/profile_converter.dart';
 
@@ -10,13 +10,13 @@ class ProfileResponseConverter {
       throw Exception('Empty profile response');
     }
 
-    final protoProfileResponse = profileProto.ProfileResponse()
+    final protoProfileResponse = profile_proto.ProfileResponse()
       ..mergeFromProto3Json(jsonDecode(profileResponse as String));
 
     return ProfileResponseConverter.fromProto(protoProfileResponse);
   }
 
-  static Profile fromProto(profileProto.ProfileResponse response) {
+  static Profile fromProto(profile_proto.ProfileResponse response) {
     if (response.hasProfile()) {
       return ProfileConverter.fromProto(response.profile);
     }

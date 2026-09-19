@@ -36,10 +36,10 @@ class AuthService {
     return token;
   }
 
-  Future<AccessToken> getOrCreateAccessToken() async {
+  Future<AccessToken> getOrCreateAccessToken([bool force = false]) async {
     final accessToken = await tokenStorage.readAccessToken();
 
-    if (accessToken != null && accessToken.value.isNotEmpty) {
+    if (!force && accessToken != null && accessToken.value.isNotEmpty) {
       return accessToken;
     }
 

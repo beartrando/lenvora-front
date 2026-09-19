@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:front/contracts/proto/common/ping.pb.dart';
-import 'package:front/contracts/proto/streaming.pb.dart' as streamingProto;
+import 'package:front/contracts/proto/streaming.pb.dart' as streaming_proto;
 import 'package:front/contracts/proto/streaming.pb.dart';
 import 'package:front/domain/battle/entities/battle.dart';
 import 'package:front/domain/battle/value_objects/battle_id.dart';
@@ -20,7 +20,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
   messageHandler(List<int> message) {
     try {
       final battle = BattleResponseConverter.fromProto(
-        streamingProto.BattleResponse.fromBuffer(message),
+        streaming_proto.BattleResponse.fromBuffer(message),
       );
       // logger.i('before battle added to controller');
       safeAdd(battle);
@@ -62,7 +62,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
 
   connectBot(BattleId battleId) {
     // logger.i(battleId.value);
-    final connectBotRequest = streamingProto.BattleJoinBot()
+    final connectBotRequest = streaming_proto.BattleJoinBot()
       ..battleId = battleId.value;
 
     final req = BattleRequest()..connectBot = connectBotRequest;
@@ -72,7 +72,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
   }
 
   init([BattleId? battleId]) {
-    final request = streamingProto.BattleInit();
+    final request = streaming_proto.BattleInit();
 
     if (battleId != null) {
       request.battleId = battleId.value;
@@ -86,7 +86,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
   }
 
   start([BattleId? battleId]) {
-    final request = streamingProto.BattleStart();
+    final request = streaming_proto.BattleStart();
 
     if (battleId != null) {
       request.battleId = battleId.value;

@@ -12,7 +12,7 @@ class LocaleOption {
 final localeOptionsProvider = Provider<List<LocaleOption>>((ref) {
   return const [
     LocaleOption('ru', Locale('ru'), '🇷🇺'),
-    LocaleOption('ua', Locale('uk'), '🇺🇦'),
-    LocaleOption('us', Locale('en'), '🇺🇸'),
+    LocaleOption('uk', Locale('uk'), '🇺🇦'),
+    LocaleOption('en', Locale('en'), '🇺🇸'),
   ];
 });

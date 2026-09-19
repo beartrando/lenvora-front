@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/features/setting/application/setting_provider.dart';
+import 'package:front/infrastructure/localization/generated/l10n.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -11,21 +12,21 @@ class SettingsScreen extends ConsumerWidget {
     final notifier = ref.read(settingProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Настройки')),
+      appBar: AppBar(title: Text(S.of(context).settings)),
       body: Column(
         children: [
           SwitchListTile(
-            title: const Text('Звук'),
+            title: Text(S.of(context).sound),
             value: setting.soundEnabled.value,
             onChanged: notifier.setSoundEnabled,
           ),
           SwitchListTile(
-            title: const Text('Эффекты'),
+            title: Text(S.of(context).effects),
             value: setting.effectsSoundEnabled.value,
             onChanged: notifier.setEffectsSoundEnabled,
           ),
           SwitchListTile(
-            title: const Text('Вибрация'),
+            title: Text(S.of(context).vibration),
             value: setting.vibrationEnabled.value,
             onChanged: notifier.setVibrationEnabled,
           ),

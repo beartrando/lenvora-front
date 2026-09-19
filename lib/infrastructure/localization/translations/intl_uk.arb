@@ -1,0 +1,6 @@
+{
+  "@@locale": "uk",
+  "appTitle": "Хрестики-нулики", "play": "Грати", "settings": "Налаштування", "sound": "Звук", "effects": "Ефекти", "vibration": "Вібрація", "profile": "Профіль",
+  "profileId": "ID: {id}", "profileNickname": "Нікнейм: {nickname}", "profileLevel": "Рівень: {level}", "profileRating": "Рейтинг: {rating}", "profileExperience": "Досвід: {experience}",
+  "loading": "Завантаження...", "error": "Помилка: {error}", "connectionLost": "З'єднання із сервером втрачено", "battleTitle": "Матч: Хрестики-нулики", "matchFinished": "Матч завершено", "cancelled": "Скасовано", "draw": "Нічия", "youWon": "Ви перемогли!", "youLost": "Ви програли!", "playAgain": "Зіграти ще", "backToMenu": "Вийти в меню", "close": "Закрити", "waitingForRival": "Очікування суперника...", "playWithAi": "Грати з ШІ", "versus": "проти", "winner": "Переможець:", "battleCancelled": "Матч скасовано", "yourTurn": "Ваш хід", "notYourTurn": "Хід суперника", "secondsRemaining": "({seconds} с)", "localeLoadingError": "Не вдалося завантажити мову. Спробуйте ще раз пізніше."
+}

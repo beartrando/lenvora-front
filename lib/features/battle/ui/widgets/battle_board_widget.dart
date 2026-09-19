@@ -11,6 +11,7 @@ import 'package:front/features/battle/infrastructure/websocket/battle_service.da
 import 'package:front/features/battle/ui/widgets/turn_timer.dart';
 import 'package:front/features/profile/ui/widgets/player_name.dart';
 import 'package:front/infrastructure/app/app_config_provider.dart';
+import 'package:front/infrastructure/localization/generated/l10n.dart';
 
 class BattleBoardWideget extends ConsumerWidget {
   final Battle battle;
@@ -38,7 +39,8 @@ class BattleBoardWideget extends ConsumerWidget {
           children: [
             for (int i = 0; i < battle.playerIds.length; i++) ...[
               PlayerName(profileId: battle.playerIds.value[i]),
-              if (i < battle.playerIds.length - 1) const Text(' vs '),
+              if (i < battle.playerIds.length - 1)
+                Text(' ${S.of(context).versus} '),
             ],
           ],
         ),
@@ -47,23 +49,23 @@ class BattleBoardWideget extends ConsumerWidget {
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Winner: '),
+                        Text('${S.of(context).winner} '),
                         PlayerName(profileId: battle.winnerId!),
                       ],
                     )
-                  : const Text('Battle canceled'))
+                  : Text(S.of(context).battleCancelled))
             : (BattleStarted().calculate(battle)
                   ? (CanMove().calculate(battle, profile.id)
                         ? TurnTimer(
                             key: const ValueKey('your-turn'),
-                            text: const Text('Your turn'),
+                            text: Text(S.of(context).yourTurn),
                             seconds: config.moveTimeout,
                             battleService: battleService,
                             battleId: battle.id,
                           )
                         : TurnTimer(
                             key: const ValueKey('not-your-turn'),
-                            text: const Text('Not your turn'),
+                            text: Text(S.of(context).notYourTurn),
                             seconds: config.moveTimeout,
                             battleService: battleService,
                           ))

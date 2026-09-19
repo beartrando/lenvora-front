@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/infrastructure/localization/generated/l10n.dart';
 import 'package:front/infrastructure/localization/locale_options_provider.dart';
+import 'package:front/infrastructure/localization/locale_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -11,15 +12,10 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  String _currentLocaleCode = 'ru';
-
-  void _handleLocaleChange(BuildContext context, String code) {
+  Future<void> _handleLocaleChange(String code) async {
     final options = ref.read(localeOptionsProvider);
     final option = options.firstWhere((o) => o.code == code);
-    S.load(option.locale);
-    setState(() {
-      _currentLocaleCode = code;
-    });
+    await setLocale(ref, option.locale);
   }
 
   void _handleMenuSelection(BuildContext context, String value) {
@@ -39,6 +35,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final options = ref.watch(localeOptionsProvider);
+    final locale = ref.watch(localeProvider).valueOrNull;
+    final currentLocaleCode = locale?.languageCode ?? 'en';
 
     return Scaffold(
       appBar: AppBar(
@@ -51,13 +49,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
-                value: _currentLocaleCode,
+                value: currentLocaleCode,
                 // icon: const Icon(Icons.language, color: Colors.white),
                 dropdownColor: Colors.grey[900],
                 style: const TextStyle(color: Colors.white),
                 onChanged: (String? newValue) {
                   if (newValue != null) {
-                    _handleLocaleChange(context, newValue);
+                    _handleLocaleChange(newValue);
                   }
                 },
                 items: options
@@ -72,9 +70,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           PopupMenuButton<String>(
             icon: const Icon(Icons.menu),
             itemBuilder: (context) => [
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'settings',
-                child: Text('⚙️ Настройки'),
+                child: Text('⚙️ ${S.of(context).settings}'),
               ),
               // const PopupMenuDivider(),
               // const PopupMenuItem(

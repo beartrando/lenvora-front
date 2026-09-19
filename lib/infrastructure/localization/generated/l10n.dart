@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -55,19 +54,9 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Front App`
+  /// `Tic Tac Toe`
   String get appTitle {
-    return Intl.message('Front App', name: 'appTitle', desc: '', args: []);
-  }
-
-  /// `Welcome to Front App`
-  String get welcome {
-    return Intl.message(
-      'Welcome to Front App',
-      name: 'welcome',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Tic Tac Toe', name: 'appTitle', desc: '', args: []);
   }
 
   /// `Play`
@@ -75,19 +64,224 @@ class S {
     return Intl.message('Play', name: 'play', desc: '', args: []);
   }
 
-  /// `Nickname`
-  String get nickname {
-    return Intl.message('Nickname', name: 'nickname', desc: '', args: []);
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
   }
 
-  /// `Exp.`
-  String get exp {
-    return Intl.message('Exp.', name: 'exp', desc: '', args: []);
+  /// `Sound`
+  String get sound {
+    return Intl.message('Sound', name: 'sound', desc: '', args: []);
   }
 
-  /// `Level`
-  String get level {
-    return Intl.message('Level', name: 'level', desc: '', args: []);
+  /// `Effects`
+  String get effects {
+    return Intl.message('Effects', name: 'effects', desc: '', args: []);
+  }
+
+  /// `Vibration`
+  String get vibration {
+    return Intl.message('Vibration', name: 'vibration', desc: '', args: []);
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message('Profile', name: 'profile', desc: '', args: []);
+  }
+
+  /// `ID: {id}`
+  String profileId(Object id) {
+    return Intl.message('ID: $id', name: 'profileId', desc: '', args: [id]);
+  }
+
+  /// `Nickname: {nickname}`
+  String profileNickname(Object nickname) {
+    return Intl.message(
+      'Nickname: $nickname',
+      name: 'profileNickname',
+      desc: '',
+      args: [nickname],
+    );
+  }
+
+  /// `Level: {level}`
+  String profileLevel(Object level) {
+    return Intl.message(
+      'Level: $level',
+      name: 'profileLevel',
+      desc: '',
+      args: [level],
+    );
+  }
+
+  /// `Rating: {rating}`
+  String profileRating(Object rating) {
+    return Intl.message(
+      'Rating: $rating',
+      name: 'profileRating',
+      desc: '',
+      args: [rating],
+    );
+  }
+
+  /// `Experience: {experience}`
+  String profileExperience(Object experience) {
+    return Intl.message(
+      'Experience: $experience',
+      name: 'profileExperience',
+      desc: '',
+      args: [experience],
+    );
+  }
+
+  /// `Loading...`
+  String get loading {
+    return Intl.message('Loading...', name: 'loading', desc: '', args: []);
+  }
+
+  /// `Error: {error}`
+  String error(Object error) {
+    return Intl.message(
+      'Error: $error',
+      name: 'error',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Connection to the server was lost`
+  String get connectionLost {
+    return Intl.message(
+      'Connection to the server was lost',
+      name: 'connectionLost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Battle: Tic Tac Toe`
+  String get battleTitle {
+    return Intl.message(
+      'Battle: Tic Tac Toe',
+      name: 'battleTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Match finished`
+  String get matchFinished {
+    return Intl.message(
+      'Match finished',
+      name: 'matchFinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancelled`
+  String get cancelled {
+    return Intl.message('Cancelled', name: 'cancelled', desc: '', args: []);
+  }
+
+  /// `Draw`
+  String get draw {
+    return Intl.message('Draw', name: 'draw', desc: '', args: []);
+  }
+
+  /// `You won!`
+  String get youWon {
+    return Intl.message('You won!', name: 'youWon', desc: '', args: []);
+  }
+
+  /// `You lost!`
+  String get youLost {
+    return Intl.message('You lost!', name: 'youLost', desc: '', args: []);
+  }
+
+  /// `Play again`
+  String get playAgain {
+    return Intl.message('Play again', name: 'playAgain', desc: '', args: []);
+  }
+
+  /// `Back to menu`
+  String get backToMenu {
+    return Intl.message('Back to menu', name: 'backToMenu', desc: '', args: []);
+  }
+
+  /// `Close`
+  String get close {
+    return Intl.message('Close', name: 'close', desc: '', args: []);
+  }
+
+  /// `Waiting for rival...`
+  String get waitingForRival {
+    return Intl.message(
+      'Waiting for rival...',
+      name: 'waitingForRival',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Play with AI`
+  String get playWithAi {
+    return Intl.message('Play with AI', name: 'playWithAi', desc: '', args: []);
+  }
+
+  /// `vs`
+  String get versus {
+    return Intl.message('vs', name: 'versus', desc: '', args: []);
+  }
+
+  /// `Winner:`
+  String get winner {
+    return Intl.message('Winner:', name: 'winner', desc: '', args: []);
+  }
+
+  /// `Battle cancelled`
+  String get battleCancelled {
+    return Intl.message(
+      'Battle cancelled',
+      name: 'battleCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your turn`
+  String get yourTurn {
+    return Intl.message('Your turn', name: 'yourTurn', desc: '', args: []);
+  }
+
+  /// `Not your turn`
+  String get notYourTurn {
+    return Intl.message(
+      'Not your turn',
+      name: 'notYourTurn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `({seconds} s)`
+  String secondsRemaining(Object seconds) {
+    return Intl.message(
+      '($seconds s)',
+      name: 'secondsRemaining',
+      desc: '',
+      args: [seconds],
+    );
+  }
+
+  /// `Failed to load locale. Please try again later.`
+  String get localeLoadingError {
+    return Intl.message(
+      'Failed to load locale. Please try again later.',
+      name: 'localeLoadingError',
+      desc: '',
+      args: [],
+    );
   }
 }
 
@@ -95,15 +289,17 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
-    return const <Locale>[Locale.fromSubtags(languageCode: 'en')];
+    return const <Locale>[
+      Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ru'),
+      Locale.fromSubtags(languageCode: 'uk'),
+    ];
   }
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
-
   @override
   Future<S> load(Locale locale) => S.load(locale);
-
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

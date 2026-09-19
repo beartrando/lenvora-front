@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:front/domain/battle/value_objects/battle_id.dart';
 import 'package:front/features/battle/infrastructure/websocket/battle_service.dart';
+import 'package:front/infrastructure/localization/generated/l10n.dart';
 
 class TurnTimer extends StatefulWidget {
   final Text text;
@@ -52,7 +53,11 @@ class _TurnTimerState extends State<TurnTimer> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: [widget.text, const SizedBox(width: 4), Text("($remaining s)")],
+      children: [
+        widget.text,
+        const SizedBox(width: 4),
+        Text(S.of(context).secondsRemaining(remaining)),
+      ],
     );
   }
 }

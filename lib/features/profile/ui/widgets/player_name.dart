@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/domain/profile/value_objects/profile_id.dart';
 import 'package:front/features/profile/providers/profile_provider.dart';
 import 'package:front/features/profile/ui/profile_details_screen.dart';
+import 'package:front/infrastructure/localization/generated/l10n.dart';
 
 class PlayerName extends ConsumerWidget {
   final ProfileId profileId;
@@ -34,8 +35,8 @@ class PlayerName extends ConsumerWidget {
           ),
         );
       },
-      loading: () => const Text("Загрузка..."),
-      error: (err, _) => Text("Ошибка: $err"),
+      loading: () => Text(S.of(context).loading),
+      error: (err, _) => Text(S.of(context).error(err)),
     );
   }
 }

@@ -15,9 +15,9 @@ class MyApp extends ConsumerWidget {
 
     return localeAsync.when(
       data: (locale) => MaterialApp(
-        title: 'Tic Tac Toe',
+        onGenerateTitle: (context) => S.of(context).appTitle,
         theme: appTheme,
-        locale: Locale(locale),
+        locale: locale,
         supportedLocales: S.delegate.supportedLocales,
         localizationsDelegates: const [
           S.delegate,

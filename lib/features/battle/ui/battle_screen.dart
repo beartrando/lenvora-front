@@ -10,6 +10,7 @@ import 'package:front/features/battle/infrastructure/websocket/battle_stream_pro
 import 'package:front/features/battle/providers/battle_stream_provider.dart';
 import 'package:front/features/battle/ui/widgets/battle_content.dart';
 import 'package:front/features/profile/providers/my_profile_provider.dart';
+import 'package:front/infrastructure/localization/generated/l10n.dart';
 import 'package:logger/logger.dart';
 
 final logger = Logger();
@@ -49,9 +50,7 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
                 ).pushNamedAndRemoveUntil('/', (route) => false);
 
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Соединение с сервером потеряно'),
-                  ),
+                  SnackBar(content: Text(S.of(context).connectionLost)),
                 );
               };
             }
@@ -77,16 +76,16 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
               },
               error: (err, stack) {
                 debugPrint("Battle stream error: $err\n$stack");
-                return Center(child: Text('Ошибка: $err'));
+                return Center(child: Text(S.of(context).error(err)));
               },
             );
           },
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (e, _) => Text("Profile error: $e"),
+          error: (e, _) => Text(S.of(context).error(e)),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Text("Profile error: $e"),
+      error: (e, _) => Text(S.of(context).error(e)),
     );
   }
 

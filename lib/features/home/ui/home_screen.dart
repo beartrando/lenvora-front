@@ -109,7 +109,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ),
       bottomNavigationBar: appVersion.isEmpty
-          ? null
+          ? const Text('Unknown version')
           : SafeArea(
               top: false,
               child: Padding(

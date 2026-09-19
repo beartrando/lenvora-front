@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:front/contracts/proto/common/response.pb.dart' as response_proto;
+import 'package:front/contracts/proto/common/response.pb.dart'
+    as response_proto;
 import 'package:logger/logger.dart';
 
 final logger = Logger();
@@ -13,7 +14,7 @@ class SuccessResponseConverter {
 
     // logger.i(jsonDecode(successResponse as String));
     final protoSuccessResponse = response_proto.SuccessResponse()
-      ..mergeFromProto3Json(jsonDecode(successResponse as String)); // работает
+      ..mergeFromProto3Json(jsonDecode(successResponse));
 
     return SuccessResponseConverter.fromProto(protoSuccessResponse);
   }
@@ -24,8 +25,6 @@ class SuccessResponseConverter {
     }
 
     if (response.hasError()) {
-      final error = response.error;
-
       throw response.error;
     }
 

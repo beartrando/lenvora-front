@@ -23,6 +23,7 @@ class BattleBoardWideget extends ConsumerWidget {
   // final WidgetRef ref;
 
   const BattleBoardWideget({
+    super.key,
     required this.profile,
     required this.battle,
     required this.battleService,
@@ -127,6 +128,7 @@ class BattleBoardWideget extends ConsumerWidget {
       case BattleCellValueEnum.o:
         return 'O';
       case BattleCellValueEnum.empty:
+      // ignore: unreachable_switch_default
       default:
         return '';
     }
@@ -139,6 +141,7 @@ class BattleBoardWideget extends ConsumerWidget {
       case BattleCellValueEnum.o:
         return Colors.blue; // O синий
       case BattleCellValueEnum.empty:
+      // ignore: unreachable_switch_default
       default:
         return Colors.white; // пустая клетка белая
     }

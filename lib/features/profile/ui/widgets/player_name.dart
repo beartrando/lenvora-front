@@ -12,7 +12,7 @@ class PlayerName extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profileAsync = ref.watch(profileProvider(this.profileId));
+    final profileAsync = ref.watch(profileProvider(profileId));
 
     return profileAsync.when(
       data: (profile) {

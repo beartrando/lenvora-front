@@ -15,8 +15,11 @@ final logger = Logger();
 
 class BattleChannel extends WebsocketConnection<Battle> {
   late ProfileId profileId;
-  final pathname = 'battle';
 
+  @override
+  String get pathname => 'battle';
+
+  @override
   messageHandler(List<int> message) {
     try {
       final battle = BattleResponseConverter.fromProto(
@@ -32,9 +35,10 @@ class BattleChannel extends WebsocketConnection<Battle> {
     }
   }
 
+  @override
   getWsUri() {
     return Uri.parse(
-      'ws://${config.host}:${config.port}/$pathname?token=${accessToken.value}&profileId=${this.profileId.value}',
+      'ws://${config.host}:${config.port}/$pathname?token=${accessToken.value}&profileId=${profileId.value}',
     );
   }
 
@@ -60,7 +64,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
-  connectBot(BattleId battleId) {
+  void connectBot(BattleId battleId) {
     // logger.i(battleId.value);
     final connectBotRequest = streaming_proto.BattleJoinBot()
       ..battleId = battleId.value;
@@ -71,7 +75,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
     // logger.i('Sent profile: $profileId at $cellIdx');
   }
 
-  init([BattleId? battleId]) {
+  void init([BattleId? battleId]) {
     final request = streaming_proto.BattleInit();
 
     if (battleId != null) {
@@ -85,7 +89,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
     // logger.i('Sent start battle: $battleId');
   }
 
-  start([BattleId? battleId]) {
+  void start([BattleId? battleId]) {
     final request = streaming_proto.BattleStart();
 
     if (battleId != null) {
@@ -98,6 +102,7 @@ class BattleChannel extends WebsocketConnection<Battle> {
     // logger.i('Sent start battle: $battleId');
   }
 
+  @override
   Future<void> ping() async {
     final req = BattleRequest()
       ..ping = (Ping()..timestamp = TimestampConverter().to(DateTime.now()));

@@ -11,17 +11,17 @@ class SettingNotifier extends StateNotifier<Setting> {
   SettingNotifier(this._settingDomain) : super(_settingDomain.setting);
 
   Future<void> setSoundEnabled(bool value) async {
-    _settingDomain.setSoundEnabled(new SoundEnabled(value));
+    _settingDomain.setSoundEnabled(SoundEnabled(value));
     state = _settingDomain.setting;
   }
 
   Future<void> setEffectsSoundEnabled(bool value) async {
-    _settingDomain.setEffectsSoundEnabled(new EffectsSoundEnabled(value));
+    _settingDomain.setEffectsSoundEnabled(EffectsSoundEnabled(value));
     state = _settingDomain.setting;
   }
 
   Future<void> setVibrationEnabled(bool value) async {
-    _settingDomain.setVibrationEnabled(new VibrationEnabled(value));
+    _settingDomain.setVibrationEnabled(VibrationEnabled(value));
     state = _settingDomain.setting;
   }
 }

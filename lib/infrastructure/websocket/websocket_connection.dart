@@ -17,13 +17,14 @@ abstract class WebsocketConnection<T> {
   void Function()? onConnectionLost;
   bool _closing = false;
 
-  final pathname = '';
+  String get pathname => '';
+
   final heartbeatTimer = 10;
   final _controller = StreamController<T>.broadcast();
 
   WebSocketChannel get channel => _channel;
 
-  messageHandler(List<int> message) {
+  void messageHandler(List<int> message) {
     logger.i('Received: $message');
     try {
       // final resp = T.fromBuffer(message);
@@ -44,13 +45,13 @@ abstract class WebsocketConnection<T> {
     }
   }
 
-  getWsUri() {
+  Uri getWsUri() {
     return Uri.parse(
       'ws://${config.host}:${config.port}/$pathname?token=${accessToken.value}',
     );
   }
 
-  connect() {
+  void connect() {
     final uri = getWsUri();
     // logger.i('Connecting to $uri');
     _channel = WebSocketChannel.connect(uri);

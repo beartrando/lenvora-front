@@ -11,7 +11,7 @@ class BattleResponseConverter {
     }
 
     final protoBattleResponse = battle_proto.BattleResponse()
-      ..mergeFromProto3Json(jsonDecode(battleResponse as String)); // работает
+      ..mergeFromProto3Json(jsonDecode(battleResponse));
 
     return BattleResponseConverter.fromProto(protoBattleResponse);
   }
@@ -22,8 +22,6 @@ class BattleResponseConverter {
     }
 
     if (response.hasError()) {
-      final error = response.error;
-
       throw response.error;
     }
 

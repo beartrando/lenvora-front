@@ -1,6 +1,6 @@
 import 'package:front/infrastructure/auth/value_objects/access_token.dart';
-import 'package:front/infrastructure/auth/value_objects/session_object.dart';
 import 'package:front/infrastructure/auth/value_objects/refresh_token.dart';
+import 'package:front/infrastructure/auth/value_objects/session_object.dart';
 import 'package:front/infrastructure/device/value_objects/device_id.dart';
 import 'package:front/infrastructure/http/clients/http_client.dart';
 import 'package:front/infrastructure/proto/converters/session/session_response_converter.dart';

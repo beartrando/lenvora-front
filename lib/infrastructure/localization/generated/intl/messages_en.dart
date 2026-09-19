@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m7(seconds) => "(${seconds} s)";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "aiWillConnectIn": m0,
     "appTitle": MessageLookupByLibrary.simpleMessage("Tic Tac Toe"),

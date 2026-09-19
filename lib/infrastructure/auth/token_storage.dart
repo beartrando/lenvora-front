@@ -1,6 +1,6 @@
 import 'package:front/infrastructure/auth/value_objects/access_token.dart';
-import 'package:front/infrastructure/auth/value_objects/session_object.dart';
 import 'package:front/infrastructure/auth/value_objects/refresh_token.dart';
+import 'package:front/infrastructure/auth/value_objects/session_object.dart';
 import 'package:front/infrastructure/storage/secure_storage.dart';
 
 class TokenStorage extends SecureStorage {

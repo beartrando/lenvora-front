@@ -224,6 +224,36 @@ class S {
     );
   }
 
+  /// `AI will connect in {seconds} s`
+  String aiWillConnectIn(Object seconds) {
+    return Intl.message(
+      'AI will connect in $seconds s',
+      name: 'aiWillConnectIn',
+      desc: '',
+      args: [seconds],
+    );
+  }
+
+  /// `Connect AI now`
+  String get connectAiNow {
+    return Intl.message(
+      'Connect AI now',
+      name: 'connectAiNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel AI connection`
+  String get cancelAiConnection {
+    return Intl.message(
+      'Cancel AI connection',
+      name: 'cancelAiConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Play with AI`
   String get playWithAi {
     return Intl.message('Play with AI', name: 'playWithAi', desc: '', args: []);

@@ -20,34 +20,41 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(error) => "Error: ${error}";
+  static String m0(seconds) => "AI will connect in ${seconds} s";
 
-  static String m1(experience) => "Experience: ${experience}";
+  static String m1(error) => "Error: ${error}";
 
-  static String m2(id) => "ID: ${id}";
+  static String m2(experience) => "Experience: ${experience}";
 
-  static String m3(level) => "Level: ${level}";
+  static String m3(id) => "ID: ${id}";
 
-  static String m4(nickname) => "Nickname: ${nickname}";
+  static String m4(level) => "Level: ${level}";
 
-  static String m5(rating) => "Rating: ${rating}";
+  static String m5(nickname) => "Nickname: ${nickname}";
 
-  static String m6(seconds) => "(${seconds} s)";
+  static String m6(rating) => "Rating: ${rating}";
+
+  static String m7(seconds) => "(${seconds} s)";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "aiWillConnectIn": m0,
     "appTitle": MessageLookupByLibrary.simpleMessage("Tic Tac Toe"),
     "backToMenu": MessageLookupByLibrary.simpleMessage("Back to menu"),
     "battleCancelled": MessageLookupByLibrary.simpleMessage("Battle cancelled"),
     "battleTitle": MessageLookupByLibrary.simpleMessage("Battle: Tic Tac Toe"),
+    "cancelAiConnection": MessageLookupByLibrary.simpleMessage(
+      "Cancel AI connection",
+    ),
     "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
     "close": MessageLookupByLibrary.simpleMessage("Close"),
+    "connectAiNow": MessageLookupByLibrary.simpleMessage("Connect AI now"),
     "connectionLost": MessageLookupByLibrary.simpleMessage(
       "Connection to the server was lost",
     ),
     "draw": MessageLookupByLibrary.simpleMessage("Draw"),
     "effects": MessageLookupByLibrary.simpleMessage("Effects"),
-    "error": m0,
+    "error": m1,
     "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
     "localeLoadingError": MessageLookupByLibrary.simpleMessage(
       "Failed to load locale. Please try again later.",
@@ -58,12 +65,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "playAgain": MessageLookupByLibrary.simpleMessage("Play again"),
     "playWithAi": MessageLookupByLibrary.simpleMessage("Play with AI"),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
-    "profileExperience": m1,
-    "profileId": m2,
-    "profileLevel": m3,
-    "profileNickname": m4,
-    "profileRating": m5,
-    "secondsRemaining": m6,
+    "profileExperience": m2,
+    "profileId": m3,
+    "profileLevel": m4,
+    "profileNickname": m5,
+    "profileRating": m6,
+    "secondsRemaining": m7,
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "sound": MessageLookupByLibrary.simpleMessage("Sound"),
     "versus": MessageLookupByLibrary.simpleMessage("vs"),

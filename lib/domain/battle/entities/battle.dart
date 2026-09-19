@@ -38,4 +38,8 @@ class Battle {
         'updatedAt: $updatedAt'
         ')';
   }
+
+  bool hasRival() {
+    return this.playerIds.length > 1;
+  }
 }

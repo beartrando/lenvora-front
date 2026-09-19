@@ -20,36 +20,43 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'uk';
 
-  static String m0(error) => "Помилка: ${error}";
+  static String m0(seconds) => "ШІ підключиться через ${seconds} с";
 
-  static String m1(experience) => "Досвід: ${experience}";
+  static String m1(error) => "Помилка: ${error}";
 
-  static String m2(id) => "ID: ${id}";
+  static String m2(experience) => "Досвід: ${experience}";
 
-  static String m3(level) => "Рівень: ${level}";
+  static String m3(id) => "ID: ${id}";
 
-  static String m4(nickname) => "Нікнейм: ${nickname}";
+  static String m4(level) => "Рівень: ${level}";
 
-  static String m5(rating) => "Рейтинг: ${rating}";
+  static String m5(nickname) => "Нікнейм: ${nickname}";
 
-  static String m6(seconds) => "(${seconds} с)";
+  static String m6(rating) => "Рейтинг: ${rating}";
+
+  static String m7(seconds) => "(${seconds} с)";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "aiWillConnectIn": m0,
     "appTitle": MessageLookupByLibrary.simpleMessage("Хрестики-нулики"),
     "backToMenu": MessageLookupByLibrary.simpleMessage("Вийти в меню"),
     "battleCancelled": MessageLookupByLibrary.simpleMessage("Матч скасовано"),
     "battleTitle": MessageLookupByLibrary.simpleMessage(
       "Матч: Хрестики-нулики",
     ),
+    "cancelAiConnection": MessageLookupByLibrary.simpleMessage(
+      "Скасувати підключення ШІ",
+    ),
     "cancelled": MessageLookupByLibrary.simpleMessage("Скасовано"),
     "close": MessageLookupByLibrary.simpleMessage("Закрити"),
+    "connectAiNow": MessageLookupByLibrary.simpleMessage("Підключити ШІ зараз"),
     "connectionLost": MessageLookupByLibrary.simpleMessage(
       "З\'єднання із сервером втрачено",
     ),
     "draw": MessageLookupByLibrary.simpleMessage("Нічия"),
     "effects": MessageLookupByLibrary.simpleMessage("Ефекти"),
-    "error": m0,
+    "error": m1,
     "loading": MessageLookupByLibrary.simpleMessage("Завантаження..."),
     "localeLoadingError": MessageLookupByLibrary.simpleMessage(
       "Не вдалося завантажити мову. Спробуйте ще раз пізніше.",
@@ -60,12 +67,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "playAgain": MessageLookupByLibrary.simpleMessage("Зіграти ще"),
     "playWithAi": MessageLookupByLibrary.simpleMessage("Грати з ШІ"),
     "profile": MessageLookupByLibrary.simpleMessage("Профіль"),
-    "profileExperience": m1,
-    "profileId": m2,
-    "profileLevel": m3,
-    "profileNickname": m4,
-    "profileRating": m5,
-    "secondsRemaining": m6,
+    "profileExperience": m2,
+    "profileId": m3,
+    "profileLevel": m4,
+    "profileNickname": m5,
+    "profileRating": m6,
+    "secondsRemaining": m7,
     "settings": MessageLookupByLibrary.simpleMessage("Налаштування"),
     "sound": MessageLookupByLibrary.simpleMessage("Звук"),
     "versus": MessageLookupByLibrary.simpleMessage("проти"),

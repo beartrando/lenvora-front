@@ -11,7 +11,7 @@ class ProfileResponseConverter {
     }
 
     final protoProfileResponse = profileProto.ProfileResponse()
-      ..mergeFromProto3Json(jsonDecode(profileResponse as String)); // работает
+      ..mergeFromProto3Json(jsonDecode(profileResponse as String));
 
     return ProfileResponseConverter.fromProto(protoProfileResponse);
   }
@@ -24,7 +24,7 @@ class ProfileResponseConverter {
     if (response.hasError()) {
       final error = response.error;
 
-      throw response.error;
+      throw error;
     }
 
     throw Exception('Empty profile response');

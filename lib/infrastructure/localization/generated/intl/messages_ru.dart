@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(seconds) => "ИИ подключится через ${seconds} с";
 
-  static String m1(error) => "Ошибка: ${error}";
+  static String m1(error) => "Произошла ошибка. Перезапустите приложение и попробуйте ещё раз.";
 
   static String m2(experience) => "Опыт: ${experience}";
 

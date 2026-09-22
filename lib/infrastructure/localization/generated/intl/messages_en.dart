@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(seconds) => "AI will connect in ${seconds} s";
 
-  static String m1(error) => "Error: ${error}";
+  static String m1(error) => "An error occurred. Restart the app and try again.";
 
   static String m2(experience) => "Experience: ${experience}";
 

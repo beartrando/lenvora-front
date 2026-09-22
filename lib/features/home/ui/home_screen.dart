@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:front/infrastructure/app/app_version.dart';
+import 'package:front/infrastructure/error/firebase_error_reporter.dart';
 import 'package:front/infrastructure/localization/generated/l10n.dart';
 import 'package:front/infrastructure/localization/locale_options_provider.dart';
 import 'package:front/infrastructure/localization/locale_provider.dart';
@@ -17,6 +18,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final options = ref.read(localeOptionsProvider);
     final option = options.firstWhere((o) => o.code == code);
     await setLocale(ref, option.locale);
+  }
+
+  void _sendCrashlyticsTest() {
+    try {
+      FirebaseErrorReporter().report(
+        Exception('Manual Crashlytics test'),
+        StackTrace.current,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Тест Crashlytics отправлен')),
+      );
+    } catch (error, stack) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Crashlytics недоступен: $error')));
+      debugPrint('Crashlytics test failed: $error\n$stack');
+    }
   }
 
   void _handleMenuSelection(BuildContext context, String value) {
@@ -104,6 +122,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 S.of(context).play,
                 style: const TextStyle(fontSize: 24),
               ),
+            ),
+            const SizedBox(height: 24),
+            OutlinedButton(
+              onPressed: _sendCrashlyticsTest,
+              child: const Text('Тест Crashlytics'),
             ),
           ],
         ),

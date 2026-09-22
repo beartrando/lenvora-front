@@ -1,25 +1,22 @@
+import 'dart:async';
+
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:front/infrastructure/error/error_reporter.dart';
 
 class FirebaseErrorReporter implements ErrorReporter {
-  FirebaseErrorReporter();
+  FirebaseErrorReporter({FirebaseCrashlytics? crashlytics})
+    : _crashlytics = crashlytics ?? FirebaseCrashlytics.instance;
 
-  final _crashlytics = FirebaseCrashlytics.instance;
+  final FirebaseCrashlytics _crashlytics;
 
   @override
   void fatal(Object error, StackTrace stack) {
-    _crashlytics.recordError(
-      error,
-      stack,
-      fatal: true,
-    );
+    unawaited(_crashlytics.recordError(error, stack, fatal: true));
   }
 
   @override
   void report(Object error, StackTrace stack) {
-    _crashlytics.recordError(
-      error,
-      stack,
-    );
+    unawaited(_crashlytics.recordError(error, stack));
   }
 }

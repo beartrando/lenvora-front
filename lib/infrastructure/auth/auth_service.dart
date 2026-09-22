@@ -47,11 +47,7 @@ class AuthService {
 
     final deviceId = await deviceService.getDeviceId();
 
-    // final response = await authClient.anonymousSignIn(deviceId);
-    final response = SessionObject(
-      accessToken: AccessToken('asdf'),
-      refreshToken: RefreshToken('asdf'),
-    );
+    final response = await authClient.anonymousSignIn(deviceId);
 
     await tokenStorage.saveAuthObject(response);
 

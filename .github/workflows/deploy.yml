@@ -149,6 +149,10 @@ jobs:
       #          ls -lh android/app/upload-keystore.jks
       #          file android/app/upload-keystore.jks
 
+      - name: Create google-services.json
+        run: |
+          echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > android/app/google-services.json
+
       - name: Create key.properties
         run: |
           cat > android/key.properties <<EOF

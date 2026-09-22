@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:front/infrastructure/auth/auth_service.dart';
 import 'package:front/infrastructure/http/clients/http_client.dart';
 import 'package:front/infrastructure/http/models/http_response.dart';
@@ -55,7 +58,15 @@ class AuthorizedHttpClient {
 
     var response = await request(token.value);
 
-    if (response.statusCode == 401) {
+    final body = response.body != null
+        ? jsonDecode(response.body!)
+        : {};
+    final tokenExpired =
+        body is Map<String, dynamic> &&
+            body['error'] is Map<String, dynamic> &&
+            body['error']['code'] == 401;
+
+    if (tokenExpired || response.statusCode == 401) {
       await _authService.clearRefreshToken();
       token = await _authService.ensureAccessToken();
       response = await request(token.value);

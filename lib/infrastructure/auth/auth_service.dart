@@ -1,8 +1,6 @@
-import 'package:front/infrastructure/auth/value_objects/session_object.dart';
 import 'package:front/infrastructure/auth/api/auth_client.dart';
 import 'package:front/infrastructure/auth/token_storage.dart';
 import 'package:front/infrastructure/auth/value_objects/access_token.dart';
-import 'package:front/infrastructure/auth/value_objects/refresh_token.dart';
 import 'package:front/infrastructure/device/device_service.dart';
 import 'package:logger/logger.dart';
 

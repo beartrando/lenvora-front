@@ -22,7 +22,7 @@ class BattleScreen extends ConsumerStatefulWidget {
 
 class _BattleScreenState extends ConsumerState<BattleScreen> {
   late BattleService battleService;
-  late Battle? _battle;
+  Battle? _battle;
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +90,12 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
   @override
   void dispose() {
     debugPrint("BattleScreen dispose");
+
     final battle = _battle;
     if (battle != null) {
       battleService.leave(battle.id);
     }
+
     super.dispose();
   }
 }

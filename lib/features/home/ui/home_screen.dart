@@ -123,11 +123,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 style: const TextStyle(fontSize: 24),
               ),
             ),
-            const SizedBox(height: 24),
-            OutlinedButton(
-              onPressed: _sendCrashlyticsTest,
-              child: const Text('Тест Crashlytics'),
-            ),
+            // const SizedBox(height: 24),
+            // OutlinedButton(
+            //   onPressed: _sendCrashlyticsTest,
+            //   child: const Text('Тест Crashlytics'),
+            // ),
           ],
         ),
       ),

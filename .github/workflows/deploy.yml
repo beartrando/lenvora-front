@@ -165,7 +165,7 @@ jobs:
       - name: Checkout proto repository
         uses: actions/checkout@v4
         with:
-          repository: beartrando/tic-tac-toe-proto
+          repository: beartrando/lenvora-proto
           ref: master
           path: infra/proto
           token: ${{ secrets.GH_PAT }}

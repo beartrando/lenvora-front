@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 concurrency:
   group: mobile-${{ github.ref_name }}
@@ -41,7 +42,6 @@ jobs:
             TAG="v0.0.0"
           fi
 
-          # Remove leading "v" for calculations
           TAG=${TAG#v}
 
           echo "TAG=$TAG"
@@ -75,7 +75,6 @@ jobs:
               MINOR=0
               PATCH=0
             fi
-
           done
 
           VERSION="$MAJOR.$MINOR.$PATCH"
@@ -126,28 +125,12 @@ jobs:
           MOVE_TIMEOUT=${{ secrets.MOVE_TIMEOUT }}
           EOF
 
-      #      - name: Verify .env
-      #        run: |
-      #          echo "Created .env:"
-      #          cat .env
-
       - name: Install dependencies
         run: flutter pub get
 
       - name: Decode keystore
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
-
-      #      - name: Debug keystore
-      #        run: |
-      #          ls -la android
-      #          ls -la android/app
-      #          cat android/app/upload-keystore.jks
-      #
-      #      - name: Check keystore
-      #        run: |
-      #          ls -lh android/app/upload-keystore.jks
-      #          file android/app/upload-keystore.jks
 
       - name: Create google-services.json
         run: |
@@ -181,12 +164,6 @@ jobs:
             --proto_path=infra/proto \
             $(find infra/proto -name "*.proto")
 
-      - name: Create Google Play credentials
-        run: |
-          cat > google-play.json <<'EOF'
-          ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
-          EOF
-
       - name: Build appbundle
         run: |
           flutter build appbundle \
@@ -196,12 +173,19 @@ jobs:
             --dart-define=GIT_SHA=$GITHUB_SHA \
             --build-number=$GITHUB_RUN_NUMBER
 
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
       - name: Upload to Google Play (internal)
         if: github.ref_name != 'prod'
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: google-play.json
-          packageName: org.beartrando.tictactoe
+          serviceAccountJson: ${{ steps.auth.outputs.credentials_file_path }}
+          packageName: ${{ secrets.PACKAGE_NAME }}
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           tracks: internal
           whatsNewDirectory: ./release-notes
@@ -210,8 +194,8 @@ jobs:
         if: github.ref_name == 'prod'
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
-          packageName: org.beartrando.tictactoe
+          serviceAccountJson: ${{ steps.auth.outputs.credentials_file_path }}
+          packageName: ${{ secrets.PACKAGE_NAME }}
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           tracks: production
           whatsNewDirectory: ./release-notes

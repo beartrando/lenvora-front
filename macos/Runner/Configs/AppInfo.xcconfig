@@ -8,7 +8,7 @@
 PRODUCT_NAME = front
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = org.beartrando.tictactoe
+PRODUCT_BUNDLE_IDENTIFIER = org.beartrando.lenvora
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2026 com.example. All rights reserved.

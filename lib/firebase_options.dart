@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '510420642612',
     projectId: 'lenvora-d65e2',
     storageBucket: 'lenvora-d65e2.firebasestorage.app',
-    iosBundleId: 'org.beartrando.tictactoe',
+    iosBundleId: 'org.beartrando.lenvora',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '510420642612',
     projectId: 'lenvora-d65e2',
     storageBucket: 'lenvora-d65e2.firebasestorage.app',
-    iosBundleId: 'org.beartrando.tictactoe',
+    iosBundleId: 'org.beartrando.lenvora',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

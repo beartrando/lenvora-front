@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.beartrando.tictactoe">
+          package="org.beartrando.lenvora">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
             android:label="Tic-tac-toe"

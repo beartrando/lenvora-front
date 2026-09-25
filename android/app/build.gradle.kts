@@ -19,7 +19,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "org.beartrando.tictactoe"
+    namespace = "org.beartrando.lenvora"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -33,7 +33,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "org.beartrando.tictactoe"
+        applicationId = "org.beartrando.lenvora"
 
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion

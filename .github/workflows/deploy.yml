@@ -153,25 +153,25 @@ jobs:
           path: infra/proto
           token: ${{ secrets.GH_PAT }}
 
-      - name: Generate protobuf files
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y protobuf-compiler
-          dart pub global activate protoc_plugin 25.0.0
-          mkdir -p lib/contracts/proto/
-          protoc \
-            --dart_out=grpc:lib/contracts/proto \
-            --proto_path=infra/proto \
-            $(find infra/proto -name "*.proto")
-
-      - name: Build appbundle
-        run: |
-          flutter build appbundle \
-            --release \
-            --build-name=$VERSION \
-            --dart-define=APP_VERSION=$VERSION \
-            --dart-define=GIT_SHA=$GITHUB_SHA \
-            --build-number=$GITHUB_RUN_NUMBER
+#      - name: Generate protobuf files
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y protobuf-compiler
+#          dart pub global activate protoc_plugin 25.0.0
+#          mkdir -p lib/contracts/proto/
+#          protoc \
+#            --dart_out=grpc:lib/contracts/proto \
+#            --proto_path=infra/proto \
+#            $(find infra/proto -name "*.proto")
+#
+#      - name: Build appbundle
+#        run: |
+#          flutter build appbundle \
+#            --release \
+#            --build-name=$VERSION \
+#            --dart-define=APP_VERSION=$VERSION \
+#            --dart-define=GIT_SHA=$GITHUB_SHA \
+#            --build-number=$GITHUB_RUN_NUMBER
 
       - name: Authenticate to Google Cloud
         id: auth
@@ -180,6 +180,12 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           create_credentials_file: true
+
+      - name: Debug Google credentials
+        run: |
+          echo "Credentials file: ${{ steps.auth.outputs.credentials_file_path }}"
+          cat "${{ steps.auth.outputs.credentials_file_path }}" | \
+            sed -E 's/"client_email": "[^"]+"/"client_email": "***"/'
 
       - name: Upload to Google Play (internal)
         if: github.ref_name != 'prod'

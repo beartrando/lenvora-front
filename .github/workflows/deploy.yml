@@ -181,6 +181,13 @@ jobs:
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           create_credentials_file: true
 
+      - name: Test Google auth
+        run: |
+          echo "Testing Google authentication..."
+          gcloud auth list
+          gcloud auth print-access-token > /dev/null
+          echo "Google access token obtained successfully"
+
       - name: Debug Google credentials
         run: |
           echo "Credentials file: ${{ steps.auth.outputs.credentials_file_path }}"

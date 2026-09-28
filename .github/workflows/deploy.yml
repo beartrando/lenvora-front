@@ -115,7 +115,7 @@ jobs:
           cache: true
 
       - name: Generate environment files
-        run: dart run tools/generate_env.dart
+        run: dart run tool/generate_env.dart
 
       - name: Create .env
         run: cp ".env.${{ github.ref_name }}" .env

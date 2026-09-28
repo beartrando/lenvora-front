@@ -8,24 +8,19 @@ const base = {
 
   'STREAMING_HOST': '192.168.31.186',
   'STREAMING_PORT': '8080',
-
-  'MOVE_TIMEOUT': '20',
 };
 
 const environments = {
   'dev': {
     'GATEWAY_HOST': '31.222.235.64',
-    'STREAMING_HOST': '31.222.235.64',
   },
   'uat': {
     'ENV': 'dev',
     'GATEWAY_HOST': '31.222.235.64',
-    'STREAMING_HOST': '31.222.235.64',
   },
   'prod': {
-    'ENV': 'dev',
+    'ENV': 'production',
     'GATEWAY_HOST': '31.222.235.64',
-    'STREAMING_HOST': '31.222.235.64',
   },
 };
 

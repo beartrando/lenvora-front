@@ -2,7 +2,7 @@
           package="org.beartrando.lenvora">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-            android:label="Tic-tac-toe"
+            android:label="Lenvora"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher">
         <activity

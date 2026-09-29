@@ -1,29 +1,10 @@
 import 'dart:io';
 
-const baseEnvPath = './env/.env.base';
+const baseOveridesEnvPath = './env/.env';
+const baseEnvPath = './env/.env.dist';
+const environmentPrefix = './env/.env.';
+const environmentsList = ['dev', 'uat', 'prod'];
 
-const base = {
-  'ENV': 'dev',
-
-  'GATEWAY_HOST': '192.168.31.186',
-  'GATEWAY_PORT': '9090',
-
-  'STREAMING_HOST': '192.168.31.186',
-  'STREAMING_PORT': '8080',
-};
-
-const environments = {
-  'dev': {
-    'GATEWAY_HOST': '31.222.235.64',
-  },
-  'uat': {
-    'GATEWAY_HOST': '31.222.235.64',
-  },
-  'prod': {
-    'ENV': 'production',
-    'GATEWAY_HOST': '31.222.235.64',
-  },
-};
 
 
 Map<String, String> readEnv(String path) {
@@ -57,31 +38,42 @@ Map<String, String> readEnv(String path) {
 }
 
 void writeEnv(String filename, Map<String, String> variables) {
+  final file = File(filename);
+
+  if (file.existsSync()) {
+    print('Skipped: $filename already exists');
+    return;
+  }
+
   final content = variables.entries
       .map((e) => '${e.key}=${e.value}')
       .join('\n');
 
   File(filename).writeAsStringSync('$content\n');
+
+  print('Created: $filename');
 }
 
 void main() {
   final baseEnv = readEnv(baseEnvPath);
-
-  print('base: $baseEnv');
+  final baseOveridenEnv = readEnv(baseOveridesEnvPath);
 
   final actualBase = {
-    ...base,
     ...baseEnv,
+    ...baseOveridenEnv,
   };
 
   writeEnv('.env', actualBase);
 
-  for (final entry in environments.entries) {
+  for (final environment in environmentsList) {
+
+    final envValue = readEnv(environmentPrefix + environment);
+
     final variables = {
       ...actualBase,
-      ...entry.value,
+      ...envValue,
     };
 
-    writeEnv('.env.${entry.key}', variables);
+    writeEnv('.env.${environment}', variables);
   }
 }

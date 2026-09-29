@@ -1,3 +1,4 @@
-env:
-	dart run tool/generate_env.dart
+.PHONY: env
 
+env-generate:
+	dart run env/generate.dart

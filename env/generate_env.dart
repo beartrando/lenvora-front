@@ -1,5 +1,7 @@
 import 'dart:io';
 
+const baseEnvPath = './env/.env.base';
+
 const base = {
   'ENV': 'dev',
 
@@ -23,7 +25,6 @@ const environments = {
   },
 };
 
-const baseEnvPath = './tool/.env.base';
 
 Map<String, String> readEnv(String path) {
   final file = File(path);

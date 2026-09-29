@@ -225,39 +225,39 @@ class S {
     );
   }
 
-  /// `JARVIS will connect in {seconds} s`
+  /// `REMY will connect in {seconds} s`
   String aiWillConnectIn(Object seconds) {
     return Intl.message(
-      'JARVIS will connect in $seconds s',
+      'REMY will connect in $seconds s',
       name: 'aiWillConnectIn',
       desc: '',
       args: [seconds],
     );
   }
 
-  /// `Connect JARVIS now`
+  /// `Connect REMY now`
   String get connectAiNow {
     return Intl.message(
-      'Connect JARVIS now',
+      'Connect REMY now',
       name: 'connectAiNow',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cancel JARVIS connection`
+  /// `Cancel REMY connection`
   String get cancelAiConnection {
     return Intl.message(
-      'Cancel JARVIS connection',
+      'Cancel REMY connection',
       name: 'cancelAiConnection',
       desc: '',
       args: [],
     );
   }
 
-  /// `Play with JARVIS`
+  /// `Play with REMY`
   String get playWithAi {
-    return Intl.message('Play with JARVIS', name: 'playWithAi', desc: '', args: []);
+    return Intl.message('Play with REMY', name: 'playWithAi', desc: '', args: []);
   }
 
   /// `vs`

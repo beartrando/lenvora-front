@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(seconds) => "JARVIS will connect in ${seconds} s";
+  static String m0(seconds) => "REMY will connect in ${seconds} s";
 
   static String m1(error) => "An error occurred. Restart the app and try again.";
 
@@ -48,11 +48,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "battleTitle": MessageLookupByLibrary.simpleMessage("Battle: Tic Tac Toe"),
     "cancelAiConnection": MessageLookupByLibrary.simpleMessage(
-      "Cancel JARVIS connection",
+      "Cancel REMY connection",
     ),
     "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
     "close": MessageLookupByLibrary.simpleMessage("Close"),
-    "connectAiNow": MessageLookupByLibrary.simpleMessage("Connect JARVIS now"),
+    "connectAiNow": MessageLookupByLibrary.simpleMessage("Connect REMY now"),
     "connectionLost": MessageLookupByLibrary.simpleMessage(
       "Connection to the server was lost",
     ),
@@ -67,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "notYourTurn": MessageLookupByLibrary.simpleMessage("Not your turn"),
     "play": MessageLookupByLibrary.simpleMessage("Play"),
     "playAgain": MessageLookupByLibrary.simpleMessage("Play again"),
-    "playWithAi": MessageLookupByLibrary.simpleMessage("Play with JARVIS"),
+    "playWithAi": MessageLookupByLibrary.simpleMessage("Play with REMY"),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "profileExperience": m2,
     "profileId": m3,

@@ -15,7 +15,6 @@ const environments = {
     'GATEWAY_HOST': '31.222.235.64',
   },
   'uat': {
-    'ENV': 'dev',
     'GATEWAY_HOST': '31.222.235.64',
   },
   'prod': {
@@ -23,6 +22,38 @@ const environments = {
     'GATEWAY_HOST': '31.222.235.64',
   },
 };
+
+const baseEnvPath = './tool/.env.base';
+
+Map<String, String> readEnv(String path) {
+  final file = File(path);
+
+  if (!file.existsSync()) {
+    return {};
+  }
+
+  return Map.fromEntries(
+    file
+        .readAsLinesSync()
+        .where((line) {
+      final trimmed = line.trim();
+      return trimmed.isNotEmpty && !trimmed.startsWith('#');
+    })
+        .map((line) {
+      final index = line.indexOf('=');
+
+      if (index == -1) {
+        return null;
+      }
+
+      return MapEntry(
+        line.substring(0, index).trim(),
+        line.substring(index + 1).trim(),
+      );
+    })
+        .whereType<MapEntry<String, String>>(),
+  );
+}
 
 void writeEnv(String filename, Map<String, String> variables) {
   final content = variables.entries
@@ -33,11 +64,20 @@ void writeEnv(String filename, Map<String, String> variables) {
 }
 
 void main() {
-  writeEnv('.env', base);
+  final baseEnv = readEnv(baseEnvPath);
+
+  print('base: $baseEnv');
+
+  final actualBase = {
+    ...base,
+    ...baseEnv,
+  };
+
+  writeEnv('.env', actualBase);
 
   for (final entry in environments.entries) {
     final variables = {
-      ...base,
+      ...actualBase,
       ...entry.value,
     };
 

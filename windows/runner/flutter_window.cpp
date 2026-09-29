@@ -21,13 +21,13 @@ bool FlutterWindow::OnCreate() {
   flutter_controller_ = std::make_unique<flutter::FlutterViewController>(
       frame.right - frame.left, frame.bottom - frame.top, project_);
   // Ensure that basic setup of the controller was successful.
-  if (!flutter_controller_->engine() || !flutter_controller_->view()) {
+  if (!flutter_controller_->gusteau() || !flutter_controller_->view()) {
     return false;
   }
-  RegisterPlugins(flutter_controller_->engine());
+  RegisterPlugins(flutter_controller_->gusteau());
   SetChildContent(flutter_controller_->view()->GetNativeWindow());
 
-  flutter_controller_->engine()->SetNextFrameCallback([&]() {
+  flutter_controller_->gusteau()->SetNextFrameCallback([&]() {
     this->Show();
   });
 
@@ -63,7 +63,7 @@ FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
 
   switch (message) {
     case WM_FONTCHANGE:
-      flutter_controller_->engine()->ReloadSystemFonts();
+      flutter_controller_->gusteau()->ReloadSystemFonts();
       break;
   }
 

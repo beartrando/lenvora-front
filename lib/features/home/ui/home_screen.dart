@@ -112,17 +112,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/battle'),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(60),
-              ),
-              child: Text(
-                S.of(context).play,
-                style: const TextStyle(fontSize: 24),
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () => Navigator.pushNamed(context, '/batttle'),
+            //   style: ElevatedButton.styleFrom(
+            //     shape: const CircleBorder(),
+            //     padding: const EdgeInsets.all(60),
+            //   ),
+            //   child: Text(
+            //     S.of(context).play,
+            //     style: const TextStyle(fontSize: 24),
+            //   ),
+            // ),
             // const SizedBox(height: 24),
             // OutlinedButton(
             //   onPressed: _sendCrashlyticsTest,

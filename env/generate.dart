@@ -5,8 +5,6 @@ const baseEnvPath = './env/.env.dist';
 const environmentPrefix = './env/.env.';
 const environmentsList = ['dev', 'uat', 'prod'];
 
-
-
 Map<String, String> readEnv(String path) {
   final file = File(path);
 
@@ -37,10 +35,14 @@ Map<String, String> readEnv(String path) {
   );
 }
 
-void writeEnv(String filename, Map<String, String> variables) {
+void writeEnv(
+    String filename,
+    Map<String, String> variables, {
+      required bool force,
+    }) {
   final file = File(filename);
 
-  if (file.existsSync()) {
+  if (file.existsSync() && !force) {
     print('Skipped: $filename already exists');
     return;
   }
@@ -49,12 +51,14 @@ void writeEnv(String filename, Map<String, String> variables) {
       .map((e) => '${e.key}=${e.value}')
       .join('\n');
 
-  File(filename).writeAsStringSync('$content\n');
+  file.writeAsStringSync('$content\n');
 
-  print('Created: $filename');
+  print('${force ? 'Updated' : 'Created'}: $filename');
 }
 
-void main() {
+void main(List<String> args) {
+  final force = args.contains('--force');
+
   final baseEnv = readEnv(baseEnvPath);
   final baseOveridenEnv = readEnv(baseOveridesEnvPath);
 
@@ -63,10 +67,9 @@ void main() {
     ...baseOveridenEnv,
   };
 
-  writeEnv('.env', actualBase);
+  writeEnv('.env', actualBase, force: force);
 
   for (final environment in environmentsList) {
-
     final envValue = readEnv(environmentPrefix + environment);
 
     final variables = {
@@ -74,6 +77,10 @@ void main() {
       ...envValue,
     };
 
-    writeEnv('.env.${environment}', variables);
+    writeEnv(
+      '.env.$environment',
+      variables,
+      force: force,
+    );
   }
 }

@@ -1,9 +1,6 @@
 import 'dart:io';
 
-const baseOveridesEnvPath = './env/.env';
-const baseEnvPath = './env/.env.dist';
-const environmentPrefix = './env/.env.';
-const environmentsList = ['dev', 'uat', 'prod'];
+const envDirectoryPath = './env';
 
 Map<String, String> readEnv(String path) {
   final file = File(path);
@@ -41,9 +38,10 @@ void writeEnv(
       required bool force,
     }) {
   final file = File(filename);
+  final exists = file.existsSync();
 
-  if (file.existsSync() && !force) {
-    print('Skipped: $filename already exists');
+  if (exists && !force) {
+    print('Warning: skipped $filename — file already exists');
     return;
   }
 
@@ -53,32 +51,47 @@ void writeEnv(
 
   file.writeAsStringSync('$content\n');
 
-  print('${force ? 'Updated' : 'Created'}: $filename');
+  print('${exists ? 'Updated' : 'Created'}: $filename');
 }
 
 void main(List<String> args) {
   final force = args.contains('--force');
 
+  final envDirectory = Directory(envDirectoryPath);
+
+  if (!envDirectory.existsSync()) {
+    print('Warning: $envDirectoryPath does not exist');
+    return;
+  }
+
+  final baseEnvPath = '$envDirectoryPath/.env';
   final baseEnv = readEnv(baseEnvPath);
-  final baseOveridenEnv = readEnv(baseOveridesEnvPath);
 
-  final actualBase = {
-    ...baseEnv,
-    ...baseOveridenEnv,
-  };
+  writeEnv(
+    '.env',
+    baseEnv,
+    force: force,
+  );
 
-  writeEnv('.env', actualBase, force: force);
+  final environmentFiles = envDirectory
+      .listSync()
+      .whereType<File>()
+      .where((file) {
+    final name = file.uri.pathSegments.last;
+    return name.startsWith('.env.');
+  });
 
-  for (final environment in environmentsList) {
-    final envValue = readEnv(environmentPrefix + environment);
+  for (final file in environmentFiles) {
+    final name = file.uri.pathSegments.last;
+    final envValue = readEnv(file.path);
 
     final variables = {
-      ...actualBase,
+      ...baseEnv,
       ...envValue,
     };
 
     writeEnv(
-      '.env.$environment',
+      name,
       variables,
       force: force,
     );

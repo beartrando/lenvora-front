@@ -118,7 +118,9 @@ jobs:
         run: make env-generate
 
       - name: Create .env
-        run: cp ".env.${{ github.ref_name }}" .env
+        run: |
+          cp ".env.${{ github.ref_name }}" .env
+          cat .env
 
       - name: Install dependencies
         run: flutter pub get
